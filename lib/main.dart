@@ -85,13 +85,21 @@ class _MyHomePageState extends State<MyHomePage> {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               mainAxisSize: MainAxisSize.max,
               children: <Widget>[
-                Text(
-                  '$player1Life',
-                  style: Theme.of(context).textTheme.headlineMedium,
+                SizedBox(
+                  width: 200,
+                  child: Text(
+                    '$player1Life',
+                    textAlign: TextAlign.center,
+                    style: Theme.of(context).textTheme.headlineMedium,
+                  ),
                 ),
-                Text(
-                  '$player2Life',
-                  style: Theme.of(context).textTheme.headlineMedium,
+                SizedBox(
+                  width:200,
+                  child: Text(
+                    '$player2Life',
+                    textAlign: TextAlign.center,
+                    style: Theme.of(context).textTheme.headlineMedium,
+                  ),
                 ),
               ],
             ),
