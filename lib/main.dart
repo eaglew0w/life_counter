@@ -101,20 +101,36 @@ class _MyHomePageState extends State<MyHomePage> {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               mainAxisSize: MainAxisSize.max,
               children: <Widget>[
-                TextButton(
+                ElevatedButton(
                   onPressed: _gainlifePlayer1,
+                  style: ElevatedButton.styleFrom(
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(0)),
+                    shadowColor: Colors.transparent,
+                  ),
                   child: const Text('+1'),
                 ),
-                TextButton(
+                ElevatedButton(
                   onPressed: _loselifePlayer1,
+                  style: ElevatedButton.styleFrom(
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(0)),
+                    shadowColor: Colors.transparent,
+                  ),
                   child: const Text('-1'),
                 ),
-                TextButton(
+                ElevatedButton(
                   onPressed: _gainlifePlayer2,
+                  style: ElevatedButton.styleFrom(
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(0)),
+                    shadowColor: Colors.transparent,
+                  ),
                   child: const Text('+1')
                 ),
-                TextButton(
+                ElevatedButton(
                   onPressed: _loselifePlayer2,
+                  style: ElevatedButton.styleFrom(
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(0)),
+                    shadowColor: Colors.transparent,
+                  ),
                   child: const Text('-1')
                 ),
               ],
