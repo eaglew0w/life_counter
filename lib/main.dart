@@ -1,3 +1,4 @@
+import 'player.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -30,12 +31,14 @@ class LifeCounter extends StatefulWidget {
 }
 
 class _LifeCounterState extends State<LifeCounter> {
-  final GlobalKey<_PlayerState> keyPlayer1 = GlobalKey<_PlayerState>();
-  final GlobalKey<_PlayerState> keyPlayer2 = GlobalKey<_PlayerState>();
-  void _resetLife() {
+  final GlobalKey<PlayerState> player1Key = GlobalKey<PlayerState>();
+  final GlobalKey<PlayerState> player2Key = GlobalKey<PlayerState>();
+  final int defaultLife = 20;
+
+  void _resetLife(int defaultLife) {
     setState(() {
-      keyPlayer1.currentState?.resetLife(20);
-      keyPlayer2.currentState?.resetLife(20);
+      player1Key.currentState?.resetLife(defaultLife);
+      player2Key.currentState?.resetLife(defaultLife);
     });
   }
 
@@ -51,84 +54,17 @@ class _LifeCounterState extends State<LifeCounter> {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           mainAxisSize: MainAxisSize.max,
           children: <Widget>[
-            Player(key: keyPlayer1),
+            Player(key: player1Key),
             ElevatedButton(
-              onPressed: _resetLife,
+              onPressed: () {
+                _resetLife(defaultLife);
+              },
               child: const Icon(Icons.handshake_outlined),
             ),
-            Player(key: keyPlayer2),
+            Player(key: player2Key),
           ],
         ),
       ),
-    );
-  }
-}
-
-class Player extends StatefulWidget {
-  const Player({super.key});
-
-  @override
-  State<Player> createState() => _PlayerState();
-}
-
-class _PlayerState extends State<Player> {
-  int life = 20;
-
-  void _gainLife() {
-    setState(() {
-      life++;
-    });
-  }
-
-  void _loseLife() {
-    setState(() {
-      life--;
-    });
-  }
-
-  // 外部から初期化する用
-  void resetLife(int defaultlife) {
-    setState(() => life = defaultlife);
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Stack(
-        alignment: Alignment.center,
-      children: <Widget>[
-        Center(
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            mainAxisSize: MainAxisSize.max,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: <Widget>[
-              ElevatedButton(
-                onPressed: _gainLife,
-                style: ElevatedButton.styleFrom(
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(0)),
-                  shadowColor: Colors.transparent,
-                ),
-                child: const Text('+1'),
-              ),
-              ElevatedButton(
-                onPressed: _loseLife,
-                style: ElevatedButton.styleFrom(
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(0)),
-                  shadowColor: Colors.transparent,
-                ),
-                child: const Text('-1'),
-              ),
-            ],
-          ),
-        ),
-        Center(
-          child: Text(
-            '$life',
-            textAlign: TextAlign.center,
-            style: Theme.of(context).textTheme.headlineMedium,
-          ),
-        ),
-      ],
     );
   }
 }
