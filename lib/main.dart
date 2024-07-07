@@ -49,21 +49,18 @@ class _LifeCounterState extends State<LifeCounter> {
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: Text(widget.title),
       ),
-      body: Center(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          mainAxisSize: MainAxisSize.max,
-          children: <Widget>[
-            Player(key: player1Key),
-            ElevatedButton(
-              onPressed: () {
-                _resetLife(defaultLife);
-              },
-              child: const Icon(Icons.handshake_outlined),
-            ),
-            Player(key: player2Key),
-          ],
-        ),
+      body: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: <Widget>[
+          Expanded(child: Player(key: player1Key),),
+          ElevatedButton(
+            onPressed: () {
+              _resetLife(defaultLife);
+            },
+            child: const Icon(Icons.handshake_outlined),
+          ),
+          Expanded(child: Player(key: player2Key),),
+        ],
       ),
     );
   }
