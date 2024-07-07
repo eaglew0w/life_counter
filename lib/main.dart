@@ -1,66 +1,44 @@
+import 'player.dart';
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(const LifeCounterApp());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class LifeCounterApp extends StatelessWidget {
+  const LifeCounterApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'MTG Life Counter',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const MyHomePage(title: 'MTG Life Counter'),
+      home: const LifeCounter(title: 'MTG Life Counter'),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
+class LifeCounter extends StatefulWidget {
+  const LifeCounter({super.key, required this.title});
 
   final String title;
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<LifeCounter> createState() => _LifeCounterState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
-  int player1Life = 20;
-  int player2Life = 20;
+class _LifeCounterState extends State<LifeCounter> {
+  final GlobalKey<PlayerState> player1Key = GlobalKey<PlayerState>();
+  final GlobalKey<PlayerState> player2Key = GlobalKey<PlayerState>();
+  final int defaultLife = 20;
 
-  void _gainlifePlayer1() {
+  void _resetLife(int defaultLife) {
     setState(() {
-      player1Life++;
-    });
-  }
-
-  void _loselifePlayer1() {
-    setState(() {
-      player1Life--;
-    });
-  }
-
-  void _gainlifePlayer2() {
-    setState(() {
-      player2Life++;
-    });
-  }
-
-  void _loselifePlayer2() {
-    setState(() {
-      player2Life--;
-    });
-  }
-
-  void _resetLife() {
-    setState(() {
-      player1Life = 20;
-      player2Life = 20;
+      player1Key.currentState?.resetLife(defaultLife);
+      player2Key.currentState?.resetLife(defaultLife);
     });
   }
 
@@ -70,81 +48,22 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: Text(widget.title),
-        actions: <Widget>[
-          FloatingActionButton(
-            onPressed: _resetLife,
-            tooltip: 'Reset',
-            child: const Icon(Icons.handshake_outlined),
-          ),
-        ],
       ),
-      body: Stack (
-        children: <Widget>[
-          Center(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              mainAxisSize: MainAxisSize.max,
-              children: <Widget>[
-                SizedBox(
-                  width: 200,
-                  child: Text(
-                    '$player1Life',
-                    textAlign: TextAlign.center,
-                    style: Theme.of(context).textTheme.headlineMedium,
-                  ),
-                ),
-                SizedBox(
-                  width:200,
-                  child: Text(
-                    '$player2Life',
-                    textAlign: TextAlign.center,
-                    style: Theme.of(context).textTheme.headlineMedium,
-                  ),
-                ),
-              ],
+      body: Center(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          mainAxisSize: MainAxisSize.max,
+          children: <Widget>[
+            Player(key: player1Key),
+            ElevatedButton(
+              onPressed: () {
+                _resetLife(defaultLife);
+              },
+              child: const Icon(Icons.handshake_outlined),
             ),
-          ),
-          Center(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              mainAxisSize: MainAxisSize.max,
-              children: <Widget>[
-                ElevatedButton(
-                  onPressed: _gainlifePlayer1,
-                  style: ElevatedButton.styleFrom(
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(0)),
-                    shadowColor: Colors.transparent,
-                  ),
-                  child: const Text('+1'),
-                ),
-                ElevatedButton(
-                  onPressed: _loselifePlayer1,
-                  style: ElevatedButton.styleFrom(
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(0)),
-                    shadowColor: Colors.transparent,
-                  ),
-                  child: const Text('-1'),
-                ),
-                ElevatedButton(
-                  onPressed: _gainlifePlayer2,
-                  style: ElevatedButton.styleFrom(
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(0)),
-                    shadowColor: Colors.transparent,
-                  ),
-                  child: const Text('+1')
-                ),
-                ElevatedButton(
-                  onPressed: _loselifePlayer2,
-                  style: ElevatedButton.styleFrom(
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(0)),
-                    shadowColor: Colors.transparent,
-                  ),
-                  child: const Text('-1')
-                ),
-              ],
-            ),
-          ),
-        ]
+            Player(key: player2Key),
+          ],
+        ),
       ),
     );
   }
