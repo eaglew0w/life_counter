@@ -10,57 +10,32 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'MTG Life Counter',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const MyHomePage(title: 'MTG Life Counter'),
+      home: const LifeCounter(title: 'MTG Life Counter'),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
+class LifeCounter extends StatefulWidget {
+  const LifeCounter({super.key, required this.title});
 
   final String title;
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<LifeCounter> createState() => _LifeCounterState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
-  int player1Life = 20;
-  int player2Life = 20;
-
-  void _gainlifePlayer1() {
-    setState(() {
-      player1Life++;
-    });
-  }
-
-  void _loselifePlayer1() {
-    setState(() {
-      player1Life--;
-    });
-  }
-
-  void _gainlifePlayer2() {
-    setState(() {
-      player2Life++;
-    });
-  }
-
-  void _loselifePlayer2() {
-    setState(() {
-      player2Life--;
-    });
-  }
-
+class _LifeCounterState extends State<LifeCounter> {
+  final GlobalKey<_PlayerState> keyPlayer1 = GlobalKey<_PlayerState>();
+  final GlobalKey<_PlayerState> keyPlayer2 = GlobalKey<_PlayerState>();
   void _resetLife() {
     setState(() {
-      player1Life = 20;
-      player2Life = 20;
+      keyPlayer1.currentState?.resetLife(20);
+      keyPlayer2.currentState?.resetLife(20);
     });
   }
 
@@ -70,82 +45,90 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: Text(widget.title),
-        actions: <Widget>[
-          FloatingActionButton(
-            onPressed: _resetLife,
-            tooltip: 'Reset',
-            child: const Icon(Icons.handshake_outlined),
-          ),
-        ],
       ),
-      body: Stack (
-        children: <Widget>[
-          Center(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              mainAxisSize: MainAxisSize.max,
-              children: <Widget>[
-                SizedBox(
-                  width: 200,
-                  child: Text(
-                    '$player1Life',
-                    textAlign: TextAlign.center,
-                    style: Theme.of(context).textTheme.headlineMedium,
-                  ),
-                ),
-                SizedBox(
-                  width:200,
-                  child: Text(
-                    '$player2Life',
-                    textAlign: TextAlign.center,
-                    style: Theme.of(context).textTheme.headlineMedium,
-                  ),
-                ),
-              ],
+      body: Center(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          mainAxisSize: MainAxisSize.max,
+          children: <Widget>[
+            Player(key: keyPlayer1),
+            ElevatedButton(
+              onPressed: _resetLife,
+              child: const Icon(Icons.handshake_outlined),
             ),
-          ),
-          Center(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              mainAxisSize: MainAxisSize.max,
-              children: <Widget>[
-                ElevatedButton(
-                  onPressed: _gainlifePlayer1,
-                  style: ElevatedButton.styleFrom(
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(0)),
-                    shadowColor: Colors.transparent,
-                  ),
-                  child: const Text('+1'),
-                ),
-                ElevatedButton(
-                  onPressed: _loselifePlayer1,
-                  style: ElevatedButton.styleFrom(
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(0)),
-                    shadowColor: Colors.transparent,
-                  ),
-                  child: const Text('-1'),
-                ),
-                ElevatedButton(
-                  onPressed: _gainlifePlayer2,
-                  style: ElevatedButton.styleFrom(
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(0)),
-                    shadowColor: Colors.transparent,
-                  ),
-                  child: const Text('+1')
-                ),
-                ElevatedButton(
-                  onPressed: _loselifePlayer2,
-                  style: ElevatedButton.styleFrom(
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(0)),
-                    shadowColor: Colors.transparent,
-                  ),
-                  child: const Text('-1')
-                ),
-              ],
-            ),
-          ),
-        ]
+            Player(key: keyPlayer2),
+          ],
+        ),
       ),
+    );
+  }
+}
+
+class Player extends StatefulWidget {
+  const Player({super.key});
+
+  @override
+  State<Player> createState() => _PlayerState();
+}
+
+class _PlayerState extends State<Player> {
+  int life = 20;
+
+  void _gainLife() {
+    setState(() {
+      life++;
+    });
+  }
+
+  void _loseLife() {
+    setState(() {
+      life--;
+    });
+  }
+
+  // 外部から初期化する用
+  void resetLife(int defaultlife) {
+    setState(() => life = defaultlife);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+        alignment: Alignment.center,
+      children: <Widget>[
+        Center(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisSize: MainAxisSize.max,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: <Widget>[
+              ElevatedButton(
+                onPressed: _gainLife,
+                style: ElevatedButton.styleFrom(
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(0)),
+                  shadowColor: Colors.transparent,
+                ),
+                child: const Text('+1'),
+              ),
+              ElevatedButton(
+                onPressed: _loseLife,
+                style: ElevatedButton.styleFrom(
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(0)),
+                  shadowColor: Colors.transparent,
+                ),
+                child: const Text('-1'),
+              ),
+            ],
+          ),
+        ),
+        Center(
+          child: Text(
+            '$life',
+            textAlign: TextAlign.center,
+            style: Theme.of(context).textTheme.headlineMedium,
+          ),
+        ),
+      ],
     );
   }
 }
