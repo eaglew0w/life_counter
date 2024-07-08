@@ -33,6 +33,7 @@ class LifeCounter extends StatefulWidget {
 class _LifeCounterState extends State<LifeCounter> {
   final GlobalKey<PlayerState> player1Key = GlobalKey<PlayerState>();
   final GlobalKey<PlayerState> player2Key = GlobalKey<PlayerState>();
+
   final int defaultLife = 20;
 
   void _resetLife(int defaultLife) {
@@ -49,17 +50,28 @@ class _LifeCounterState extends State<LifeCounter> {
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: Text(widget.title),
       ),
-      body: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: <Widget>[
-          Expanded(child: Player(key: player1Key),),
-          ElevatedButton(
-            onPressed: () {
-              _resetLife(defaultLife);
-            },
-            child: const Icon(Icons.handshake_outlined),
+      body: Column(
+        children: [
+          // 各項目の"高さ"をExpandedで均等に設定する
+          Expanded(
+            child: Row(
+              children: [
+                // 各項目の"幅"をExpandedで均等に設定する
+                Expanded(
+                  child: Player(key: player1Key),
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    _resetLife(defaultLife);
+                  },
+                  child: const Icon(Icons.handshake_outlined),
+                ),
+                Expanded(
+                  child: Player(key: player2Key),
+                ),
+              ],
+            ),
           ),
-          Expanded(child: Player(key: player2Key),),
         ],
       ),
     );
