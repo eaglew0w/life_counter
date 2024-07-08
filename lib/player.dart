@@ -30,29 +30,32 @@ class PlayerState extends State<Player> {
   @override
   Widget build(BuildContext context) {
     return Stack(
-        alignment: Alignment.center,
-      children: <Widget>[
+      children: [
         Center(
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            mainAxisSize: MainAxisSize.max,
+            // Cross方向へはここのプロパティで広げれるだけ広げるようにする
             crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: <Widget>[
-              ElevatedButton(
-                onPressed: _gainLife,
-                style: ElevatedButton.styleFrom(
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(0)),
-                  shadowColor: Colors.transparent,
-                ),
+            children: [
+              // Main方向へはここで広げられる限り広げる
+              Expanded(
+                child: ElevatedButton(
+                  onPressed: _gainLife,
+                  style: ElevatedButton.styleFrom(
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(0)),
+                    shadowColor: Colors.transparent,
+                  ),
                 child: const Text('+1'),
-              ),
-              ElevatedButton(
-                onPressed: _loseLife,
-                style: ElevatedButton.styleFrom(
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(0)),
-                  shadowColor: Colors.transparent,
                 ),
-                child: const Text('-1'),
+              ),
+              Expanded(
+                child: ElevatedButton(
+                  onPressed: () =>_loseLife,
+                  style: ElevatedButton.styleFrom(
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(0)),
+                    shadowColor: Colors.transparent,
+                  ),
+                  child: const Text('-1'),
+                ),
               ),
             ],
           ),
