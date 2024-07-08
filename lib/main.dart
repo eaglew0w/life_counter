@@ -30,16 +30,21 @@ class LifeCounter extends StatefulWidget {
   State<LifeCounter> createState() => _LifeCounterState();
 }
 
+/*
+  ライフカウンターのプレイヤーの配置レイアウトを決める
+*/
 class _LifeCounterState extends State<LifeCounter> {
   final GlobalKey<PlayerState> player1Key = GlobalKey<PlayerState>();
   final GlobalKey<PlayerState> player2Key = GlobalKey<PlayerState>();
 
-  final int defaultLife = 20;
+  // 初期ライフの値
+  final int _defaultLife = 20;
+
 
   void _resetLife(int defaultLife) {
     setState(() {
-      player1Key.currentState?.resetLife(defaultLife);
-      player2Key.currentState?.resetLife(defaultLife);
+      player1Key.currentState?.reset(defaultLife);
+      player2Key.currentState?.reset(defaultLife);
     });
   }
 
@@ -58,16 +63,16 @@ class _LifeCounterState extends State<LifeCounter> {
               children: [
                 // 各項目の"幅"をExpandedで均等に設定する
                 Expanded(
-                  child: Player(key: player1Key),
+                  child: Player(key: player1Key, life: _defaultLife),
                 ),
                 ElevatedButton(
                   onPressed: () {
-                    _resetLife(defaultLife);
+                    _resetLife(_defaultLife);
                   },
                   child: const Icon(Icons.handshake_outlined),
                 ),
                 Expanded(
-                  child: Player(key: player2Key),
+                  child: Player(key: player2Key, life: _defaultLife),
                 ),
               ],
             ),
