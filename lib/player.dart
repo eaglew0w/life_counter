@@ -1,30 +1,37 @@
 import 'package:flutter/material.dart';
 
 class Player extends StatefulWidget {
-  const Player({super.key});
+  final int life;
+  const Player({super.key, required this.life});
 
   @override
   State<Player> createState() => PlayerState();
 }
 
+// 1プレイヤーのウィジェット
+// プレイヤーのリソース及び増減カウンタをここで用意する
+// resetのみ外部に公開
 class PlayerState extends State<Player> {
-  int life = 20;
+  // プレイヤーのリソース
+  late int _life;
 
-  void _gainLife() {
-    setState(() {
-      life++;
-    });
+  @override
+  void initState() {
+    super.initState();
+    _life = widget.life;
   }
 
-  void _loseLife() {
-    setState(() {
-      life--;
-    });
+  void _gainLife(int value) {
+    setState(() => _life += value);
+  }
+
+  void _loseLife(int value) {
+    setState(() => _life -= value);
   }
 
   // 外部から初期化する用
-  void resetLife(int defaultlife) {
-    setState(() => life = defaultlife);
+  void reset(int defaultlife) {
+    setState(() => _life = defaultlife);
   }
 
   @override
@@ -39,7 +46,7 @@ class PlayerState extends State<Player> {
               // Main方向へはここで広げられる限り広げる
               Expanded(
                 child: ElevatedButton(
-                  onPressed: _gainLife,
+                  onPressed: () => _gainLife(1),
                   style: ElevatedButton.styleFrom(
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(0)),
                     shadowColor: Colors.transparent,
@@ -49,7 +56,7 @@ class PlayerState extends State<Player> {
               ),
               Expanded(
                 child: ElevatedButton(
-                  onPressed: () =>_loseLife,
+                  onPressed: () => _loseLife(1),
                   style: ElevatedButton.styleFrom(
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(0)),
                     shadowColor: Colors.transparent,
@@ -62,7 +69,7 @@ class PlayerState extends State<Player> {
         ),
         Center(
           child: Text(
-            '$life',
+            '$_life',
             textAlign: TextAlign.center,
             style: Theme.of(context).textTheme.headlineMedium,
           ),
