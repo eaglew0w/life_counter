@@ -26,7 +26,7 @@ class PlayerState extends State<Player> {
   }
 
   void _loseLife(int value) {
-    setState(() => _life -= value);
+    _gainLife(-value);
   }
 
   // 外部から初期化する用
