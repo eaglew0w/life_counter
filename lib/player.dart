@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 
 class Player extends StatefulWidget {
@@ -15,23 +16,47 @@ class PlayerState extends State<Player> {
   // プレイヤーのリソース
   late int _life;
 
+  int _lifeChange = 0;
+
+  Timer? _timer;
+
   @override
   void initState() {
     super.initState();
     _life = widget.life;
+    _lifeChange = 0;
   }
 
   void _gainLife(int value) {
-    setState(() => _life += value);
+    setState(() {
+      _life += value;
+      _lifeChange += value;
+    });
+    _restartTimer();
   }
 
   void _loseLife(int value) {
-    setState(() => _life -= value);
+    _gainLife(-value);
   }
 
   // 外部から初期化する用
   void reset(int defaultlife) {
     setState(() => _life = defaultlife);
+  }
+
+  void _restartTimer() {
+    _timer?.cancel();
+    _timer = Timer(const Duration(seconds: 5), () {
+      setState(() {
+        _lifeChange = 0;
+      });
+    });
+  }
+
+  @override
+  void dispose() {
+    _timer?.cancel();
+    super.dispose();
   }
 
   @override
@@ -74,6 +99,16 @@ class PlayerState extends State<Player> {
             style: Theme.of(context).textTheme.headlineMedium,
           ),
         ),
+        Align(
+          alignment: const Alignment(0, 0.2),
+          child: Text(
+            _lifeChange == 0
+              ? ''
+              : _lifeChange > 0
+                ? '+$_lifeChange'
+                : '$_lifeChange',
+            textAlign: TextAlign.end,
+          ))
       ],
     );
   }
