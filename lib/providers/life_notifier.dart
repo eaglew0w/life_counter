@@ -1,13 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'dart:async';
-
-class PlayerState {
-  int life;
-  int lifeChange;
-  Timer? timer;
-
-  PlayerState({required this.life, this.lifeChange = 0, this.timer});
-}
+import '../models/player_state.dart';
 
 class LifeNotifier extends StateNotifier<PlayerState> {
   LifeNotifier(int initialLife) : super(PlayerState(life: initialLife));
