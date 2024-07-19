@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'life_notifier.dart';
+import '../models/player_state.dart';
+import '../providers/life_notifier.dart';
 
 class Player extends ConsumerWidget {
   final StateNotifierProvider<LifeNotifier, PlayerState> playerProvider;
