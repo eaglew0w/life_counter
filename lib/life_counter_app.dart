@@ -1,5 +1,7 @@
-import 'player.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'player.dart';
+import 'life_notifier.dart';
 
 class LifeCounterApp extends StatelessWidget {
   const LifeCounterApp({super.key});
@@ -17,64 +19,38 @@ class LifeCounterApp extends StatelessWidget {
   }
 }
 
-class LifeCounter extends StatefulWidget {
+final player1Provider = StateNotifierProvider<LifeNotifier, PlayerState>((ref) => LifeNotifier(20));
+final player2Provider = StateNotifierProvider<LifeNotifier, PlayerState>((ref) => LifeNotifier(20));
+
+class LifeCounter extends ConsumerWidget {
   const LifeCounter({super.key, required this.title});
 
   final String title;
 
   @override
-  State<LifeCounter> createState() => _LifeCounterState();
-}
-
-/*
-  ライフカウンターのプレイヤーの配置レイアウトを決める
-*/
-class _LifeCounterState extends State<LifeCounter> {
-  // 初期ライフの値
-  final int _defaultLife = 20;
-
-  // PlayerのGlobalKeyリスト
-  final List<GlobalKey<PlayerState>> _playerGlobalKeyList = [];
-  int _keyListIndex = 0;
-  GlobalKey<PlayerState> _generateGlobalKey() {
-    _playerGlobalKeyList.add(GlobalKey<PlayerState>());
-    _keyListIndex++;
-    return _playerGlobalKeyList[_keyListIndex - 1];
-  }
-
-  void _resetLife(int defaultLife) {
-    setState(() {
-      for (var key in _playerGlobalKeyList) {
-        key.currentState?.reset(defaultLife);
-      }
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(widget.title),
+        title: Text(title),
       ),
       body: Column(
         children: [
-          // 各項目の"高さ"をExpandedで均等に設定する
           Expanded(
             child: Row(
               children: [
-                // 各項目の"幅"をExpandedで均等に設定する
                 Expanded(
-                  child: Player(key: _generateGlobalKey(), life: _defaultLife),
+                  child: Player(playerProvider: player1Provider),
                 ),
                 ElevatedButton(
                   onPressed: () {
-                    _resetLife(_defaultLife);
+                    ref.read(player1Provider.notifier).reset(20);
+                    ref.read(player2Provider.notifier).reset(20);
                   },
                   child: const Icon(Icons.handshake_outlined),
                 ),
                 Expanded(
-                  child: Player(key: _generateGlobalKey(), life: _defaultLife),
+                  child: Player(playerProvider: player2Provider),
                 ),
               ],
             ),
