@@ -24,6 +24,7 @@ class Player extends ConsumerWidget {
                   onPressed: () => lifeNotifier.gainLife(1),
                   style: ElevatedButton.styleFrom(
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(0)),
+                    backgroundColor: Colors.transparent,
                     shadowColor: Colors.transparent,
                   ),
                   child: const Text('+1'),
@@ -34,6 +35,7 @@ class Player extends ConsumerWidget {
                   onPressed: () => lifeNotifier.gainLife(-1),
                   style: ElevatedButton.styleFrom(
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(0)),
+                    backgroundColor: Colors.transparent,
                     shadowColor: Colors.transparent,
                   ),
                   child: const Text('-1'),
@@ -46,7 +48,7 @@ class Player extends ConsumerWidget {
           child: Text(
             '${playerState.life}',
             textAlign: TextAlign.center,
-            style: Theme.of(context).textTheme.headlineMedium,
+            style: Theme.of(context).textTheme.displayLarge,
           ),
         ),
         Align(
