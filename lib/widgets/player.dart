@@ -46,7 +46,7 @@ class Player extends ConsumerWidget {
           child: Text(
             '${playerState.life}',
             textAlign: TextAlign.center,
-            style: Theme.of(context).textTheme.headlineMedium,
+            style: Theme.of(context).textTheme.displayLarge,
           ),
         ),
         Align(
