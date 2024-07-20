@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../utils/global_functions.dart';
 import '../models/player_state.dart';
 import '../providers/life_notifier.dart';
+import '../widgets/life_change_button.dart';
 
 class Player extends ConsumerWidget {
   final StateNotifierProvider<LifeNotifier, PlayerState> playerProvider;
@@ -10,8 +12,8 @@ class Player extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final playerState = ref.watch(playerProvider);
-    final lifeNotifier = ref.read(playerProvider.notifier);
+    final PlayerState playerState = ref.watch(playerProvider);
+    final LifeNotifier lifeNotifier = ref.read(playerProvider.notifier);
 
     return Stack(
       children: [
@@ -20,26 +22,10 @@ class Player extends ConsumerWidget {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Expanded(
-                child: ElevatedButton(
-                  onPressed: () => lifeNotifier.gainLife(1),
-                  style: ElevatedButton.styleFrom(
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(0)),
-                    backgroundColor: Colors.transparent,
-                    shadowColor: Colors.transparent,
-                  ),
-                  child: const Text('+1'),
-                ),
+                child: LifeChangeButton(lifeNotifier: lifeNotifier, changeValue: 1),
               ),
               Expanded(
-                child: ElevatedButton(
-                  onPressed: () => lifeNotifier.gainLife(-1),
-                  style: ElevatedButton.styleFrom(
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(0)),
-                    backgroundColor: Colors.transparent,
-                    shadowColor: Colors.transparent,
-                  ),
-                  child: const Text('-1'),
-                ),
+                child: LifeChangeButton(lifeNotifier: lifeNotifier, changeValue: -1),
               ),
             ],
           ),
@@ -54,11 +40,7 @@ class Player extends ConsumerWidget {
         Align(
           alignment: const Alignment(0, 0.2),
           child: Text(
-            playerState.lifeChange == 0
-                ? ''
-                : playerState.lifeChange > 0
-                    ? '+${playerState.lifeChange}'
-                    : '${playerState.lifeChange}',
+            addAbsoluteValueText(playerState.lifeChange),
             textAlign: TextAlign.end,
           ),
         )
