@@ -31,9 +31,10 @@ class LifeCounter extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
+      backgroundColor: Colors.black,
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(title),
+        backgroundColor: Colors.black,
+        title: Text(title, style:const TextStyle(color: Colors.white),),
       ),
       body: Column(
         children: [
