@@ -38,7 +38,7 @@ class Player extends ConsumerWidget {
           ),
         ),
         Align(
-          alignment: const Alignment(0, 0.2),
+          alignment: const Alignment(0, 0.3),
           child: Text(
             addAbsoluteValueText(playerState.lifeChange),
             textAlign: TextAlign.end,
