@@ -21,8 +21,7 @@ Flutterの開発環境構築はインターネットで適当にいい感じに(
 
 ## リリース作業
 1. feature/developからfeature/mainへのPR作成
-リリースするissue一覧を作成する
-また、issueをこのタイミングでcloseする
+リリースするissueについてこのタイミングでcloseする
 PRに close #"閉じるissue番号" を記載すればマージ時に自動でissueがcloseされる
 2. PRをマージ
 3. リリースバイナリ作成
@@ -34,7 +33,11 @@ flutter build apk --release
 4. Code の ReleasesからDraft a new releaseを押してリリース作成
 Choose a tagでタグ付けをすること
 3で作成したバイナリを含めること
+文章自動生成でいい感じに文章作れるはず
 Pubish releaseを押せば公開される
+5. feature/developをmainから切り出して完了
+手元でfeature/developにmainをコミットを作らずにマージしてpush
+
 
 ## ブランチ分け
 - main
