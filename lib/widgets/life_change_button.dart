@@ -22,7 +22,7 @@ class LifeChangeButton extends ConsumerWidget {
         backgroundColor: Colors.transparent,
         shadowColor: Colors.transparent,
       ),
-      child: Text(buttonText),
+      child: Text(buttonText, style: const TextStyle(color: Colors.white),),
     );
   }
 }

@@ -34,7 +34,7 @@ class Player extends ConsumerWidget {
           child: Text(
             '${playerState.life}',
             textAlign: TextAlign.center,
-            style: Theme.of(context).textTheme.displayLarge,
+            style: Theme.of(context).textTheme.displayLarge?.copyWith(color: Colors.white),
           ),
         ),
         Align(
@@ -42,6 +42,9 @@ class Player extends ConsumerWidget {
           child: Text(
             addAbsoluteValueText(playerState.lifeChange),
             textAlign: TextAlign.end,
+            style: const TextStyle(
+              color: Colors.white,
+            ),
           ),
         )
       ],
