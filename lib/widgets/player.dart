@@ -34,14 +34,17 @@ class Player extends ConsumerWidget {
           child: Text(
             '${playerState.life}',
             textAlign: TextAlign.center,
-            style: Theme.of(context).textTheme.displayLarge,
+            style: Theme.of(context).textTheme.displayLarge?.copyWith(color: Colors.white),
           ),
         ),
         Align(
-          alignment: const Alignment(0, 0.2),
+          alignment: const Alignment(0, 0.3),
           child: Text(
             addAbsoluteValueText(playerState.lifeChange),
             textAlign: TextAlign.end,
+            style: const TextStyle(
+              color: Colors.white,
+            ),
           ),
         )
       ],
