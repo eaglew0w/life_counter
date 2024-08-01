@@ -34,3 +34,45 @@ Color getBackgroundColor(BackgroundState backgroundState) {
 
   return retColor;
 }
+
+BackgroundState getNextBackground(BackgroundState backgroundState) {
+  BackgroundState retNextBackground = BackgroundState.unset;
+
+  switch (backgroundState) {
+    case BackgroundState.unset:
+      retNextBackground = BackgroundState.day;
+      break;
+    case BackgroundState.day:
+      retNextBackground = BackgroundState.night;
+      break;
+    case BackgroundState.night:
+      retNextBackground = BackgroundState.day;
+      break;
+    default:
+      retNextBackground = BackgroundState.day;
+      break;
+  }
+
+  return retNextBackground;
+}
+
+Icon getBackgroundIcon(BackgroundState backgroundState) {
+  Icon retIcon = backgroundUnsetIcon;
+
+  switch (backgroundState) {
+    case BackgroundState.unset:
+      retIcon = backgroundUnsetIcon;
+      break;
+    case BackgroundState.day:
+      retIcon = backgroundDayIcon;
+      break;
+    case BackgroundState.night:
+      retIcon = backgroundNightIcon;
+      break;
+    default:
+      retIcon = backgroundUnsetIcon;
+      break;
+  }
+
+  return retIcon;
+}
