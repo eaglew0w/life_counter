@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:life_counter/constants/constants.dart';
 import '../utils/global_functions.dart';
 import '../models/player_state.dart';
 import '../providers/life_notifier.dart';
@@ -22,10 +23,12 @@ class Player extends ConsumerWidget {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Expanded(
-                child: LifeChangeButton(lifeNotifier: lifeNotifier, changeValue: 1),
+                child: LifeChangeButton(
+                    lifeNotifier: lifeNotifier, changeValue: 1),
               ),
               Expanded(
-                child: LifeChangeButton(lifeNotifier: lifeNotifier, changeValue: -1),
+                child: LifeChangeButton(
+                    lifeNotifier: lifeNotifier, changeValue: -1),
               ),
             ],
           ),
@@ -34,16 +37,20 @@ class Player extends ConsumerWidget {
           child: Text(
             '${playerState.life}',
             textAlign: TextAlign.center,
-            style: Theme.of(context).textTheme.displayLarge?.copyWith(color: Colors.white),
+            style: Theme.of(context)
+                .textTheme
+                .displayLarge
+                ?.copyWith(color: textColorDefault),
           ),
         ),
         Align(
-          alignment: const Alignment(0, 0.3),
+          alignment: const Alignment(
+              alignmentXofPlayerLifeChange, alignmentYofPlayerLifeChange),
           child: Text(
             addAbsoluteValueText(playerState.lifeChange),
             textAlign: TextAlign.end,
             style: const TextStyle(
-              color: Colors.white,
+              color: textColorDefault,
             ),
           ),
         )

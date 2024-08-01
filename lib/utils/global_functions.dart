@@ -1,15 +1,10 @@
 String addAbsoluteValueText(int value) {
   String retString = '';
-  if (value == 0)
-  {
+  if (value == 0) {
     retString = '';
-  }
-  else if (value > 0)
-  {
+  } else if (value > 0) {
     retString = '+$value';
-  }
-  else
-  {
+  } else {
     retString = '$value';
   }
   return retString;
