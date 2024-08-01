@@ -7,11 +7,14 @@ class LifeChangeButton extends ConsumerWidget {
   final LifeNotifier lifeNotifier;
   final int changeValue;
 
-  const LifeChangeButton({required this.lifeNotifier, required this.changeValue, super.key,});
+  const LifeChangeButton({
+    required this.lifeNotifier,
+    required this.changeValue,
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-
     // late finalのフィールドを初期化するより先にbuildが呼ばれる場合エラーになるためbuildの中で表示するテキストを生成する
     final buttonText = addAbsoluteValueText(changeValue);
 
@@ -22,7 +25,10 @@ class LifeChangeButton extends ConsumerWidget {
         backgroundColor: Colors.transparent,
         shadowColor: Colors.transparent,
       ),
-      child: Text(buttonText, style: const TextStyle(color: Colors.white),),
+      child: Text(
+        buttonText,
+        style: const TextStyle(color: Colors.white),
+      ),
     );
   }
 }
