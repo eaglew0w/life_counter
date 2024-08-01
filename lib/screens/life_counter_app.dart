@@ -20,8 +20,10 @@ class LifeCounterApp extends StatelessWidget {
   }
 }
 
-final player1Provider = StateNotifierProvider<LifeNotifier, PlayerState>((ref) => LifeNotifier(20));
-final player2Provider = StateNotifierProvider<LifeNotifier, PlayerState>((ref) => LifeNotifier(20));
+final player1Provider =
+    StateNotifierProvider<LifeNotifier, PlayerState>((ref) => LifeNotifier(20));
+final player2Provider =
+    StateNotifierProvider<LifeNotifier, PlayerState>((ref) => LifeNotifier(20));
 
 class LifeCounter extends ConsumerWidget {
   const LifeCounter({super.key, required this.title});
@@ -34,7 +36,10 @@ class LifeCounter extends ConsumerWidget {
       backgroundColor: Colors.black,
       appBar: AppBar(
         backgroundColor: Colors.black,
-        title: Text(title, style:const TextStyle(color: Colors.white),),
+        title: Text(
+          title,
+          style: const TextStyle(color: Colors.white),
+        ),
       ),
       body: Column(
         children: [

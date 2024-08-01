@@ -22,10 +22,12 @@ class Player extends ConsumerWidget {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Expanded(
-                child: LifeChangeButton(lifeNotifier: lifeNotifier, changeValue: 1),
+                child: LifeChangeButton(
+                    lifeNotifier: lifeNotifier, changeValue: 1),
               ),
               Expanded(
-                child: LifeChangeButton(lifeNotifier: lifeNotifier, changeValue: -1),
+                child: LifeChangeButton(
+                    lifeNotifier: lifeNotifier, changeValue: -1),
               ),
             ],
           ),
@@ -34,7 +36,10 @@ class Player extends ConsumerWidget {
           child: Text(
             '${playerState.life}',
             textAlign: TextAlign.center,
-            style: Theme.of(context).textTheme.displayLarge?.copyWith(color: Colors.white),
+            style: Theme.of(context)
+                .textTheme
+                .displayLarge
+                ?.copyWith(color: Colors.white),
           ),
         ),
         Align(
