@@ -21,11 +21,6 @@ class LifeCounterApp extends StatelessWidget {
   }
 }
 
-final player1Provider = StateNotifierProvider<LifeNotifier, PlayerState>(
-    (ref) => LifeNotifier(defaultLife));
-final player2Provider = StateNotifierProvider<LifeNotifier, PlayerState>(
-    (ref) => LifeNotifier(defaultLife));
-
 class LifeCounter extends ConsumerWidget {
   const LifeCounter({super.key, required this.title});
 
