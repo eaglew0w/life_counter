@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 const Color backgroundColorDefault = Colors.black;
-const Color backgroundColorDay = Colors.limeAccent;
-final Color? backgorundColorNight = Colors.indigo[400];
+final Color backgroundColorDay = Colors.amber[900]!;
+final Color backgorundColorNight = Colors.indigo[900]!;
 
 const Color textColorDefault = Colors.white;
 
