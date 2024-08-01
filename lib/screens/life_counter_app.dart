@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../models/player_state.dart';
 import '../widgets/player.dart';
 import '../providers/life_notifier.dart';
+import '../constants/constants.dart';
 
 class LifeCounterApp extends StatelessWidget {
   const LifeCounterApp({super.key});
@@ -20,8 +21,10 @@ class LifeCounterApp extends StatelessWidget {
   }
 }
 
-final player1Provider = StateNotifierProvider<LifeNotifier, PlayerState>((ref) => LifeNotifier(20));
-final player2Provider = StateNotifierProvider<LifeNotifier, PlayerState>((ref) => LifeNotifier(20));
+final player1Provider = StateNotifierProvider<LifeNotifier, PlayerState>(
+    (ref) => LifeNotifier(defaultLife));
+final player2Provider = StateNotifierProvider<LifeNotifier, PlayerState>(
+    (ref) => LifeNotifier(defaultLife));
 
 class LifeCounter extends ConsumerWidget {
   const LifeCounter({super.key, required this.title});
@@ -31,10 +34,13 @@ class LifeCounter extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: backgroundColorDefault,
       appBar: AppBar(
-        backgroundColor: Colors.black,
-        title: Text(title, style:const TextStyle(color: Colors.white),),
+        backgroundColor: backgroundColorDefault,
+        title: Text(
+          title,
+          style: const TextStyle(color: textColorDefault),
+        ),
       ),
       body: Column(
         children: [
@@ -46,8 +52,8 @@ class LifeCounter extends ConsumerWidget {
                 ),
                 ElevatedButton(
                   onPressed: () {
-                    ref.read(player1Provider.notifier).reset(20);
-                    ref.read(player2Provider.notifier).reset(20);
+                    ref.read(player1Provider.notifier).reset(defaultLife);
+                    ref.read(player2Provider.notifier).reset(defaultLife);
                   },
                   child: const Icon(Icons.handshake_outlined),
                 ),
