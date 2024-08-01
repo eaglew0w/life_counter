@@ -1,6 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'dart:async';
 import '../models/player_state.dart';
+import '../constants/constants.dart';
 
 class LifeNotifier extends StateNotifier<PlayerState> {
   LifeNotifier(int initialLife) : super(PlayerState(life: initialLife));
@@ -20,7 +21,7 @@ class LifeNotifier extends StateNotifier<PlayerState> {
 
   void _restartTimer() {
     state.timer?.cancel();
-    state.timer = Timer(const Duration(seconds: 5), () {
+    state.timer = Timer(const Duration(seconds: lifeChangeDisplayTimer), () {
       state = PlayerState(life: state.life, lifeChange: 0, timer: state.timer);
     });
   }
