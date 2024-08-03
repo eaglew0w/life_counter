@@ -3,9 +3,11 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:life_counter/models/background_state.dart';
 import 'package:life_counter/utils/global_functions.dart';
 import 'package:life_counter/constants/constants.dart';
-import 'package:life_counter/providers/background_provider.dart';
+import 'package:life_counter/providers/background_notifier.dart';
 import 'package:life_counter/providers/life_notifier.dart';
 import 'package:life_counter/widgets/player.dart';
+import 'package:life_counter/widgets/background_change_button.dart';
+import 'package:life_counter/widgets/reset_button.dart';
 
 class LifeCounterApp extends StatelessWidget {
   const LifeCounterApp({super.key});
@@ -30,14 +32,26 @@ class LifeCounter extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final BackgroundState backgroundState = ref.watch(backgroundProvider);
+    final Color backgroundColor =
+        getBackgroundColor(backgroundState.background);
+
     return Scaffold(
-      backgroundColor: backgroundColorDefault,
+      backgroundColor: backgroundColor,
       appBar: AppBar(
-        backgroundColor: backgroundColorDefault,
+        backgroundColor: backgroundColor,
         title: Text(
           title,
           style: const TextStyle(color: textColorDefault),
         ),
+        leading: ResetButton(stateNotifiers: [
+          ref.read(player1Provider.notifier),
+          ref.read(player2Provider.notifier),
+          ref.read(backgroundProvider.notifier)
+        ]),
+        actions: [
+          BackgroundChangeButton(backgroundProvider: backgroundProvider),
+        ],
       ),
       body: Column(
         children: [
@@ -46,13 +60,6 @@ class LifeCounter extends ConsumerWidget {
               children: [
                 Expanded(
                   child: Player(playerProvider: player1Provider),
-                ),
-                ElevatedButton(
-                  onPressed: () {
-                    ref.read(player1Provider.notifier).reset(defaultLife);
-                    ref.read(player2Provider.notifier).reset(defaultLife);
-                  },
-                  child: const Icon(Icons.handshake_outlined),
                 ),
                 Expanded(
                   child: Player(playerProvider: player2Provider),

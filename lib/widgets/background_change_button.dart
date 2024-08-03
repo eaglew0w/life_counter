@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:life_counter/models/background_state.dart';
+import 'package:life_counter/providers/background_notifier.dart';
 import 'package:life_counter/utils/global_functions.dart';
 
 class BackgroundChangeButton extends ConsumerWidget {
-  final StateProvider<BackgroundState> backgroundProvider;
+  final StateNotifierProvider<BackgroundNotifier, BackgroundState>
+      backgroundProvider;
 
   const BackgroundChangeButton({
     required this.backgroundProvider,
@@ -13,13 +15,15 @@ class BackgroundChangeButton extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final BackgroundState backgroundState = ref.watch(backgroundProvider);
+    final BackgroundNotifier backgroundNotifier =
+        ref.read(backgroundProvider.notifier);
     return ElevatedButton(
       onPressed: () {
-        ref.read(backgroundProvider.notifier).state =
-            getNextBackground(ref.read(backgroundProvider.notifier).state);
+        backgroundNotifier.setNextBackground();
       },
       onLongPress: () {
-        ref.read(backgroundProvider.notifier).state = BackgroundState.unset;
+        backgroundNotifier.reset();
       },
       style: ElevatedButton.styleFrom(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(0)),
@@ -27,7 +31,8 @@ class BackgroundChangeButton extends ConsumerWidget {
         shadowColor: Colors.transparent,
       ),
       child: getBackgroundIcon(
-          getNextBackground(ref.read(backgroundProvider.notifier).state)),
+        (getNextBackground(backgroundState.background)),
+      ),
     );
   }
 }
