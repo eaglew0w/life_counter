@@ -1,7 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'dart:async';
-import '../models/player_state.dart';
-import '../constants/constants.dart';
+import 'package:life_counter/models/player_state.dart';
+import 'package:life_counter/constants/constants.dart';
 
 class LifeNotifier extends StateNotifier<PlayerState> {
   LifeNotifier(int initialLife) : super(PlayerState(life: initialLife));
@@ -32,3 +32,8 @@ class LifeNotifier extends StateNotifier<PlayerState> {
     super.dispose();
   }
 }
+
+final player1Provider = StateNotifierProvider<LifeNotifier, PlayerState>(
+    (ref) => LifeNotifier(defaultLife));
+final player2Provider = StateNotifierProvider<LifeNotifier, PlayerState>(
+    (ref) => LifeNotifier(defaultLife));
