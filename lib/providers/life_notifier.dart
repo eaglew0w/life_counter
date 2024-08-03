@@ -2,9 +2,13 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'dart:async';
 import 'package:life_counter/models/player_state.dart';
 import 'package:life_counter/constants/constants.dart';
+import 'package:life_counter/providers/resettable_notifier.dart';
 
-class LifeNotifier extends StateNotifier<PlayerState> {
-  LifeNotifier(int initialLife) : super(PlayerState(life: initialLife));
+class LifeNotifier extends StateNotifier<PlayerState>
+    implements ResettableNotifier {
+  final int defaultLife;
+
+  LifeNotifier(this.defaultLife) : super(PlayerState(life: defaultLife));
 
   void gainLife(int value) {
     state = PlayerState(
@@ -15,7 +19,8 @@ class LifeNotifier extends StateNotifier<PlayerState> {
     _restartTimer();
   }
 
-  void reset(int defaultLife) {
+  @override
+  void reset() {
     state = PlayerState(life: defaultLife);
   }
 
