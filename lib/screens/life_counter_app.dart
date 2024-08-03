@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../models/player_state.dart';
-import '../widgets/player.dart';
-import '../providers/life_notifier.dart';
+import 'package:life_counter/models/background_state.dart';
+import 'package:life_counter/utils/global_functions.dart';
+import 'package:life_counter/constants/constants.dart';
+import 'package:life_counter/providers/background_notifier.dart';
+import 'package:life_counter/providers/life_notifier.dart';
+import 'package:life_counter/widgets/player.dart';
+import 'package:life_counter/widgets/background_change_button.dart';
+import 'package:life_counter/widgets/reset_button.dart';
 
 class LifeCounterApp extends StatelessWidget {
   const LifeCounterApp({super.key});
@@ -20,9 +25,6 @@ class LifeCounterApp extends StatelessWidget {
   }
 }
 
-final player1Provider = StateNotifierProvider<LifeNotifier, PlayerState>((ref) => LifeNotifier(20));
-final player2Provider = StateNotifierProvider<LifeNotifier, PlayerState>((ref) => LifeNotifier(20));
-
 class LifeCounter extends ConsumerWidget {
   const LifeCounter({super.key, required this.title});
 
@@ -30,11 +32,26 @@ class LifeCounter extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final BackgroundState backgroundState = ref.watch(backgroundProvider);
+    final Color backgroundColor =
+        getBackgroundColor(backgroundState.background);
+
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: backgroundColor,
       appBar: AppBar(
-        backgroundColor: Colors.black,
-        title: Text(title, style:const TextStyle(color: Colors.white),),
+        backgroundColor: backgroundColor,
+        title: Text(
+          title,
+          style: const TextStyle(color: textColorDefault),
+        ),
+        leading: ResetButton(stateNotifiers: [
+          ref.read(player1Provider.notifier),
+          ref.read(player2Provider.notifier),
+          ref.read(backgroundProvider.notifier)
+        ]),
+        actions: [
+          BackgroundChangeButton(backgroundProvider: backgroundProvider),
+        ],
       ),
       body: Column(
         children: [
@@ -43,13 +60,6 @@ class LifeCounter extends ConsumerWidget {
               children: [
                 Expanded(
                   child: Player(playerProvider: player1Provider),
-                ),
-                ElevatedButton(
-                  onPressed: () {
-                    ref.read(player1Provider.notifier).reset(20);
-                    ref.read(player2Provider.notifier).reset(20);
-                  },
-                  child: const Icon(Icons.handshake_outlined),
                 ),
                 Expanded(
                   child: Player(playerProvider: player2Provider),
