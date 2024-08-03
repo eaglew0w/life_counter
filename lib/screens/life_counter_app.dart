@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../models/player_state.dart';
-import '../widgets/player.dart';
-import '../providers/life_notifier.dart';
-import '../constants/constants.dart';
+import 'package:life_counter/models/background_state.dart';
+import 'package:life_counter/utils/global_functions.dart';
+import 'package:life_counter/constants/constants.dart';
+import 'package:life_counter/providers/background_provider.dart';
+import 'package:life_counter/providers/life_notifier.dart';
+import 'package:life_counter/widgets/player.dart';
 
 class LifeCounterApp extends StatelessWidget {
   const LifeCounterApp({super.key});
@@ -20,11 +22,6 @@ class LifeCounterApp extends StatelessWidget {
     );
   }
 }
-
-final player1Provider = StateNotifierProvider<LifeNotifier, PlayerState>(
-    (ref) => LifeNotifier(defaultLife));
-final player2Provider = StateNotifierProvider<LifeNotifier, PlayerState>(
-    (ref) => LifeNotifier(defaultLife));
 
 class LifeCounter extends ConsumerWidget {
   const LifeCounter({super.key, required this.title});
