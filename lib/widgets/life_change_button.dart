@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../utils/global_functions.dart';
-import '../providers/life_notifier.dart';
+import 'package:life_counter/utils/global_functions.dart';
+import 'package:life_counter/providers/life_notifier.dart';
 
 class LifeChangeButton extends ConsumerWidget {
   final LifeNotifier lifeNotifier;
