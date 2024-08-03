@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:life_counter/constants/constants.dart';
-import 'package:life_counter/models/background_state.dart';
 
 String addAbsoluteValueText(int value) {
   String retString = '';
@@ -14,17 +13,37 @@ String addAbsoluteValueText(int value) {
   return retString;
 }
 
-Color getBackgroundColor(BackgroundState backgroundState) {
+Background getNextBackground(Background background) {
+  Background retNextBackground = Background.unset;
+
+  switch (background) {
+    case Background.unset:
+      retNextBackground = Background.day;
+      break;
+    case Background.day:
+      retNextBackground = Background.night;
+      break;
+    case Background.night:
+      retNextBackground = Background.day;
+      break;
+    default:
+      retNextBackground = Background.unset;
+      break;
+  }
+  return retNextBackground;
+}
+
+Color getBackgroundColor(Background background) {
   Color retColor = backgroundColorDefault;
 
-  switch (backgroundState) {
-    case BackgroundState.unset:
+  switch (background) {
+    case Background.unset:
       retColor = backgroundColorDefault;
       break;
-    case BackgroundState.day:
+    case Background.day:
       retColor = backgroundColorDay;
       break;
-    case BackgroundState.night:
+    case Background.night:
       retColor = backgorundColorNight;
       break;
     default:
@@ -35,38 +54,17 @@ Color getBackgroundColor(BackgroundState backgroundState) {
   return retColor;
 }
 
-BackgroundState getNextBackground(BackgroundState backgroundState) {
-  BackgroundState retNextBackground = BackgroundState.unset;
-
-  switch (backgroundState) {
-    case BackgroundState.unset:
-      retNextBackground = BackgroundState.day;
-      break;
-    case BackgroundState.day:
-      retNextBackground = BackgroundState.night;
-      break;
-    case BackgroundState.night:
-      retNextBackground = BackgroundState.day;
-      break;
-    default:
-      retNextBackground = BackgroundState.day;
-      break;
-  }
-
-  return retNextBackground;
-}
-
-Icon getBackgroundIcon(BackgroundState backgroundState) {
+Icon getBackgroundIcon(Background background) {
   Icon retIcon = backgroundUnsetIcon;
 
-  switch (backgroundState) {
-    case BackgroundState.unset:
+  switch (background) {
+    case Background.unset:
       retIcon = backgroundUnsetIcon;
       break;
-    case BackgroundState.day:
+    case Background.day:
       retIcon = backgroundDayIcon;
       break;
-    case BackgroundState.night:
+    case Background.night:
       retIcon = backgroundNightIcon;
       break;
     default:
