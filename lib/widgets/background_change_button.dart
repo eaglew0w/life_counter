@@ -18,6 +18,9 @@ class BackgroundChangeButton extends ConsumerWidget {
         ref.read(backgroundProvider.notifier).state =
             getNextBackground(ref.read(backgroundProvider.notifier).state);
       },
+      onLongPress: () {
+        ref.read(backgroundProvider.notifier).state = BackgroundState.unset;
+      },
       style: ElevatedButton.styleFrom(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(0)),
         backgroundColor: Colors.transparent,
