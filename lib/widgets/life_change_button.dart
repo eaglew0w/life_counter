@@ -6,10 +6,12 @@ import 'package:life_counter/providers/life_notifier.dart';
 class LifeChangeButton extends ConsumerWidget {
   final LifeNotifier lifeNotifier;
   final int changeValue;
+  final Alignment alignment;
 
   const LifeChangeButton({
     required this.lifeNotifier,
     required this.changeValue,
+    this.alignment = Alignment.center,
     super.key,
   });
 
@@ -25,9 +27,12 @@ class LifeChangeButton extends ConsumerWidget {
         backgroundColor: Colors.transparent,
         shadowColor: Colors.transparent,
       ),
-      child: Text(
-        buttonText,
-        style: const TextStyle(color: Colors.white),
+      child: Align(
+        alignment: alignment,
+        child: Text(
+          buttonText,
+          style: const TextStyle(color: Colors.white),
+        ),
       ),
     );
   }
