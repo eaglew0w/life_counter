@@ -92,7 +92,7 @@ class PlayerAddLifeChange extends Player {
               color: textColorDefault,
             ),
           ),
-        )
+        ),
       ],
     );
   }
