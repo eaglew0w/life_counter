@@ -58,7 +58,7 @@ class Player extends ConsumerWidget {
               color: textColorDefault,
             ),
           ),
-        )
+        ),
       ],
     );
   }
