@@ -7,11 +7,13 @@ class LifeChangeButton extends ConsumerWidget {
   final LifeNotifier lifeNotifier;
   final int changeValue;
   final Alignment alignment;
+  final Color textColor;
 
   const LifeChangeButton({
     required this.lifeNotifier,
     required this.changeValue,
     this.alignment = Alignment.center,
+    this.textColor = Colors.white,
     super.key,
   });
 
@@ -31,7 +33,7 @@ class LifeChangeButton extends ConsumerWidget {
         alignment: alignment,
         child: Text(
           buttonText,
-          style: const TextStyle(color: Colors.white),
+          style: TextStyle(color: textColor),
         ),
       ),
     );
