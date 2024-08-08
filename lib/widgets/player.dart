@@ -24,11 +24,16 @@ class Player extends ConsumerWidget {
             children: [
               Expanded(
                 child: LifeChangeButton(
-                    lifeNotifier: lifeNotifier, changeValue: 1),
+                  lifeNotifier: lifeNotifier,
+                  changeValue: 1,
+                  textColor: lifeChangeButtonColor,
+                ),
               ),
               Expanded(
                 child: LifeChangeButton(
-                    lifeNotifier: lifeNotifier, changeValue: -1),
+                    lifeNotifier: lifeNotifier,
+                    changeValue: -1,
+                    textColor: lifeChangeButtonColor),
               ),
             ],
           ),
