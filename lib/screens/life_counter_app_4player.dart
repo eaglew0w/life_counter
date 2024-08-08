@@ -9,8 +9,8 @@ import 'package:life_counter/widgets/background_change_button.dart';
 import 'package:life_counter/widgets/player_addlifechange.dart';
 import 'package:life_counter/widgets/reset_button.dart';
 
-class LifeCounterApp extends StatelessWidget {
-  const LifeCounterApp({super.key});
+class LifeCounterApp4Player extends StatelessWidget {
+  const LifeCounterApp4Player({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -20,13 +20,13 @@ class LifeCounterApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const LifeCounter(title: 'MTG Life Counter'),
+      home: const LifeCounter4Player(title: 'MTG Life Counter'),
     );
   }
 }
 
-class LifeCounter extends ConsumerWidget {
-  const LifeCounter({super.key, required this.title});
+class LifeCounter4Player extends ConsumerWidget {
+  const LifeCounter4Player({super.key, required this.title});
 
   final String title;
 
@@ -45,7 +45,6 @@ class LifeCounter extends ConsumerWidget {
           style: const TextStyle(color: textColorDefault),
         ),
         leading: ResetButton(stateNotifiers: [
-          // 画面遷移時にプレイヤー3、4もリセットしてある状態にする
           ref.read(player1Provider.notifier),
           ref.read(player2Provider.notifier),
           ref.read(player3Provider.notifier),
@@ -62,10 +61,34 @@ class LifeCounter extends ConsumerWidget {
             child: Row(
               children: [
                 Expanded(
-                  child: PlayerAddLifeChange(playerProvider: player1Provider),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      Expanded(
+                        child: PlayerAddLifeChange(
+                            playerProvider: player3Provider),
+                      ),
+                      Expanded(
+                        child: PlayerAddLifeChange(
+                            playerProvider: player1Provider),
+                      ),
+                    ],
+                  ),
                 ),
                 Expanded(
-                  child: PlayerAddLifeChange(playerProvider: player2Provider),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      Expanded(
+                        child: PlayerAddLifeChange(
+                            playerProvider: player4Provider),
+                      ),
+                      Expanded(
+                        child: PlayerAddLifeChange(
+                            playerProvider: player2Provider),
+                      ),
+                    ],
+                  ),
                 ),
               ],
             ),
