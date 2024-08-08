@@ -5,8 +5,8 @@ import 'package:life_counter/utils/global_functions.dart';
 import 'package:life_counter/constants/constants.dart';
 import 'package:life_counter/providers/background_notifier.dart';
 import 'package:life_counter/providers/life_notifier.dart';
-import 'package:life_counter/widgets/player.dart';
 import 'package:life_counter/widgets/background_change_button.dart';
+import 'package:life_counter/widgets/player_addlifechange.dart';
 import 'package:life_counter/widgets/reset_button.dart';
 
 class LifeCounterApp extends StatelessWidget {
@@ -59,10 +59,10 @@ class LifeCounter extends ConsumerWidget {
             child: Row(
               children: [
                 Expanded(
-                  child: Player(playerProvider: player1Provider),
+                  child: PlayerAddLifeChange(playerProvider: player1Provider),
                 ),
                 Expanded(
-                  child: Player(playerProvider: player2Provider),
+                  child: PlayerAddLifeChange(playerProvider: player2Provider),
                 ),
               ],
             ),
