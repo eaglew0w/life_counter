@@ -42,3 +42,7 @@ final player1Provider = StateNotifierProvider<LifeNotifier, PlayerState>(
     (ref) => LifeNotifier(defaultLife));
 final player2Provider = StateNotifierProvider<LifeNotifier, PlayerState>(
     (ref) => LifeNotifier(defaultLife));
+final player3Provider = StateNotifierProvider<LifeNotifier, PlayerState>(
+    (ref) => LifeNotifier(defaultLife));
+final player4Provider = StateNotifierProvider<LifeNotifier, PlayerState>(
+    (ref) => LifeNotifier(defaultLife));
