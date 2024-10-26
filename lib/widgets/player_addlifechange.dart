@@ -28,7 +28,7 @@ class PlayerAddLifeChange extends Player {
                     Expanded(
                       child: LifeChangeButton(
                         lifeNotifier: lifeNotifier,
-                        changeValue: 5,
+                        changeValue: -5,
                         alignment: Alignment.lerp(
                             Alignment.topLeft, Alignment.center, 0.5)!,
                         textColor: lifeChangeButtonColor,
@@ -37,7 +37,7 @@ class PlayerAddLifeChange extends Player {
                     Expanded(
                       child: LifeChangeButton(
                         lifeNotifier: lifeNotifier,
-                        changeValue: 1,
+                        changeValue: -1,
                         alignment: Alignment.lerp(
                             Alignment.bottomLeft, Alignment.center, 0.5)!,
                         textColor: lifeChangeButtonColor,
@@ -53,7 +53,7 @@ class PlayerAddLifeChange extends Player {
                     Expanded(
                       child: LifeChangeButton(
                           lifeNotifier: lifeNotifier,
-                          changeValue: -5,
+                          changeValue: 5,
                           alignment: Alignment.lerp(
                               Alignment.topRight, Alignment.center, 0.5)!,
                           textColor: lifeChangeButtonColor),
@@ -61,7 +61,7 @@ class PlayerAddLifeChange extends Player {
                     Expanded(
                       child: LifeChangeButton(
                           lifeNotifier: lifeNotifier,
-                          changeValue: -1,
+                          changeValue: 1,
                           alignment: Alignment.lerp(
                               Alignment.bottomRight, Alignment.center, 0.5)!,
                           textColor: lifeChangeButtonColor),
