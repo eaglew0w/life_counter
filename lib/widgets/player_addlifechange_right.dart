@@ -7,8 +7,8 @@ import 'package:life_counter/providers/life_notifier.dart';
 import 'package:life_counter/widgets/life_change_button.dart';
 import 'package:life_counter/widgets/player.dart';
 
-class PlayerAddLifeChange extends Player {
-  const PlayerAddLifeChange({required super.playerProvider, super.key});
+class PlayerAddLifeChangeRight extends Player {
+  const PlayerAddLifeChangeRight({required super.playerProvider, super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -28,7 +28,7 @@ class PlayerAddLifeChange extends Player {
                     Expanded(
                       child: LifeChangeButton(
                         lifeNotifier: lifeNotifier,
-                        changeValue: -5,
+                        changeValue: 5,
                         alignment: Alignment.lerp(
                             Alignment.topLeft, Alignment.center, 0.5)!,
                         textColor: lifeChangeButtonColor,
@@ -37,7 +37,7 @@ class PlayerAddLifeChange extends Player {
                     Expanded(
                       child: LifeChangeButton(
                         lifeNotifier: lifeNotifier,
-                        changeValue: -1,
+                        changeValue: -5,
                         alignment: Alignment.lerp(
                             Alignment.bottomLeft, Alignment.center, 0.5)!,
                         textColor: lifeChangeButtonColor,
@@ -53,7 +53,7 @@ class PlayerAddLifeChange extends Player {
                     Expanded(
                       child: LifeChangeButton(
                           lifeNotifier: lifeNotifier,
-                          changeValue: 5,
+                          changeValue: 1,
                           alignment: Alignment.lerp(
                               Alignment.topRight, Alignment.center, 0.5)!,
                           textColor: lifeChangeButtonColor),
@@ -61,7 +61,7 @@ class PlayerAddLifeChange extends Player {
                     Expanded(
                       child: LifeChangeButton(
                           lifeNotifier: lifeNotifier,
-                          changeValue: 1,
+                          changeValue: -1,
                           alignment: Alignment.lerp(
                               Alignment.bottomRight, Alignment.center, 0.5)!,
                           textColor: lifeChangeButtonColor),
