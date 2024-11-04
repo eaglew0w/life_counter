@@ -81,3 +81,15 @@ String formatDuration(Duration duration) {
   final seconds = (duration.inSeconds % 60).toString().padLeft(2, '0');
   return '$hours:$minutes:$seconds';
 }
+
+Text timerText(Duration duration) {
+  Text retText = Text(
+    formatDuration(duration),
+    style: const TextStyle(
+      color: Colors.white, // Textの色を指定
+      fontSize: 20,
+      // fontWeight: FontWeight.bold,
+    ),
+  );
+  return retText;
+}
