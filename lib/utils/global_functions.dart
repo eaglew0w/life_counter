@@ -76,7 +76,8 @@ Icon getBackgroundIcon(Background background) {
 }
 
 String formatDuration(Duration duration) {
+  final hours = duration.inHours.toString().padLeft(1, '0');
   final minutes = duration.inMinutes.toString().padLeft(2, '0');
   final seconds = (duration.inSeconds % 60).toString().padLeft(2, '0');
-  return '$minutes:$seconds';
+  return '$hours:$minutes:$seconds';
 }
