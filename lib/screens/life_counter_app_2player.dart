@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:life_counter/models/background_state.dart';
+import 'package:life_counter/providers/timer_notifier.dart';
 import 'package:life_counter/utils/global_functions.dart';
-import 'package:life_counter/constants/constants.dart';
 import 'package:life_counter/providers/background_notifier.dart';
 import 'package:life_counter/providers/life_notifier.dart';
 import 'package:life_counter/widgets/background_change_button.dart';
@@ -35,14 +35,14 @@ class LifeCounter extends ConsumerWidget {
     final BackgroundState backgroundState = ref.watch(backgroundProvider);
     final Color backgroundColor =
         getBackgroundColor(backgroundState.background);
+    final duration = ref.watch(timerProvider);
 
     return Scaffold(
       backgroundColor: backgroundColor,
       appBar: AppBar(
         backgroundColor: backgroundColor,
-        title: Text(
-          title,
-          style: const TextStyle(color: textColorDefault),
+        title: Center(
+          child: timerText(duration),
         ),
         leading: ResetButton(stateNotifiers: [
           // 画面遷移時にプレイヤー3、4もリセットしてある状態にする
@@ -50,7 +50,8 @@ class LifeCounter extends ConsumerWidget {
           ref.read(player2Provider.notifier),
           ref.read(player3Provider.notifier),
           ref.read(player4Provider.notifier),
-          ref.read(backgroundProvider.notifier)
+          ref.read(backgroundProvider.notifier),
+          ref.read(timerProvider.notifier)
         ]),
         actions: [
           BackgroundChangeButton(backgroundProvider: backgroundProvider),
