@@ -86,8 +86,8 @@ Text timerText(Duration duration) {
   Text retText = Text(
     formatDuration(duration),
     style: const TextStyle(
-      color: Colors.white, // Textの色を指定
-      fontSize: 20,
+      color: playTimerFontColor, // Textの色を指定
+      fontSize: playTimerFontSize,
       // fontWeight: FontWeight.bold,
     ),
   );

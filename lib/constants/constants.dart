@@ -21,3 +21,6 @@ const Icon resetIcon = Icon(Icons.restart_alt);
 const Icon backgroundUnsetIcon = Icon(Icons.restore);
 const Icon backgroundDayIcon = Icon(Icons.light_mode);
 const Icon backgroundNightIcon = Icon(Icons.dark_mode);
+
+const double playTimerFontSize = 20;
+const Color playTimerFontColor = Colors.white;
