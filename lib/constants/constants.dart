@@ -21,3 +21,18 @@ const Icon resetIcon = Icon(Icons.restart_alt);
 const Icon backgroundUnsetIcon = Icon(Icons.restore);
 const Icon backgroundDayIcon = Icon(Icons.light_mode);
 const Icon backgroundNightIcon = Icon(Icons.dark_mode);
+
+class ChangeLifeInfo {
+  // もうちょっといい感じに管理したい
+  static String gainText = '+';
+  static String loseText = '-';
+  static int gainOnTap = 1;
+  static int loseOnTap = -1;
+  static int gainOnFlick = 5;
+  static int loseOnFlick = -5;
+  static int gainOnLongPress = 5;
+  static int loseOnLongPress = -5;
+}
+
+// フリック判定の為の値
+const int flickThresholdForLifeChange = 75;
