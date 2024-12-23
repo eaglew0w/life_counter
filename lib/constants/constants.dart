@@ -30,6 +30,8 @@ class ChangeLifeInfo {
   static int loseOnTap = -1;
   static int gainOnFlick = 5;
   static int loseOnFlick = -5;
+  static int gainOnLongPress = 5;
+  static int loseOnLongPress = -5;
 }
 
 // フリック判定の為の値
