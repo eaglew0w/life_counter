@@ -22,7 +22,6 @@ class LifeChangeButtonFlick extends StatelessWidget {
   Widget build(BuildContext context) {
     Offset? startPosition;
     return GestureDetector(
-      onTap: () => {onTapFunc()},
       onPanStart: (details) {
         startPosition = details.localPosition;
       },
@@ -31,12 +30,14 @@ class LifeChangeButtonFlick extends StatelessWidget {
           double distance = (details.localPosition - startPosition!).distance;
           if (distance > flickThreshold) {
             onFlickFunc();
+          } else {
+            onTapFunc();
           }
         }
         startPosition = null;
       },
       child: ElevatedButton(
-        onPressed: null, // onPressedは使用せずGestureDetectorで操作
+        onPressed: () => {onTapFunc()},
         style: ElevatedButton.styleFrom(
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(0)),
           backgroundColor: Colors.transparent,
