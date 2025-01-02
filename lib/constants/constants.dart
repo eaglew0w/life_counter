@@ -7,6 +7,8 @@ final Color backgorundColorNight = Colors.indigo[900]!;
 const Color textColorDefault = Colors.white;
 final Color lifeChangeButtonColor = Colors.grey[600]!;
 
+const int playerNumber = 4;
+
 const int lifeChangeDisplayTimer = 5;
 const int defaultLife = 20;
 const double alignmentXofPlayerLifeChange = 0;
@@ -21,6 +23,10 @@ const Icon resetIcon = Icon(Icons.restart_alt);
 const Icon backgroundUnsetIcon = Icon(Icons.restore);
 const Icon backgroundDayIcon = Icon(Icons.light_mode);
 const Icon backgroundNightIcon = Icon(Icons.dark_mode);
+
+enum Players { player1, player2, player3, player4 }
+
+enum PlayerPosition { none, left, right }
 
 class ChangeLifeInfo {
   // もうちょっといい感じに管理したい
