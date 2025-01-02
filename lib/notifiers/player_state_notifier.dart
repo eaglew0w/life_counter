@@ -2,15 +2,19 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'dart:async';
 import 'package:life_counter/models/player_state.dart';
 import 'package:life_counter/constants/constants.dart';
-import 'package:life_counter/providers/resettable_notifier.dart';
+import 'package:life_counter/notifiers/resettable_notifier.dart';
 
-class LifeNotifier extends StateNotifier<PlayerState>
+class PlayerStateNotifier extends Notifier<PlayerState>
     implements ResettableNotifier {
-  final int defaultLife;
+  @override
+  PlayerState build() {
+    ref.onDispose(() {
+      state.timer?.cancel();
+    });
+    return PlayerState(life: defaultLife);
+  }
 
-  LifeNotifier(this.defaultLife) : super(PlayerState(life: defaultLife));
-
-  void gainLife(int value) {
+  void changeLife(int value) {
     state = PlayerState(
       life: state.life + value,
       lifeChange: state.lifeChange + value,
@@ -21,6 +25,7 @@ class LifeNotifier extends StateNotifier<PlayerState>
 
   @override
   void reset() {
+    state.timer?.cancel();
     state = PlayerState(life: defaultLife);
   }
 
@@ -30,19 +35,4 @@ class LifeNotifier extends StateNotifier<PlayerState>
       state = PlayerState(life: state.life, lifeChange: 0, timer: state.timer);
     });
   }
-
-  @override
-  void dispose() {
-    state.timer?.cancel();
-    super.dispose();
-  }
 }
-
-final player1Provider = StateNotifierProvider<LifeNotifier, PlayerState>(
-    (ref) => LifeNotifier(defaultLife));
-final player2Provider = StateNotifierProvider<LifeNotifier, PlayerState>(
-    (ref) => LifeNotifier(defaultLife));
-final player3Provider = StateNotifierProvider<LifeNotifier, PlayerState>(
-    (ref) => LifeNotifier(defaultLife));
-final player4Provider = StateNotifierProvider<LifeNotifier, PlayerState>(
-    (ref) => LifeNotifier(defaultLife));

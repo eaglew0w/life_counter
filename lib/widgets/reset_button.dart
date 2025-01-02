@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:life_counter/providers/resettable_notifier.dart';
+import 'package:life_counter/notifiers/resettable_notifier.dart';
 
 class ResetButton extends StatelessWidget {
-  final List<ResettableNotifier> stateNotifiers;
+  final List<ResettableNotifier> notifiers;
 
-  const ResetButton({required this.stateNotifiers, super.key});
+  const ResetButton({required this.notifiers, super.key});
 
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
       onPressed: () {
-        for (var notifier in stateNotifiers) {
+        for (var notifier in notifiers) {
           notifier.reset();
         }
       },

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:life_counter/models/background_state.dart';
-import 'package:life_counter/providers/background_notifier.dart';
+import 'package:life_counter/notifiers/background_notifier.dart';
 import 'package:life_counter/utils/global_functions.dart';
 
 class BackgroundChangeButton extends ConsumerWidget {
-  final StateNotifierProvider<BackgroundNotifier, BackgroundState>
+  final NotifierProvider<BackgroundNotifier, BackgroundState>
       backgroundProvider;
 
   const BackgroundChangeButton({
