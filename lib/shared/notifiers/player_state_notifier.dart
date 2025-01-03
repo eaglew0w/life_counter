@@ -1,8 +1,8 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'dart:async';
-import 'package:life_counter/models/player_state.dart';
-import 'package:life_counter/constants/constants.dart';
-import 'package:life_counter/notifiers/resettable_notifier.dart';
+import 'package:life_counter/shared/models/player_state.dart';
+import 'package:life_counter/shared/constants/constants.dart';
+import 'package:life_counter/shared/notifiers/resettable_notifier.dart';
 
 class PlayerStateNotifier extends Notifier<PlayerState>
     implements ResettableNotifier {
