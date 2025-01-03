@@ -17,26 +17,28 @@ class Player extends ConsumerWidget {
       super.key});
 
   // レイヤーをStackでまとめて表示するWidget
-  Widget _displayWidget(BuildContext context, WidgetRef ref) {
+  @protected
+  Widget displayWidget(BuildContext context, WidgetRef ref) {
     return Stack(
       children: [
-        _buttonLayer(context, ref),
+        buttonLayer(context, ref),
         // 下2つもlayerにしたい
         // 現状は表示位置等の問題で一緒に出来ず
-        _displayPlayerLife(context, ref),
-        _displayPlayerLifeChange(context, ref)
+        displayPlayerLife(context, ref),
+        displayPlayerLifeChange(context, ref)
       ],
     );
   }
 
   // ボタンレイヤーに表示するものをまとめたWidget
-  Widget _buttonLayer(BuildContext context, WidgetRef ref) {
+  @protected
+  Widget buttonLayer(BuildContext context, WidgetRef ref) {
     List<Widget> buttonList;
     // 右側プレイヤー設定の場合、ボタンの順番を逆にしておく
     if (playerPosition == PlayerPosition.right) {
-      buttonList = [_rightButton(context, ref), _leftButton(context, ref)];
+      buttonList = [rightButton(context, ref), leftButton(context, ref)];
     } else {
-      buttonList = [_leftButton(context, ref), _rightButton(context, ref)];
+      buttonList = [leftButton(context, ref), rightButton(context, ref)];
     }
     return Center(
       child: Row(
@@ -46,7 +48,8 @@ class Player extends ConsumerWidget {
     );
   }
 
-  Widget _leftButton(BuildContext context, WidgetRef ref) {
+  @protected
+  Widget leftButton(BuildContext context, WidgetRef ref) {
     final PlayerStateNotifier playerStateNotifier =
         ref.read(playerProvider.notifier);
     return Expanded(
@@ -59,7 +62,8 @@ class Player extends ConsumerWidget {
     );
   }
 
-  Widget _rightButton(BuildContext context, WidgetRef ref) {
+  @protected
+  Widget rightButton(BuildContext context, WidgetRef ref) {
     final PlayerStateNotifier playerStateNotifier =
         ref.read(playerProvider.notifier);
     return Expanded(
@@ -72,7 +76,8 @@ class Player extends ConsumerWidget {
     );
   }
 
-  Widget _displayPlayerLife(BuildContext context, WidgetRef ref) {
+  @protected
+  Widget displayPlayerLife(BuildContext context, WidgetRef ref) {
     final PlayerState playerState = ref.watch(playerProvider);
     return Center(
       child: Text(
@@ -86,7 +91,8 @@ class Player extends ConsumerWidget {
     );
   }
 
-  Widget _displayPlayerLifeChange(BuildContext context, WidgetRef ref) {
+  @protected
+  Widget displayPlayerLifeChange(BuildContext context, WidgetRef ref) {
     final PlayerState playerState = ref.watch(playerProvider);
     return Align(
       alignment: const Alignment(
@@ -103,6 +109,6 @@ class Player extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return _displayWidget(context, ref);
+    return displayWidget(context, ref);
   }
 }
