@@ -17,14 +17,16 @@ class LifeCounterBaseScreen extends ConsumerWidget {
   final String title;
 
   // overrideして使用するプレイヤー表示を変更する
-  Player _createPlayer(
+  @protected
+  Player createPlayer(
       NotifierProvider<PlayerStateNotifier, PlayerState> playerProvider,
       PlayerPosition playerPosition) {
     return Player(
         playerProvider: playerProvider, playerPosition: playerPosition);
   }
 
-  List<ResettableNotifier> _resettableNotifierList(WidgetRef ref) {
+  @protected
+  List<ResettableNotifier> resettableNotifierList(WidgetRef ref) {
     return [
       // 画面遷移時にプレイヤー3、4もリセットしてある状態にする
       ref.read(playerProviderList[Players.player1.index].notifier),
@@ -50,7 +52,7 @@ class LifeCounterBaseScreen extends ConsumerWidget {
           style: const TextStyle(color: textColorDefault),
         ),
         leading: ResetButton(
-          notifiers: _resettableNotifierList(ref),
+          notifiers: resettableNotifierList(ref),
         ),
         actions: [
           BackgroundChangeButton(backgroundProvider: backgroundProvider),
@@ -62,13 +64,11 @@ class LifeCounterBaseScreen extends ConsumerWidget {
             child: Row(
               children: [
                 Expanded(
-                  child: _createPlayer(
-                      playerProviderList[Players.player1.index],
+                  child: createPlayer(playerProviderList[Players.player1.index],
                       PlayerPosition.left),
                 ),
                 Expanded(
-                  child: _createPlayer(
-                      playerProviderList[Players.player2.index],
+                  child: createPlayer(playerProviderList[Players.player2.index],
                       PlayerPosition.right),
                 ),
               ],
