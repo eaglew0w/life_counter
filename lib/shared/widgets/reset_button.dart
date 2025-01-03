@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:life_counter/notifiers/resettable_notifier.dart';
+import 'package:life_counter/shared/notifiers/resettable_notifier.dart';
 
 class ResetButton extends StatelessWidget {
   final List<ResettableNotifier> notifiers;
