@@ -14,8 +14,9 @@ class LifeChangeButton extends StatelessWidget {
     super.key,
   });
 
-  @override
-  Widget build(BuildContext context) {
+  // overrideしてボタン設定をする
+  @protected
+  Widget createButton() {
     return ElevatedButton(
       onPressed: () => {onPressed()},
       style: ElevatedButton.styleFrom(
@@ -31,5 +32,10 @@ class LifeChangeButton extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return createButton();
   }
 }
