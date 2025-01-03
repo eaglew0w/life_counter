@@ -7,9 +7,9 @@ import 'package:life_counter/shared/notifiers/resettable_notifier.dart';
 import 'package:life_counter/shared/utils/global_functions.dart';
 import 'package:life_counter/shared/constants/constants.dart';
 import 'package:life_counter/shared/providers/providers.dart';
-import 'package:life_counter/shared/widgets/background_change_button.dart';
-import 'package:life_counter/shared/widgets/player.dart';
-import 'package:life_counter/shared/widgets/reset_button.dart';
+import 'package:life_counter/shared/widgets/button/background_change_button/background_change_button.dart';
+import 'package:life_counter/shared/widgets/player/player.dart';
+import 'package:life_counter/shared/widgets/button/reset_button/reset_button.dart';
 
 class LifeCounterBaseScreen extends ConsumerWidget {
   const LifeCounterBaseScreen({super.key, required this.title});
