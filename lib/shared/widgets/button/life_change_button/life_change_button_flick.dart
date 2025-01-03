@@ -12,6 +12,8 @@ class LifeChangeButtonFlick extends LifeChangeButton {
     required this.onTapFunc,
     required super.text,
     required super.onPressed,
+    super.alignment,
+    super.textColor,
     super.key,
   });
 

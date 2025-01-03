@@ -8,6 +8,8 @@ class LifeChangeButtonLongPress extends LifeChangeButton {
     required this.onLongPress,
     required super.text,
     required super.onPressed,
+    super.alignment,
+    super.textColor,
     super.key,
   });
 
