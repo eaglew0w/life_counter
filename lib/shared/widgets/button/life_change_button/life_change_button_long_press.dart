@@ -1,23 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:life_counter/shared/widgets/button/life_change_button/life_change_button.dart';
 
-class LifeChangeButtonLongPress extends StatelessWidget {
-  final String text;
-  final Alignment alignment;
-  final Color textColor;
-  final VoidCallback onPressed;
+class LifeChangeButtonLongPress extends LifeChangeButton {
   final VoidCallback onLongPress;
 
   const LifeChangeButtonLongPress({
-    required this.text,
-    required this.onPressed,
     required this.onLongPress,
-    this.alignment = Alignment.center,
-    this.textColor = Colors.white,
+    required super.text,
+    required super.onPressed,
     super.key,
   });
 
   @override
-  Widget build(BuildContext context) {
+  Widget createButton() {
     return ElevatedButton(
       onPressed: () => {onPressed()},
       onLongPress: () => {onLongPress()},

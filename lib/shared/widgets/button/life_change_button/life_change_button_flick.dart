@@ -1,25 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:life_counter/shared/widgets/button/life_change_button/life_change_button.dart';
 
-class LifeChangeButtonFlick extends StatelessWidget {
-  final String text;
-  final Alignment alignment;
-  final Color textColor;
+class LifeChangeButtonFlick extends LifeChangeButton {
   final int flickThreshold;
   final VoidCallback onFlickFunc;
   final VoidCallback onTapFunc;
 
   const LifeChangeButtonFlick({
-    required this.text,
     required this.flickThreshold,
     required this.onFlickFunc,
     required this.onTapFunc,
-    this.alignment = Alignment.center,
-    this.textColor = Colors.white,
+    required super.text,
+    required super.onPressed,
     super.key,
   });
 
   @override
-  Widget build(BuildContext context) {
+  Widget createButton() {
+    // startPositionがbuild()再描画された際に破棄されるのでフリック判定ができない
+    // 今までは再描画されなかったから耐えてた
+    // 直前のライフ変更タイマーとフリックのタイミングが被るとアウト
     Offset? startPosition;
     return GestureDetector(
       onPanStart: (details) {
