@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+const String title = "MTG Life Counter";
+
 const Color backgroundColorDefault = Colors.black;
 final Color backgroundColorDay = Colors.amber[900]!;
 final Color backgorundColorNight = Colors.indigo[900]!;

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:life_counter/constants/constants.dart';
-import 'package:life_counter/utils/global_functions.dart';
-import 'package:life_counter/models/player_state.dart';
-import 'package:life_counter/notifiers/player_state_notifier.dart';
-import 'package:life_counter/widgets/life_change_button.dart';
+import 'package:life_counter/shared/constants/constants.dart';
+import 'package:life_counter/shared/utils/global_functions.dart';
+import 'package:life_counter/shared/models/player_state.dart';
+import 'package:life_counter/shared/notifiers/player_state_notifier.dart';
+import 'package:life_counter/shared/widgets/life_change_button.dart';
 
 class Player extends ConsumerWidget {
   final NotifierProvider<PlayerStateNotifier, PlayerState> playerProvider;

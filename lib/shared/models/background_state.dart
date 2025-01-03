@@ -1,4 +1,4 @@
-import 'package:life_counter/constants/constants.dart';
+import 'package:life_counter/shared/constants/constants.dart';
 
 class BackgroundState {
   Background background;
