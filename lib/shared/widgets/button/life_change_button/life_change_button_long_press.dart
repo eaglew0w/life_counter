@@ -3,11 +3,14 @@ import 'package:life_counter/shared/widgets/button/life_change_button/life_chang
 
 class LifeChangeButtonLongPress extends LifeChangeButton {
   final VoidCallback onLongPress;
-
+  final Color splashColor;
+  final Color highlightColor;
   const LifeChangeButtonLongPress({
     required this.onLongPress,
     required super.text,
     required super.onPressed,
+    this.splashColor = Colors.transparent,
+    this.highlightColor = Colors.transparent,
     super.alignment,
     super.textColor,
     super.key,
@@ -15,14 +18,16 @@ class LifeChangeButtonLongPress extends LifeChangeButton {
 
   @override
   Widget createButton(BuildContext context) {
-    return ElevatedButton(
-      onPressed: () => {onPressed()},
-      onLongPress: () => {onLongPress()},
-      style: ElevatedButton.styleFrom(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(0)),
-        backgroundColor: Colors.transparent,
-        shadowColor: Colors.transparent,
-      ),
+    return InkWell(
+      onTap: () => {onPressed()},
+      onLongPress: () => {
+        onLongPress(),
+        // 長押し判定OK時にもタップ音だけ鳴らす
+        Feedback.forTap(context)
+      },
+      splashColor: splashColor,
+      highlightColor: highlightColor,
+      borderRadius: BorderRadius.circular(0),
       child: Align(
         alignment: alignment,
         child: Text(
