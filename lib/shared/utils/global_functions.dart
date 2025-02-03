@@ -26,10 +26,7 @@ Background getNextBackground(Background background) {
     case Background.night:
       retNextBackground = Background.day;
       break;
-    default:
-      retNextBackground = Background.unset;
-      break;
-  }
+    }
   return retNextBackground;
 }
 
@@ -46,10 +43,7 @@ Color getBackgroundColor(Background background) {
     case Background.night:
       retColor = backgorundColorNight;
       break;
-    default:
-      retColor = backgroundColorDefault;
-      break;
-  }
+    }
 
   return retColor;
 }
@@ -67,10 +61,7 @@ Icon getBackgroundIcon(Background background) {
     case Background.night:
       retIcon = backgroundNightIcon;
       break;
-    default:
-      retIcon = backgroundUnsetIcon;
-      break;
-  }
+    }
 
   return retIcon;
 }
