@@ -5,12 +5,10 @@ import 'package:life_counter/shared/widgets/button/life_change_button/life_chang
 class LifeChangeButtonFlick extends LifeChangeButton {
   final int flickThreshold;
   final VoidCallback onFlickFunc;
-  final VoidCallback onTapFunc;
 
   const LifeChangeButtonFlick({
     this.flickThreshold = flickThresholdForLifeChange,
     required this.onFlickFunc,
-    required this.onTapFunc,
     required super.text,
     required super.onPressed,
     super.alignment,
@@ -33,14 +31,16 @@ class LifeChangeButtonFlick extends LifeChangeButton {
           double distance = (details.localPosition - startPosition!).distance;
           if (distance > flickThreshold) {
             onFlickFunc();
+            Feedback.forTap(context);
           } else {
-            onTapFunc();
+            onPressed();
+            Feedback.forTap(context);
           }
         }
         startPosition = null;
       },
       child: ElevatedButton(
-        onPressed: () => {onTapFunc()},
+        onPressed: () => {onPressed()},
         style: ElevatedButton.styleFrom(
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(0)),
           backgroundColor: Colors.transparent,
