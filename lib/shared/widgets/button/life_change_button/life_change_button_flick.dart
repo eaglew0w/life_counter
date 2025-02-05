@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:life_counter/shared/constants/constants.dart';
 import 'package:life_counter/shared/widgets/button/life_change_button/life_change_button.dart';
 
 class LifeChangeButtonFlick extends LifeChangeButton {
@@ -7,7 +8,7 @@ class LifeChangeButtonFlick extends LifeChangeButton {
   final VoidCallback onTapFunc;
 
   const LifeChangeButtonFlick({
-    required this.flickThreshold,
+    this.flickThreshold = flickThresholdForLifeChange,
     required this.onFlickFunc,
     required this.onTapFunc,
     required super.text,
