@@ -17,7 +17,11 @@ class LifeChangeButtonLongPress extends LifeChangeButton {
   Widget createButton(BuildContext context) {
     return ElevatedButton(
       onPressed: () => {onPressed()},
-      onLongPress: () => {onLongPress()},
+      onLongPress: () => {
+        onLongPress(),
+        // 長押し判定OK時にもタップ音だけ鳴らす
+        Feedback.forTap(context)
+      },
       style: ElevatedButton.styleFrom(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(0)),
         backgroundColor: Colors.transparent,
