@@ -14,7 +14,7 @@ class LifeChangeButtonLongPress extends LifeChangeButton {
   });
 
   @override
-  Widget createButton() {
+  Widget createButton(BuildContext context) {
     return ElevatedButton(
       onPressed: () => {onPressed()},
       onLongPress: () => {onLongPress()},
