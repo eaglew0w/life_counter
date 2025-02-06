@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:life_counter/shared/constants/constants.dart';
+import 'package:life_counter/shared/utils/effect.dart';
 import 'package:life_counter/shared/widgets/button/life_change_button/life_change_button.dart';
 
 class LifeChangeButtonFlick extends LifeChangeButton {
@@ -32,9 +33,11 @@ class LifeChangeButtonFlick extends LifeChangeButton {
           if (distance > flickThreshold) {
             onFlickFunc();
             Feedback.forTap(context);
+            showFlashEffect(context);
           } else {
             onPressed();
             Feedback.forTap(context);
+            showFlashEffect(context);
           }
         }
         startPosition = null;
