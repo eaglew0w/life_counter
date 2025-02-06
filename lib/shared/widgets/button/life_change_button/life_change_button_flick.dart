@@ -37,7 +37,6 @@ class LifeChangeButtonFlick extends LifeChangeButton {
           } else {
             onPressed();
             Feedback.forTap(context);
-            showFlashEffect(context);
           }
         }
         startPosition = null;
