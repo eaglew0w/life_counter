@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:life_counter/shared/constants/constants.dart';
+import 'package:life_counter/shared/utils/effect.dart';
 import 'package:life_counter/shared/widgets/button/life_change_button/life_change_button.dart';
 
 class LifeChangeButtonFlick extends LifeChangeButton {
   final int flickThreshold;
   final VoidCallback onFlickFunc;
-  final VoidCallback onTapFunc;
 
   const LifeChangeButtonFlick({
-    required this.flickThreshold,
+    this.flickThreshold = flickThresholdForLifeChange,
     required this.onFlickFunc,
-    required this.onTapFunc,
     required super.text,
     required super.onPressed,
     super.alignment,
@@ -18,7 +18,7 @@ class LifeChangeButtonFlick extends LifeChangeButton {
   });
 
   @override
-  Widget createButton() {
+  Widget createButton(BuildContext context) {
     // startPositionがbuild()再描画された際に破棄されるのでフリック判定ができない
     // 今までは再描画されなかったから耐えてた
     // 直前のライフ変更タイマーとフリックのタイミングが被るとアウト
@@ -32,14 +32,18 @@ class LifeChangeButtonFlick extends LifeChangeButton {
           double distance = (details.localPosition - startPosition!).distance;
           if (distance > flickThreshold) {
             onFlickFunc();
+            Feedback.forTap(context);
+            showFlashEffect(context);
           } else {
-            onTapFunc();
+            onPressed();
+            Feedback.forTap(context);
+            showFlashEffect(context);
           }
         }
         startPosition = null;
       },
       child: ElevatedButton(
-        onPressed: () => {onTapFunc()},
+        onPressed: () => {onPressed()},
         style: ElevatedButton.styleFrom(
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(0)),
           backgroundColor: Colors.transparent,
