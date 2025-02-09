@@ -20,6 +20,8 @@ enum Background { unset, day, night }
 
 const Background defaultBackground = Background.unset;
 
+const ThemeMode initialThemeMode = ThemeMode.dark;
+
 const Icon resetIcon = Icon(Icons.restart_alt);
 
 const Icon backgroundUnsetIcon = Icon(Icons.restore);
