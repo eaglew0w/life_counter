@@ -35,7 +35,7 @@ class LifeChangeButton extends StatelessWidget {
 
   @protected
   Widget buttonText(BuildContext context) {
-    final TextStyle? baseStyle = Theme.of(context).textTheme.bodySmall;
+    final TextStyle? baseStyle = Theme.of(context).textTheme.headlineSmall;
     final TextStyle? textStyle =
         textColor != null ? baseStyle?.copyWith(color: textColor) : baseStyle;
     return Align(
