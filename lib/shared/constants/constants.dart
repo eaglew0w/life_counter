@@ -33,5 +33,8 @@ class ChangeLifeInfo {
   static int loseOnLongPress = -5;
 }
 
+const Color lifeGainButtonTextColor = Colors.green;
+const Color lifeLoseButtonTextColor = Colors.red;
+
 // フリック判定の為の値
 const int flickThresholdForLifeChange = 75;
