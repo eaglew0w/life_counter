@@ -57,7 +57,6 @@ class Player extends ConsumerWidget {
         text: ChangeLifeInfo.loseText,
         onPressed: () =>
             playerStateNotifier.changeLife(ChangeLifeInfo.loseOnTap),
-        textColor: lifeChangeButtonColor,
       ),
     );
   }
@@ -71,7 +70,6 @@ class Player extends ConsumerWidget {
         text: ChangeLifeInfo.gainText,
         onPressed: () =>
             playerStateNotifier.changeLife(ChangeLifeInfo.gainOnTap),
-        textColor: lifeChangeButtonColor,
       ),
     );
   }
@@ -85,8 +83,7 @@ class Player extends ConsumerWidget {
         textAlign: TextAlign.center,
         style: Theme.of(context)
             .textTheme
-            .displayLarge
-            ?.copyWith(color: textColorDefault),
+            .displayLarge,
       ),
     );
   }
@@ -100,9 +97,6 @@ class Player extends ConsumerWidget {
       child: Text(
         addAbsoluteValueText(playerState.lifeChange),
         textAlign: TextAlign.end,
-        style: const TextStyle(
-          color: textColorDefault,
-        ),
       ),
     );
   }

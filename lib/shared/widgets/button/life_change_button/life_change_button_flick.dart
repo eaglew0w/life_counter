@@ -52,7 +52,7 @@ class LifeChangeButtonFlick extends LifeChangeButton {
           alignment: alignment,
           child: Text(
             text,
-            style: TextStyle(color: textColor),
+            style: Theme.of(context).textTheme.bodySmall,
           ),
         ),
       ),

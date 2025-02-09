@@ -28,7 +28,7 @@ class LifeChangeButton extends StatelessWidget {
         alignment: alignment,
         child: Text(
           text,
-          style: TextStyle(color: textColor),
+          style: Theme.of(context).textTheme.bodySmall,
         ),
       ),
     );
