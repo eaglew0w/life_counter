@@ -20,7 +20,7 @@ class PlayerLongPress extends Player {
             playerStateNotifier.changeLife(ChangeLifeInfo.loseOnTap),
         onLongPress: () =>
             playerStateNotifier.changeLife(ChangeLifeInfo.loseOnLongPress),
-        textColor: lifeChangeButtonColor,
+        textColor: lifeLoseButtonTextColor,
       ),
     );
   }
@@ -36,7 +36,7 @@ class PlayerLongPress extends Player {
             playerStateNotifier.changeLife(ChangeLifeInfo.gainOnTap),
         onLongPress: () =>
             playerStateNotifier.changeLife(ChangeLifeInfo.gainOnLongPress),
-        textColor: lifeChangeButtonColor,
+        textColor: lifeGainButtonTextColor,
       ),
     );
   }

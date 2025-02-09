@@ -13,55 +13,18 @@ String addAbsoluteValueText(int value) {
   return retString;
 }
 
-Background getNextBackground(Background background) {
-  Background retNextBackground = Background.unset;
-
-  switch (background) {
-    case Background.unset:
-      retNextBackground = Background.day;
+Icon getThemeModeIcon(ThemeMode themeMode) {
+  Icon retIcon = themeModeSystemIcon;
+  switch (themeMode) {
+    case ThemeMode.dark:
+      retIcon = themeModeDarkIcon;
       break;
-    case Background.day:
-      retNextBackground = Background.night;
+    case ThemeMode.light:
+      retIcon = themeModeLightIcon;
       break;
-    case Background.night:
-      retNextBackground = Background.day;
+    case ThemeMode.system:
+      retIcon = themeModeSystemIcon;
       break;
-    }
-  return retNextBackground;
-}
-
-Color getBackgroundColor(Background background) {
-  Color retColor = backgroundColorDefault;
-
-  switch (background) {
-    case Background.unset:
-      retColor = backgroundColorDefault;
-      break;
-    case Background.day:
-      retColor = backgroundColorDay;
-      break;
-    case Background.night:
-      retColor = backgorundColorNight;
-      break;
-    }
-
-  return retColor;
-}
-
-Icon getBackgroundIcon(Background background) {
-  Icon retIcon = backgroundUnsetIcon;
-
-  switch (background) {
-    case Background.unset:
-      retIcon = backgroundUnsetIcon;
-      break;
-    case Background.day:
-      retIcon = backgroundDayIcon;
-      break;
-    case Background.night:
-      retIcon = backgroundNightIcon;
-      break;
-    }
-
+  }
   return retIcon;
 }
