@@ -3,14 +3,14 @@ import 'package:flutter/material.dart';
 class LifeChangeButton extends StatelessWidget {
   final String text;
   final Alignment alignment;
-  final Color textColor;
+  final Color? textColor;
   final VoidCallback onPressed;
 
   const LifeChangeButton({
     required this.text,
     required this.onPressed,
     this.alignment = Alignment.center,
-    this.textColor = Colors.white,
+    this.textColor,
     super.key,
   });
 
@@ -24,18 +24,23 @@ class LifeChangeButton extends StatelessWidget {
         backgroundColor: Colors.transparent,
         shadowColor: Colors.transparent,
       ),
-      child: Align(
-        alignment: alignment,
-        child: Text(
-          text,
-          style: Theme.of(context).textTheme.bodySmall,
-        ),
-      ),
+      child: buttonText(context),
     );
   }
 
   @override
   Widget build(BuildContext context) {
     return createButton(context);
+  }
+
+  @protected
+  Widget buttonText(BuildContext context) {
+    final TextStyle? baseStyle = Theme.of(context).textTheme.bodySmall;
+    final TextStyle? textStyle =
+        textColor != null ? baseStyle?.copyWith(color: textColor) : baseStyle;
+    return Align(
+      alignment: alignment,
+      child: Text(text, style: textStyle),
+    );
   }
 }

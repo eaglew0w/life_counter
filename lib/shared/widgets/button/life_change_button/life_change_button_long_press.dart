@@ -27,13 +27,7 @@ class LifeChangeButtonLongPress extends LifeChangeButton {
         backgroundColor: Colors.transparent,
         shadowColor: Colors.transparent,
       ),
-      child: Align(
-        alignment: alignment,
-        child: Text(
-          text,
-          style: Theme.of(context).textTheme.bodySmall,
-        ),
-      ),
+      child: buttonText(context),
     );
   }
 }
