@@ -28,13 +28,7 @@ class LifeChangeButtonLongPress extends LifeChangeButton {
       splashColor: splashColor,
       highlightColor: highlightColor,
       borderRadius: BorderRadius.circular(0),
-      child: Align(
-        alignment: alignment,
-        child: Text(
-          text,
-          style: TextStyle(color: textColor),
-        ),
-      ),
+      child: buttonText(context),
     );
   }
 }

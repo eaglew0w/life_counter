@@ -20,7 +20,7 @@ class PlayerFlick extends Player {
             playerStateNotifier.changeLife(ChangeLifeInfo.loseOnTap),
         onFlickFunc: () =>
             playerStateNotifier.changeLife(ChangeLifeInfo.loseOnFlick),
-        textColor: lifeChangeButtonColor,
+        textColor: lifeLoseButtonTextColor,
       ),
     );
   }
@@ -36,7 +36,7 @@ class PlayerFlick extends Player {
             playerStateNotifier.changeLife(ChangeLifeInfo.gainOnTap),
         onFlickFunc: () =>
             playerStateNotifier.changeLife(ChangeLifeInfo.gainOnFlick),
-        textColor: lifeChangeButtonColor,
+        textColor: lifeGainButtonTextColor,
       ),
     );
   }

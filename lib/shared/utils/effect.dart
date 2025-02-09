@@ -22,7 +22,8 @@ void showFlashEffect(BuildContext context,
           child: IgnorePointer(
             child: Container(
               decoration: BoxDecoration(
-                color: color.withAlpha(alpha), // 半透明のエフェクト
+                color:
+                    Theme.of(context).splashColor.withAlpha(alpha), // 半透明のエフェクト
                 borderRadius: BorderRadius.circular(0), // ボタンの形に合わせる
               ),
             ),
