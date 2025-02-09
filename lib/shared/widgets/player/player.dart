@@ -57,6 +57,7 @@ class Player extends ConsumerWidget {
         text: ChangeLifeInfo.loseText,
         onPressed: () =>
             playerStateNotifier.changeLife(ChangeLifeInfo.loseOnTap),
+        textColor: lifeLoseButtonTextColor,
       ),
     );
   }
@@ -70,6 +71,7 @@ class Player extends ConsumerWidget {
         text: ChangeLifeInfo.gainText,
         onPressed: () =>
             playerStateNotifier.changeLife(ChangeLifeInfo.gainOnTap),
+        textColor: lifeGainButtonTextColor,
       ),
     );
   }
