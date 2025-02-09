@@ -48,6 +48,22 @@ Color getBackgroundColor(Background background) {
   return retColor;
 }
 
+Icon getThemeModeIcon(ThemeMode themeMode) {
+  Icon retIcon = themeModeSystemIcon;
+  switch (themeMode) {
+    case ThemeMode.dark:
+      retIcon = themeModeDarkIcon;
+      break;
+    case ThemeMode.light:
+      retIcon = themeModeLightIcon;
+      break;
+    case ThemeMode.system:
+      retIcon = themeModeSystemIcon;
+      break;
+  }
+  return retIcon;
+}
+
 Icon getBackgroundIcon(Background background) {
   Icon retIcon = backgroundUnsetIcon;
 
