@@ -31,7 +31,7 @@ class LifeCounterBaseScreen extends ConsumerWidget {
       ref.read(playerProviderList[Players.player2.index].notifier),
       ref.read(playerProviderList[Players.player3.index].notifier),
       ref.read(playerProviderList[Players.player4.index].notifier),
-      ref.read(themeModeProvider.notifier)
+      ref.read(themeModeStateProvider.notifier)
     ];
   }
 
@@ -46,7 +46,7 @@ class LifeCounterBaseScreen extends ConsumerWidget {
           notifiers: resettableNotifierList(ref),
         ),
         actions: [
-          ThemeModeChangeButton(themeModeProvider: themeModeProvider),
+          ThemeModeChangeButton(themeModeStateProvider: themeModeStateProvider),
         ],
       ),
       body: Column(
