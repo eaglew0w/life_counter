@@ -6,33 +6,34 @@ import 'package:life_counter/shared/notifiers/resettable_notifier.dart';
 
 class PlayerStateNotifier extends Notifier<PlayerState>
     implements ResettableNotifier {
+
+  Timer? _lifeChangeTimer;
+
   @override
   PlayerState build() {
-    ref.onDispose(() {
-      state.timer?.cancel();
-    });
+    ref.onDispose(() {});
     return PlayerState(life: defaultLife);
   }
 
   void changeLife(int value) {
-    state = PlayerState(
+    state = state.copyWith(
       life: state.life + value,
       lifeChange: state.lifeChange + value,
-      timer: state.timer,
     );
     _restartTimer();
   }
 
   @override
   void reset() {
-    state.timer?.cancel();
+    _lifeChangeTimer?.cancel();
     state = PlayerState(life: defaultLife);
   }
 
   void _restartTimer() {
-    state.timer?.cancel();
-    state.timer = Timer(const Duration(seconds: lifeChangeDisplayTimer), () {
-      state = PlayerState(life: state.life, lifeChange: 0, timer: state.timer);
+    _lifeChangeTimer?.cancel();
+    _lifeChangeTimer =
+        Timer(const Duration(seconds: lifeChangeDisplayTimer), () {
+      state = state.copyWith(lifeChange: 0);
     });
   }
 }

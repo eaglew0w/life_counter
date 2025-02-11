@@ -1,9 +1,9 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:life_counter/shared/constants/constants.dart';
 import 'package:life_counter/shared/models/player_state.dart';
+import 'package:life_counter/shared/models/theme_mode_state.dart';
 import 'package:life_counter/shared/notifiers/player_state_notifier.dart';
-import 'package:life_counter/shared/notifiers/theme_mode_notifier.dart';
+import 'package:life_counter/shared/notifiers/theme_mode_state_notifier.dart';
 
 final playerProviderList = List.generate(
   playerNumber,
@@ -11,5 +11,6 @@ final playerProviderList = List.generate(
       PlayerStateNotifier.new),
 );
 
-final themeModeProvider =
-    NotifierProvider<ThemeModeNotifier, ThemeMode>(ThemeModeNotifier.new);
+final themeModeStateProvider =
+    NotifierProvider<ThemeModeStateNotifier, ThemeModeState>(
+        ThemeModeStateNotifier.new);

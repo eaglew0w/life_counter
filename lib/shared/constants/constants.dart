@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:material_symbols_icons/material_symbols_icons.dart';
 
 const String title = "MTG Life Counter";
 
@@ -13,7 +14,7 @@ const ThemeMode initialThemeMode = ThemeMode.dark;
 
 const Icon resetIcon = Icon(Icons.restart_alt);
 
-const Icon themeModeSystemIcon = Icon(Icons.settings_system_daydream);
+const Icon themeModeSystemIcon = Icon(Symbols.routine);
 const Icon themeModeLightIcon = Icon(Icons.light_mode);
 const Icon themeModeDarkIcon = Icon(Icons.dark_mode);
 
