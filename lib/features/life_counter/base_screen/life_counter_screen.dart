@@ -37,7 +37,18 @@ class LifeCounterBaseScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return Scaffold(
+    return PopScope(
+      canPop: false, // `false` にすると戻る操作を無効化
+      // ログ埋め込みなどは別チケットで対応予定
+      // 一旦コメントアウト
+      // onPopInvokedWithResult: (didPop, result) {
+      //   if (!didPop) {
+      //     debugPrint("戻る操作がブロックされました！");
+      //   } else {
+      //     debugPrint("戻る操作が成功しました！ result: $result");
+      //   }
+      // },
+      child: Scaffold(
       appBar: AppBar(
         title: Text(
           title,
@@ -66,6 +77,7 @@ class LifeCounterBaseScreen extends ConsumerWidget {
             ),
           ),
         ],
+        ),
       ),
     );
   }
