@@ -1,0 +1,25 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "life_counter (Chrome)",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "debug",
+            "args": [
+                "-d",
+                "chrome"
+            ]
+        },
+        {
+            "name": "life_counter (Windows)",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "debug",
+            "args": [
+                "-d",
+                "windows"
+            ]
+        }
+    ]
+}
