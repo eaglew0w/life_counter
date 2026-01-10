@@ -1,6 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:life_counter/shared/notifiers/player_state_notifier.dart';
 import 'package:life_counter/shared/constants/constants.dart';
 import 'package:life_counter/shared/providers/providers.dart';
 import 'package:fake_async/fake_async.dart';
