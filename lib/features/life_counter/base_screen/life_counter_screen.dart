@@ -49,34 +49,37 @@ class LifeCounterBaseScreen extends ConsumerWidget {
       //   }
       // },
       child: Scaffold(
-      appBar: AppBar(
-        title: Text(
-          title,
-        ),
-        leading: ResetButton(
-          notifiers: resettableNotifierList(ref),
-        ),
-        actions: [
-          ThemeModeChangeButton(themeModeStateProvider: themeModeStateProvider),
-        ],
-      ),
-      body: Column(
-        children: [
-          Expanded(
-            child: Row(
-              children: [
-                Expanded(
-                  child: createPlayer(playerProviderList[Players.player1.index],
-                      PlayerPosition.left),
-                ),
-                Expanded(
-                  child: createPlayer(playerProviderList[Players.player2.index],
-                      PlayerPosition.right),
-                ),
-              ],
-            ),
+        appBar: AppBar(
+          title: Text(
+            title,
           ),
-        ],
+          leading: ResetButton(
+            notifiers: resettableNotifierList(ref),
+          ),
+          actions: [
+            ThemeModeChangeButton(
+                themeModeStateProvider: themeModeStateProvider),
+          ],
+        ),
+        body: Column(
+          children: [
+            Expanded(
+              child: Row(
+                children: [
+                  Expanded(
+                    child: createPlayer(
+                        playerProviderList[Players.player1.index],
+                        PlayerPosition.left),
+                  ),
+                  Expanded(
+                    child: createPlayer(
+                        playerProviderList[Players.player2.index],
+                        PlayerPosition.right),
+                  ),
+                ],
+              ),
+            ),
+          ],
         ),
       ),
     );
