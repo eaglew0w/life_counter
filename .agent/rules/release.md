@@ -10,7 +10,7 @@ trigger: always_on
 ## 1. 事前準備
 1.  **Issueの発行**: GitHubでリリース用Issueを作成すること。
     - タイトル: `v[バージョン]リリース`
-2.  **リリースブランチ의作成**: `origin/feature/develop` から `feature/issue-[Issue番号]` を作成すること。
+2.  **リリースブランチの作成**: `origin/feature/develop` から `feature/issue-[Issue番号]` を作成すること。
 3.  **バージョンの更新**: `pubspec.yaml` の `version` を更新すること（例: `1.1.0+1`）。
 4.  **品質検証**: 以下のコマンドがすべてパスすることを確認すること。
     - `dart format .`
@@ -28,12 +28,10 @@ trigger: always_on
 
 ## 4. リリース成果物の作成 (Android)
 1.  **ビルド**: `flutter build apk --release --split-per-abi` を実行すること。
-2.  **アーカイブ**: 生成されたAPKファイルをzipで圧縮すること。
-    - PowerShell: `Compress-Archive -Path build\app\outputs\flutter-apk\*.apk -DestinationPath release-artifacts-v[バージョン].zip`
 
 ## 5. GitHub Releases の作成
-1.  **リリース作成**: `gh release create` を実行し、zip成果物を添付すること。
-    - コマンド例: `gh release create v[バージョン] release-artifacts-v[バージョン].zip --title "v[バージョン]" --notes "リリースの概要"`
+1.  **リリース作成**: `gh release create` を実行し、生成されたAPKファイルを添付すること。
+    - コマンド例: `gh release create v[バージョン] build\app\outputs\flutter-apk\*.apk --title "v[バージョン]" --notes "リリースの概要"`
 
 ## 6. Issueのクローズ
 1.  **関連Issueの特定**: 前回のタグから今回のマージまでに対象ブランチに含まれたIssueをすべて特定すること。
