@@ -5,7 +5,7 @@ import 'package:life_counter/shared/providers/providers.dart';
 import 'package:fake_async/fake_async.dart';
 
 void main() {
-  group('PlayerStateNotifier tests', () {
+  group('PlayerStateNotifier のテスト', () {
     late ProviderContainer container;
 
     setUp(() {
@@ -16,12 +16,12 @@ void main() {
       container.dispose();
     });
 
-    test('Initial life should be defaultLife', () {
+    test('初期ライフが defaultLife であること', () {
       final state = container.read(playerProviderList[0]);
       expect(state.life, defaultLife);
     });
 
-    test('changeLife should update life and lifeChange', () {
+    test('changeLife でライフと変更値が更新されること', () {
       final notifier = container.read(playerProviderList[0].notifier);
 
       notifier.changeLife(1);
@@ -31,7 +31,7 @@ void main() {
       expect(state.lifeChange, 1);
     });
 
-    test('lifeChange should reset to 0 after timer expires', () {
+    test('一定時間（タイマー）経過後に lifeChange が 0 にリセットされること', () {
       fakeAsync((async) {
         final notifier = container.read(playerProviderList[0].notifier);
 
@@ -45,7 +45,7 @@ void main() {
       });
     });
 
-    test('reset should revert life to default and cancel lifeChange', () {
+    test('reset でライフが初期値に戻り、変更値がキャンセルされること', () {
       final notifier = container.read(playerProviderList[0].notifier);
 
       notifier.changeLife(5);

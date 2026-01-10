@@ -5,26 +5,31 @@
 // gestures. You can also use WidgetTester to find child widgets in the widget
 // tree, read text, and verify that the values of widget properties are correct.
 
-import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:life_counter/app/life_counter_app.dart';
+import 'package:life_counter/shared/constants/constants.dart';
 
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    await tester.pumpWidget(const LifeCounterApp());
+  testWidgets('カウンターの増分スモークテスト', (WidgetTester tester) async {
+    // アプリをビルドし、描画を完了させます。
+    await tester.pumpWidget(const ProviderScope(child: LifeCounterApp()));
+    await tester.pumpAndSettle();
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
+    // 初期値 (20) を確認
+    expect(find.text('$defaultLife'), findsWidgets);
 
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
+    // '+' ボタン（テキスト '+'）をタップ
+    final plusButton = find.text('+').first;
+    await tester.tap(plusButton);
+    // ライフ数値の変化を反映
     await tester.pump();
 
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
+    // カウンターが増加したことを確認
+    expect(find.text('${defaultLife + 1}'), findsOneWidget);
+
+    // PlayerStateNotifier 内のタイマー (lifeChangeDisplayTimer) が保留状態だと
+    // テストが失敗するため、時間を進めてタイマーを消化させます。
+    await tester.pump(const Duration(seconds: lifeChangeDisplayTimer + 1));
   });
 }
