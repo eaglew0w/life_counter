@@ -6,7 +6,6 @@ import 'package:life_counter/shared/notifiers/resettable_notifier.dart';
 
 class PlayerStateNotifier extends Notifier<PlayerState>
     implements ResettableNotifier {
-
   Timer? _lifeChangeTimer;
 
   @override

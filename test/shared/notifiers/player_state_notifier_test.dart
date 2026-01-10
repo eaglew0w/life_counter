@@ -24,9 +24,9 @@ void main() {
 
     test('changeLife should update life and lifeChange', () {
       final notifier = container.read(playerProviderList[0].notifier);
-      
+
       notifier.changeLife(1);
-      
+
       final state = container.read(playerProviderList[0]);
       expect(state.life, defaultLife + 1);
       expect(state.lifeChange, 1);
@@ -35,25 +35,25 @@ void main() {
     test('lifeChange should reset to 0 after timer expires', () {
       fakeAsync((async) {
         final notifier = container.read(playerProviderList[0].notifier);
-        
+
         notifier.changeLife(1);
         expect(container.read(playerProviderList[0]).lifeChange, 1);
-        
+
         // 規定時間（秒）進める
         async.elapse(const Duration(seconds: lifeChangeDisplayTimer));
-        
+
         expect(container.read(playerProviderList[0]).lifeChange, 0);
       });
     });
 
     test('reset should revert life to default and cancel lifeChange', () {
       final notifier = container.read(playerProviderList[0].notifier);
-      
+
       notifier.changeLife(5);
       expect(container.read(playerProviderList[0]).life, defaultLife + 5);
-      
+
       notifier.reset();
-      
+
       expect(container.read(playerProviderList[0]).life, defaultLife);
       expect(container.read(playerProviderList[0]).lifeChange, 0);
     });
