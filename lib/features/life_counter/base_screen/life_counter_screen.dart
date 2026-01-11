@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:life_counter/shared/utils/app_logger.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:life_counter/shared/models/player_state.dart';
 import 'package:life_counter/shared/notifiers/player_state_notifier.dart';
@@ -38,16 +39,14 @@ class LifeCounterBaseScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return PopScope(
-      canPop: false, // `false` にすると戻る操作を無効化
-      // ログ埋め込みなどは別チケットで対応予定
-      // 一旦コメントアウト
-      // onPopInvokedWithResult: (didPop, result) {
-      //   if (!didPop) {
-      //     debugPrint("戻る操作がブロックされました！");
-      //   } else {
-      //     debugPrint("戻る操作が成功しました！ result: $result");
-      //   }
-      // },
+      canPop: false,
+      onPopInvokedWithResult: (didPop, result) {
+        if (!didPop) {
+          AppLogger.w('Back navigation blocked');
+        } else {
+          AppLogger.d('Back navigation success: result: $result');
+        }
+      },
       child: Scaffold(
         appBar: AppBar(
           title: Text(
