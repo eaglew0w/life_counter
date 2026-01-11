@@ -9,7 +9,9 @@ class ResetButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-      onPressed: () {
+      onPressed: null, // 通常タップでは何もしない
+      onLongPress: () {
+        // 長押しでリセット（誤操作防止）
         for (var notifier in notifiers) {
           notifier.reset();
         }
