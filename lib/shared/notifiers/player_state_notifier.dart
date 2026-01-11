@@ -15,7 +15,7 @@ class PlayerStateNotifier extends Notifier<PlayerState>
     ref.onDispose(() {
       AppLogger.d('PlayerStateNotifier disposed');
     });
-    return PlayerState(life: defaultLife);
+    return const PlayerState(life: defaultLife);
   }
 
   void changeLife(int value) {
@@ -31,7 +31,7 @@ class PlayerStateNotifier extends Notifier<PlayerState>
   void reset() {
     AppLogger.i('Player state reset');
     _lifeChangeTimer?.cancel();
-    state = PlayerState(life: defaultLife);
+    state = const PlayerState(life: defaultLife);
   }
 
   void _restartTimer() {
