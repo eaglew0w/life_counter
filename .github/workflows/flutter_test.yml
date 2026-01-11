@@ -2,9 +2,9 @@ name: Flutter Test
 
 on:
   push:
-    branches: [ "feature/develop", "main" ]
+    branches: [ "develop", "main" ]
   pull_request:
-    branches: [ "feature/develop", "main" ]
+    branches: [ "develop", "main" ]
 
 jobs:
   test:
