@@ -1,11 +1,11 @@
-class PlayerState {
-  int life;
-  int lifeChange;
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-  PlayerState({required this.life, this.lifeChange = 0});
+part 'player_state.freezed.dart';
 
-  PlayerState copyWith({int? life, int? lifeChange}) {
-    return PlayerState(
-        life: life ?? this.life, lifeChange: lifeChange ?? this.lifeChange);
-  }
+@freezed
+class PlayerState with _$PlayerState {
+  const factory PlayerState({
+    required int life,
+    @Default(0) int lifeChange,
+  }) = _PlayerState;
 }

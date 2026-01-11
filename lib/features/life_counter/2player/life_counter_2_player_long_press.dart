@@ -1,19 +1,63 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:life_counter/features/life_counter/2player/life_counter_2_player.dart';
+import 'package:life_counter/features/life_counter/base_screen/life_counter_scaffold.dart';
 import 'package:life_counter/shared/constants/constants.dart';
-import 'package:life_counter/shared/models/player_state.dart';
-import 'package:life_counter/shared/notifiers/player_state_notifier.dart';
+import 'package:life_counter/shared/providers/providers.dart';
+import 'package:life_counter/shared/widgets/button/life_change_button/life_change_button_long_press.dart';
 import 'package:life_counter/shared/widgets/player/player.dart';
-import 'package:life_counter/shared/widgets/player/player_long_press.dart';
 
-class LifeCounter2PlayerLongPress extends LifeCounter2Player {
-  const LifeCounter2PlayerLongPress({super.key, required super.title});
+class LifeCounter2PlayerLongPress extends ConsumerWidget {
+  final String title;
+  const LifeCounter2PlayerLongPress({super.key, required this.title});
 
   @override
-  Player createPlayer(
-      NotifierProvider<PlayerStateNotifier, PlayerState> playerProvider,
-      PlayerPosition playerPosition) {
-    return PlayerLongPress(
-        playerProvider: playerProvider, playerPosition: playerPosition);
+  Widget build(BuildContext context, WidgetRef ref) {
+    return LifeCounterScaffold(
+      title: title,
+      resettableNotifiers: [
+        ref.read(playerProviderList[Players.player1.index].notifier),
+        ref.read(playerProviderList[Players.player2.index].notifier),
+        ref.read(playerProviderList[Players.player3.index].notifier),
+        ref.read(playerProviderList[Players.player4.index].notifier),
+        ref.read(themeModeStateProvider.notifier),
+      ],
+      themeModeProvider: themeModeStateProvider,
+      body: Row(
+        children: [
+          Expanded(
+            child: _buildPlayer(ref, Players.player1, PlayerPosition.left),
+          ),
+          Expanded(
+            child: _buildPlayer(ref, Players.player2, PlayerPosition.right),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildPlayer(WidgetRef ref, Players player, PlayerPosition position) {
+    final provider = playerProviderList[player.index];
+    return Player(
+      playerProvider: provider,
+      playerPosition: position,
+      loseButton: LifeChangeButtonLongPress(
+        text: ChangeLifeInfo.loseText,
+        onPressed: () =>
+            ref.read(provider.notifier).changeLife(ChangeLifeInfo.loseOnTap),
+        onLongPress: () => ref
+            .read(provider.notifier)
+            .changeLife(ChangeLifeInfo.loseOnLongPress),
+        textColor: lifeLoseButtonTextColor,
+      ),
+      gainButton: LifeChangeButtonLongPress(
+        text: ChangeLifeInfo.gainText,
+        onPressed: () =>
+            ref.read(provider.notifier).changeLife(ChangeLifeInfo.gainOnTap),
+        onLongPress: () => ref
+            .read(provider.notifier)
+            .changeLife(ChangeLifeInfo.gainOnLongPress),
+        textColor: lifeGainButtonTextColor,
+      ),
+    );
   }
 }

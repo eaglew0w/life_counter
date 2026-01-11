@@ -1,5 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'dart:async';
+import 'package:life_counter/shared/utils/app_logger.dart';
 import 'package:life_counter/shared/models/player_state.dart';
 import 'package:life_counter/shared/constants/constants.dart';
 import 'package:life_counter/shared/notifiers/resettable_notifier.dart';
@@ -10,11 +11,15 @@ class PlayerStateNotifier extends Notifier<PlayerState>
 
   @override
   PlayerState build() {
-    ref.onDispose(() {});
-    return PlayerState(life: defaultLife);
+    AppLogger.d('PlayerStateNotifier build');
+    ref.onDispose(() {
+      AppLogger.d('PlayerStateNotifier disposed');
+    });
+    return const PlayerState(life: defaultLife);
   }
 
   void changeLife(int value) {
+    AppLogger.i('Life changed by $value (Current: ${state.life})');
     state = state.copyWith(
       life: state.life + value,
       lifeChange: state.lifeChange + value,
@@ -24,8 +29,9 @@ class PlayerStateNotifier extends Notifier<PlayerState>
 
   @override
   void reset() {
+    AppLogger.i('Player state reset');
     _lifeChangeTimer?.cancel();
-    state = PlayerState(life: defaultLife);
+    state = const PlayerState(life: defaultLife);
   }
 
   void _restartTimer() {

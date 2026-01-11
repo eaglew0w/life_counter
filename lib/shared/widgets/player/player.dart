@@ -4,81 +4,47 @@ import 'package:life_counter/shared/constants/constants.dart';
 import 'package:life_counter/shared/utils/global_functions.dart';
 import 'package:life_counter/shared/models/player_state.dart';
 import 'package:life_counter/shared/notifiers/player_state_notifier.dart';
-import 'package:life_counter/shared/widgets/button/life_change_button/life_change_button.dart';
 
 class Player extends ConsumerWidget {
   final NotifierProvider<PlayerStateNotifier, PlayerState> playerProvider;
-
   final PlayerPosition playerPosition;
+  final Widget loseButton;
+  final Widget gainButton;
 
-  const Player(
-      {required this.playerProvider,
-      this.playerPosition = PlayerPosition.none,
-      super.key});
+  const Player({
+    required this.playerProvider,
+    required this.loseButton,
+    required this.gainButton,
+    this.playerPosition = PlayerPosition.none,
+    super.key,
+  });
 
-  // レイヤーをStackでまとめて表示するWidget
-  @protected
-  Widget displayWidget(BuildContext context, WidgetRef ref) {
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
     return Stack(
       children: [
-        buttonLayer(context, ref),
-        // 下2つもlayerにしたい
-        // 現状は表示位置等の問題で一緒に出来ず
-        displayPlayerLife(context, ref),
-        displayPlayerLifeChange(context, ref)
+        _buildButtonLayer(context, ref),
+        _buildLifeDisplay(context, ref),
+        _buildLifeChangeDisplay(context, ref),
       ],
     );
   }
 
-  // ボタンレイヤーに表示するものをまとめたWidget
-  @protected
-  Widget buttonLayer(BuildContext context, WidgetRef ref) {
-    List<Widget> buttonList;
-    // 右側プレイヤー設定の場合、ボタンの順番を逆にしておく
-    if (playerPosition == PlayerPosition.right) {
-      buttonList = [rightButton(context, ref), leftButton(context, ref)];
-    } else {
-      buttonList = [leftButton(context, ref), rightButton(context, ref)];
-    }
+  Widget _buildButtonLayer(BuildContext context, WidgetRef ref) {
+    final List<Widget> buttons = playerPosition == PlayerPosition.right
+        ? [gainButton, loseButton]
+        : [loseButton, gainButton];
+
     return Center(
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: buttonList,
+        children: buttons.map((b) => Expanded(child: b)).toList(),
       ),
     );
   }
 
-  @protected
-  Widget leftButton(BuildContext context, WidgetRef ref) {
-    final PlayerStateNotifier playerStateNotifier =
-        ref.read(playerProvider.notifier);
-    return Expanded(
-      child: LifeChangeButton(
-        text: ChangeLifeInfo.loseText,
-        onPressed: () =>
-            playerStateNotifier.changeLife(ChangeLifeInfo.loseOnTap),
-        textColor: lifeLoseButtonTextColor,
-      ),
-    );
-  }
-
-  @protected
-  Widget rightButton(BuildContext context, WidgetRef ref) {
-    final PlayerStateNotifier playerStateNotifier =
-        ref.read(playerProvider.notifier);
-    return Expanded(
-      child: LifeChangeButton(
-        text: ChangeLifeInfo.gainText,
-        onPressed: () =>
-            playerStateNotifier.changeLife(ChangeLifeInfo.gainOnTap),
-        textColor: lifeGainButtonTextColor,
-      ),
-    );
-  }
-
-  @protected
-  Widget displayPlayerLife(BuildContext context, WidgetRef ref) {
-    final PlayerState playerState = ref.watch(playerProvider);
+  Widget _buildLifeDisplay(BuildContext context, WidgetRef ref) {
+    final playerState = ref.watch(playerProvider);
     return Center(
       child: Text(
         '${playerState.life}',
@@ -88,21 +54,17 @@ class Player extends ConsumerWidget {
     );
   }
 
-  @protected
-  Widget displayPlayerLifeChange(BuildContext context, WidgetRef ref) {
-    final PlayerState playerState = ref.watch(playerProvider);
+  Widget _buildLifeChangeDisplay(BuildContext context, WidgetRef ref) {
+    final playerState = ref.watch(playerProvider);
     return Align(
       alignment: const Alignment(
-          alignmentXofPlayerLifeChange, alignmentYofPlayerLifeChange),
+        alignmentXofPlayerLifeChange,
+        alignmentYofPlayerLifeChange,
+      ),
       child: Text(
         addAbsoluteValueText(playerState.lifeChange),
         textAlign: TextAlign.end,
       ),
     );
-  }
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    return displayWidget(context, ref);
   }
 }
