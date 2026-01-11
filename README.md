@@ -59,12 +59,14 @@ UIやレイアウトの調整には Web 版の実行が高速で便利です。
 開発は以下のステップで行います。
 
 1. **Issueの発行**: [GitHub Issues](https://github.com/eaglew0w/life_counter/issues) で作業内容を記載したIssueを発行します。
-2. **ブランチの作成**: `origin/feature/develop` から `feature/issue-[Issue番号]` という名前でブランチを切り出します。
+2. **ブランチの作成**: `origin/develop` から `feature/issue-[Issue番号]` という名前でブランチを切り出します。
 3. **実装とコミット**: コミットメッセージは `type: #[Issue番号] 概要` の形式で記述してください（例: `feat: #121 READMEの改善`）。
 4. **検証**: 提出前に必ず[品質保証](#品質保証)のステップを実行してください。
-5. **PRの作成**: `feature/develop` ブランチに対してプルリクエストを作成します。
+5. **PRの作成**: `develop` ブランチに対してプルリクエストを作成します。
 
-## 品質保証
+---
+
+## ✅ 品質保証
 
 コードをプッシュする前に、以下のコマンドがすべてパスすることを確認してください。
 
@@ -76,13 +78,14 @@ UIやレイアウトの調整には Web 版の実行が高速で便利です。
 
 ## 📦 リリース手順
 
-1. **準備**: `feature/develop` からリリース用Issueの番号でブランチを作成し、`pubspec.yaml` のバージョンを更新します。
-2. **developへの統合**: リリースブランチから `feature/develop` へPRを作成・マージします。
-3. **メインリリース**: `feature/develop` から `main` へのPRを作成・マージします。
-4. **タグ付けとビルド**:
+1. **準備**: `develop` からリリース用Issueの番号でブランチを作成し、`pubspec.yaml` のバージョンを更新します。
+2. **developへの統合**: リリースブランチから `develop` へPRを作成・マージします。
+3. **メインリリース**: `develop` から `main` へのPRを作成・マージします。
+4. **同期**: `main` マージ後は、`main` の最新状態を `develop` にマージし、開発環境を最新に保ちます。
+5. **タグ付けとビルド**:
    - `main` の最新コミットにバージョンタグ（例: `v1.1.0`）を付与します。
    - `flutter build apk --release --split-per-abi` でAPKを生成します。
-5. **GitHub Release作成**: `gh release create` コマンドを使用して、作成したAPKファイルを添付して公開します。
+6. **GitHub Release作成**: `gh release create` コマンドを使用して、作成したAPKファイルを添付して公開します。
 
 詳細な手順は [.agent/rules/release.md](.agent/rules/release.md) を参照してください。
 
@@ -90,8 +93,8 @@ UIやレイアウトの調整には Web 版の実行が高速で便利です。
 
 ## 📄 ブランチ構成
 
-- **main**: 公開リリース用ブランチ
-- **feature/develop**: 開発の統合ブランチ
+- **main**: 公開リリース用ブランチ（保護ブランチ）
+- **develop**: 開発の統合ブランチ。常に `main` の最新状態を含む。
 - **feature/issue-XX**: 各Issueごとの作業ブランチ
 
 ---

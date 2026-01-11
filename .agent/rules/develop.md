@@ -10,7 +10,7 @@ trigger: always_on
 ## 1. 修正の開始
 1.  **Issue発行**: 修正を開始する前に、必ずGitHubでIssueを発行すること。
 2.  **概要の記載**: Issueには作業内容の要約を記載すること。
-3.  **ブランチ作成**: 最新の `origin/feature/develop` からブランチを切り出すこと。
+3.  **ブランチ作成**: 最新の `origin/develop` からブランチを切り出すこと。
     - ブランチ名形式: `feature/issue-[Issue番号]`
 
 ## 2. 開発とコミット
@@ -25,11 +25,12 @@ trigger: always_on
 - `flutter test` (全ユニット/ウィジェットテストの実行)
 
 ## 4. 合流 (developへ)
-1.  **PR作成とマージ**: 作業完了後、`origin/feature/develop` へプルリクエストを作成してマージすること。
+1.  **PR作成とマージ**: 作業完了後、`origin/develop` へプルリクエストを作成してマージすること。
 2.  **ブランチの維持**: マージ後も元のブランチを削除しないこと（履歴保持のため）。
 
 ## 5. 同期
-1.  マージ後は最新の `origin/feature/develop` を `fetch` し、ローカルブランチに `pull` して最新状態を保つこと。
+1.  マージ後は最新の `origin/develop` を `fetch` し、ローカルブランチに `pull` して最新状態を保つこと。
+2.  **mainとの同期**: `main` ブランチが更新（リリース）された後は、必ず `main` を `develop` にマージして、開発ブランチを最新の状態に保つこと。
 
 ## 6. リリース
 1.  `main` ブランチへのリリースを行う際は、[リリース手順](file:///c:/Workspace/life_counter/.agent/rules/release.md) に記載された手順に従うこと。
