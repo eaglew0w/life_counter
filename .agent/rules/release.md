@@ -38,4 +38,5 @@ trigger: always_on
 2.  **一括処理**: `gh issue close [Issue番号...]` を実行して、含まれるすべてのIssueをクローズすること。
 
 ## 7. 後処理
-1.  ローカルの `main` および `develop` を最新の状態に更新（fetch/pull）すること。
+1.  **developの同期**: リリース完了後、ローカルの `main` および `develop` を最新の状態に更新（fetch/pull）すること。
+2.  **追従マージとプッシュ**: `main` の最新状態を `develop` にマージ（追従）し、その結果をリモートの `develop` にプッシュすること。
