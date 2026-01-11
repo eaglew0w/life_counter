@@ -34,8 +34,8 @@ trigger: always_on
     - コマンド例: `gh release create v[バージョン] build\app\outputs\flutter-apk\*.apk --title "v[バージョン]" --notes "リリースの概要""
 
 ## 6. Issueのクローズ
-1.  **関連Issueの特定**: 前回のタグから今回のマージまでに対象ブランチに含まれたIssueをすべて特定すること。
-2.  **一括処理**: `gh issue close [Issue番号...]` を実行して、含まれるすべてのIssueをクローズすること。
+1.  **リリースIssueのクローズ**: 本リリース作業用に作成したIssue（`v[バージョン]リリース`）をクローズすること。
+2.  **確認**: 今回のリリースに含まれる機能のIssueが全てクローズされているか確認すること。
 
 ## 7. 後処理
 1.  **developの同期**: リリース完了後、ローカルの `main` および `develop` を最新の状態に更新（fetch/pull）すること。

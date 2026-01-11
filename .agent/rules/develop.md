@@ -33,7 +33,7 @@ trigger: always_on
 ## 5. 合流 (developへ)
 1.  **PR作成とマージ**: 作業完了後、`origin/develop` へプルリクエストを作成してマージすること。
 2.  **ブランチの維持**: マージ後も元のブランチを削除しないこと（履歴保持のため）。
-3.  **Issue管理**: `develop` へのマージ時点ではIssueをクローズせず、`main` リリース時（[リリース手順](file:///c:/Workspace/life_counter/.agent/rules/release.md)参照）に一括でクローズすること。
+3.  **Issue管理**: `develop` へのマージ完了後、対応するIssueをクローズすること。
 
 ## 6. 同期
 1.  マージ後は最新の `origin/develop` を `fetch` し、ローカルブランチに `pull` して最新状態を保つこと。
