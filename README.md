@@ -1,61 +1,103 @@
 # life_counter
 
-私用で使うライフカウンター作成用リポジトリ
-Flutterの勉強も兼ねて作成中
-- 自分で使いやすいライフカウンターの開発
+私用で使うライフカウンター作成用リポジトリ。Flutterの学習を兼ねて開発しています。
 
-## 開発環境
-- テキストエディタ(筆者はVSCode使用)
-- Flutter
-- Android Studio
+## 🚀 はじめに
 
-それぞれのセットアップは一般的なやり方で問題なし
-このうち、FlutterはVSCodeの拡張機能からセットアップ可能
-Android Studioはテスト用デバイスの管理に必要
+このプロジェクトは Flutter で開発されています。以下の手順に従って環境構築を行ってください。
 
-## 作業フロー
-1. issueを発行する
-作業内容を記載すること
-2. 作業ブランチを切り出して作業
-最新のdevelopから feature/issue-"issueの数字" と切り出す  
-例えば #23 に対する作業だったら feature/issue-23 と切り出せばOK 
-3. 作業ブランチをpushして開発ブランチへのPR作成
-2で作成したブランチをpushして、開発ブランチ(feature/develop)へのPRを作成する  
-4. PRが問題なければマージ
+### 1. 開発環境のセットアップ
 
-## リリース作業
-1. feature/developからfeature/mainへのPR作成
-リリースするissueについてこのタイミングでcloseする  
-PRに close #"閉じるissue番号" を記載すればマージ時に自動でissueがcloseされる  
-2. PRをマージ
-3. リリースバイナリ作成
-mainへチェックアウトしてコマンドラインより```flutter build apk --release```を入力してリリースビルド実施  
-ビルド成果物の格納先が表示される  
-4. Code の ReleasesからDraft a new releaseを押してリリース作成  
-Choose a tagでタグ付けをすること  
-3で作成したバイナリを含めること  
-文章自動生成でいい感じに文章作れるはず  
-Pubish releaseを押せば公開される  
-5. feature/developをmainから切り出して完了
-手元でfeature/developにmainをコミットを作らずにマージしてpush
+以下のツールをインストールしてください。
 
+- **Flutter SDK**: [公式サイト](https://docs.flutter.dev/get-started/install)の指示に従ってインストールしてください。
+- **Antigravity**: 本プロジェクトの推奨開発環境（IDE）です。
+  - AIエージェント機能が統合されており、対話形式で開発を進められます。
+  - [Antigravity公式サイト](https://antigravity.google/download)からインストールしてください。
+- **Android Studio**: Androidエミュレータの管理とビルドに必要です。
+- **GitHub CLI (`gh`)**: PR作成やリリース作業で使用します。
+- **Git**: バージョン管理に使用します。
 
-## ブランチ分け
-- main
-公開済みのブランチ。
-- feature/develop
-開発ブランチ。mainへマージして公開する。
-- feature/issue-XX
-作業ブランチ。feature/developへマージしてリリースへの準備をする。
+### 2. Antigravity のセットアップ
 
-## Getting Started
-This project is a starting point for a Flutter application.
+1. **ソフトウェアの起動**: インストールした Antigravity を起動します。
+2. **プロジェクトの読み込み**: このプロジェクトのディレクトリを開いてください。
+3. **エージェントの有効化**: プロジェクトルートの `.agent/rules/` にあるルールを読み込み、AIエージェントによる開発支援が開始されます。
 
-A few resources to get you started if this is your first Flutter project:
+### 3. プロジェクトのセットアップ
+
+依存関係の解決は Antigravity 上のターミナル、またはコマンドプロンプトで以下を実行します。
+
+```bash
+flutter pub get
+```
+
+> [!NOTE]
+> プロジェクト内の `.vscode` フォルダは、Antigravity と完全な互換性があります。デバッグ設定（`launch.json`）などはそのまま利用可能です。
+
+### 4. アプリの実行・デバッグ
+
+Antigravity ではコマンドに加え、直感的な操作でアプリを実行できます。
+
+#### モバイル（エミュレータ/実機）
+
+- **UI操作**: 右上の「Run アプリのデバッグ実行」ボタンをクリック
+- **キー操作**: `F5` を押下（デフォルトで Web 版が起動するように設定されています）
+- **コマンド**: `flutter run`
+
+#### Web（ブラウザ）
+
+UIやレイアウトの調整には Web 版の実行が高速で便利です。
+
+- **UI操作**: ターゲットデバイスで「Chrome」を選択して実行
+- **コマンド**: `flutter run -d chrome`
+
+---
+
+## 🛠 開発フロー
+
+開発は以下のステップで行います。
+
+1. **Issueの発行**: [GitHub Issues](https://github.com/eaglew0w/life_counter/issues) で作業内容を記載したIssueを発行します。
+2. **ブランチの作成**: `origin/feature/develop` から `feature/issue-[Issue番号]` という名前でブランチを切り出します。
+3. **実装とコミット**: コミットメッセージは `type: #[Issue番号] 概要` の形式で記述してください（例: `feat: #121 READMEの改善`）。
+4. **検証**: 提出前に必ず[品質保証](#品質保証)のステップを実行してください。
+5. **PRの作成**: `feature/develop` ブランチに対してプルリクエストを作成します。
+
+## 品質保証
+
+コードをプッシュする前に、以下のコマンドがすべてパスすることを確認してください。
+
+- `dart format .` : コードの自動フォーマット
+- `flutter analyze` : 静的解析
+- `flutter test` : ユニット/ウィジェットテストの実行
+
+---
+
+## 📦 リリース手順
+
+1. **準備**: `feature/develop` からリリース用Issueの番号でブランチを作成し、`pubspec.yaml` のバージョンを更新します。
+2. **developへの統合**: リリースブランチから `feature/develop` へPRを作成・マージします。
+3. **メインリリース**: `feature/develop` から `main` へのPRを作成・マージします。
+4. **タグ付けとビルド**:
+   - `main` の最新コミットにバージョンタグ（例: `v1.1.0`）を付与します。
+   - `flutter build apk --release --split-per-abi` でAPKを生成します。
+5. **GitHub Release作成**: `gh release create` コマンドを使用して、作成したAPKファイルを添付して公開します。
+
+詳細な手順は [.agent/rules/release.md](.agent/rules/release.md) を参照してください。
+
+---
+
+## 📄 ブランチ構成
+
+- **main**: 公開リリース用ブランチ
+- **feature/develop**: 開発の統合ブランチ
+- **feature/issue-XX**: 各Issueごとの作業ブランチ
+
+---
+
+## 📚 学習リソース
 
 - [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
 - [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- [Flutter Documentation](https://docs.flutter.dev/)
