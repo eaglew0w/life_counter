@@ -20,6 +20,7 @@ trigger: always_on
 ## 2. 開発環境への合流 (develop)
 1.  **PR作成**: `feature/issue-[Issue番号]` から `develop` へのプルリクエストを作成すること。
 2.  **マージ**: PRが承認されたらマージしてブランチを削除すること。
+    - **Note**: この時点ではまだリリースIssueをクローズしないこと。
 
 ## 3. 本番環境へのリリース (main)
 1.  **リリースPR作成**: `develop` から `main` へのプルリクエストを作成すること。
@@ -34,7 +35,7 @@ trigger: always_on
     - コマンド例: `gh release create v[バージョン] build\app\outputs\flutter-apk\*.apk --title "v[バージョン]" --notes "リリースの概要""
 
 ## 6. Issueのクローズ
-1.  **リリースIssueのクローズ**: 本リリース作業用に作成したIssue（`v[バージョン]リリース`）をクローズすること。
+1.  **リリースIssueのクローズ**: mainリリース完了後、本リリース作業用に作成したIssue（`v[バージョン]リリース`）をクローズすること。
 2.  **確認**: 今回のリリースに含まれる機能のIssueが全てクローズされているか確認すること。
 
 ## 7. 後処理
