@@ -6,7 +6,7 @@
     "background_color": "#000000",
     "theme_color": "#000000",
     "description": "Magic: The Gathering Life Counter App",
-    "orientation": "portrait-primary",
+    "orientation": "landscape",
     "prefer_related_applications": false,
     "icons": [
         {
