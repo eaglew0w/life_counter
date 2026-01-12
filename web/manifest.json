@@ -1,11 +1,11 @@
 {
-    "name": "life_counter",
-    "short_name": "life_counter",
+    "name": "Life Counter MTG",
+    "short_name": "Life Counter",
     "start_url": ".",
     "display": "standalone",
-    "background_color": "#0175C2",
-    "theme_color": "#0175C2",
-    "description": "A new Flutter project.",
+    "background_color": "#000000",
+    "theme_color": "#000000",
+    "description": "Magic: The Gathering Life Counter App",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [
