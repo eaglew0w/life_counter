@@ -10,7 +10,7 @@ trigger: always_on
 ## 1. 事前準備
 1.  **Issueの発行**: GitHubでリリース用Issueを作成すること。
     - タイトル: `v[バージョン]リリース`
-2.  **リリースブランチの作成**: `origin/develop` から `feature/issue-[Issue番号]` を作成すること。
+2.  **リリース作業用ブランチの作成**: `origin/develop` から `feature/issue-[Issue番号]` を作成し、このブランチでリリース作業を行うこと。
 3.  **バージョンの更新**: `pubspec.yaml` の `version` を更新すること（例: `1.1.0+1`）。
 4.  **品質検証**: 以下のコマンドがすべてパスすることを確認すること。
     - `dart format .` 

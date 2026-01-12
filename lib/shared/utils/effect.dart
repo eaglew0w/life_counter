@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-
 void showRippleEffect(
   BuildContext context,
   Offset globalPosition, {
