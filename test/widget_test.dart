@@ -9,27 +9,49 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:life_counter/app/life_counter_app.dart';
 import 'package:life_counter/shared/constants/constants.dart';
+import 'package:life_counter/shared/widgets/button/reset_button/reset_button.dart';
+import 'package:life_counter/shared/widgets/button/theme_mode_change_button/theme_mode_change_button.dart';
 
 void main() {
-  testWidgets('カウンターの増分スモークテスト', (WidgetTester tester) async {
-    // アプリをビルドし、描画を完了させます。
+  testWidgets('アプリケーション統合スモークテスト', (WidgetTester tester) async {
+    // アプリをビルド
     await tester.pumpWidget(const ProviderScope(child: LifeCounterApp()));
     await tester.pumpAndSettle();
 
-    // 初期値 (20) を確認
+    // 1. 初期表示の確認
     expect(find.text('$defaultLife'), findsWidgets);
 
-    // '+' ボタン（テキスト '+'）をタップ
+    // 2. ライフの増減テスト (Player 1)
     final plusButton = find.text('+').first;
+    final minusButton = find.text('-').first;
+
     await tester.tap(plusButton);
-    // ライフ数値の変化を反映
     await tester.pump();
-
-    // カウンターが増加したことを確認
     expect(find.text('${defaultLife + 1}'), findsOneWidget);
+    expect(find.text('+1'), findsOneWidget);
 
-    // PlayerStateNotifier 内のタイマー (lifeChangeDisplayTimer) が保留状態だと
-    // テストが失敗するため、時間を進めてタイマーを消化させます。
-    await tester.pump(const Duration(seconds: lifeChangeDisplayTimer + 1));
+    await tester.tap(minusButton);
+    await tester.tap(minusButton);
+    await tester.pump();
+    // +1 - 1 - 1 = -1 -> 20 - 1 = 19
+    expect(find.text('${defaultLife - 1}'), findsOneWidget);
+    expect(find.text('-1'), findsOneWidget);
+
+    // 3. テーマ変更テスト
+    // leading にある ThemeModeChangeButton を探す
+    final themeButton = find.byType(ThemeModeChangeButton);
+    await tester.tap(themeButton);
+    await tester.pumpAndSettle();
+
+    // 4. リセットテスト
+    // title にある ResetButton を長押し
+    final resetButton = find.byType(ResetButton);
+    await tester.longPress(resetButton);
+    await tester.pumpAndSettle();
+
+    // 全てが初期状態に戻っていることを確認
+    expect(find.text('$defaultLife'), findsWidgets);
+    expect(find.text('+1'), findsNothing);
+    expect(find.text('-1'), findsNothing);
   });
 }
