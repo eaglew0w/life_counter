@@ -40,4 +40,37 @@ trigger: always_on
 
 ## 7. 後処理
 1.  **developの同期**: リリース完了後、ローカルの `main` および `develop` を最新の状態に更新（fetch/pull）すること。
-2.  **追従マージとプッシュ**: `main` の最新状態を `develop` にマージ（追従）し、その結果をリモートの `develop` にプッシュすること。
+2.  **追従マージとプッシュ**: `origin/main` を fetch し、ローカルの `develop` へマージして `origin/develop` へプッシュすること（PR不要）。
+
+## 8. Hotfixリリース (緊急修正)
+通常のリリースフローとは異なり、緊急を要するバグ修正などを `main` ブランチに対して直接的に行う場合の手順です。
+
+### 8.1. 事前準備
+1.  **Issueの発行**: GitHubでIssueを作成すること。
+    - タイトル: `Hotfix: [修正内容概要]`
+2.  **ブランチ作成**: 最新の `origin/main` からブランチを切り出すこと。
+    - ブランチ名形式: `hotfix/issue-[Issue番号]`
+3.  **バージョンの更新**: `pubspec.yaml` の `version` を更新すること（Patchバージョンをインクリメント）。
+
+### 8.2. 本番反映 (main)
+1.  **PR作成**: `hotfix/issue-[Issue番号]` から `main` へのプルリクエストを作成すること。
+2.  **品質検証**: CIチェック（`flutter analyze`, `flutter test` 等）がパスしていることを確認すること。
+3.  **マージ**: PRが承認されたらマージすること。
+4.  **タグ付け**: `main` ブランチの最新コミットにバージョンのタグ（例: `v1.5.1`）を付与し、リモートへプッシュすること。
+
+### 8.3. リリース成果物 (Android)
+1.  **ビルド**: 通常リリースと同様にAPKを作成すること。
+2.  **リリース作成**: GitHub Releasesを作成し、APKを添付すること。
+
+### 8.4. 開発環境への反映 (Backport)
+Hotfixの内容を `develop` ブランチにも反映させる必要があります。`main` と `develop` の乖離を防ぐため、以下の手順で同期を行ってください。
+
+1.  **マージ**: `origin/main` を fetch し、ローカルの `develop` ブランチに `origin/main` をマージする。
+    - コマンド例:
+      ```bash
+      git fetch origin
+      git checkout develop
+      git merge origin/main
+      ```
+2.  **プッシュ**: マージ結果を `origin/develop` へプッシュする。
+    - **Note**: PRは作成せず、直接プッシュして構いません。
