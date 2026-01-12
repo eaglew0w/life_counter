@@ -21,7 +21,13 @@ class ResetButton extends StatelessWidget {
         backgroundColor: Colors.transparent,
         shadowColor: Colors.transparent,
       ),
-      child: const Icon(Icons.restart_alt),
+      child: const Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Icon(Icons.restart_alt),
+          Text('Hold', style: TextStyle(fontSize: 10)),
+        ],
+      ),
     );
   }
 }

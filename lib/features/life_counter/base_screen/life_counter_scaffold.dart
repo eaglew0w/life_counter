@@ -84,14 +84,22 @@ class LifeCounterScaffold extends ConsumerWidget {
         ? (activeColor ?? theme.colorScheme.primary)
         : theme.disabledColor;
 
-    return IconButton(
+    return ElevatedButton(
       onPressed: onPressed,
-      icon: DefaultTextStyle.merge(
-        style: TextStyle(color: color),
-        child: icon,
-      ),
-      style: IconButton.styleFrom(
+      style: ElevatedButton.styleFrom(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(0)),
+        backgroundColor: Colors.transparent,
+        shadowColor: Colors.transparent,
         foregroundColor: color,
+        padding: EdgeInsets
+            .zero, // Minimal padding to allow centering if needed, or stick to default relative sizing
+      ),
+      child: IconTheme(
+        data: IconThemeData(color: color),
+        child: DefaultTextStyle.merge(
+          style: TextStyle(color: color),
+          child: icon,
+        ),
       ),
     );
   }
