@@ -7,5 +7,7 @@ class PlayerState with _$PlayerState {
   const factory PlayerState({
     required int life,
     @Default(0) int lifeChange,
+    @Default(0) int poison,
+    @Default(0) int speed,
   }) = _PlayerState;
 }

@@ -27,6 +27,29 @@ class PlayerStateNotifier extends Notifier<PlayerState>
     _restartTimer();
   }
 
+  void changePoison(int value) {
+    AppLogger.i('Poison changed by $value (Current: ${state.poison})');
+    state = state.copyWith(poison: state.poison + value);
+  }
+
+  void resetPoison() {
+    AppLogger.i('Poison reset');
+    state = state.copyWith(poison: 0);
+  }
+
+  void changeSpeed(int value) {
+    final newSpeed = (state.speed + value).clamp(0, 4);
+    if (newSpeed != state.speed) {
+      AppLogger.i('Speed changed to $newSpeed (Previous: ${state.speed})');
+      state = state.copyWith(speed: newSpeed);
+    }
+  }
+
+  void resetSpeed() {
+    AppLogger.i('Speed reset');
+    state = state.copyWith(speed: 0);
+  }
+
   @override
   void reset() {
     AppLogger.i('Player state reset');

@@ -18,6 +18,8 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$PlayerState {
   int get life => throw _privateConstructorUsedError;
   int get lifeChange => throw _privateConstructorUsedError;
+  int get poison => throw _privateConstructorUsedError;
+  int get speed => throw _privateConstructorUsedError;
 
   /// Create a copy of PlayerState
   /// with the given fields replaced by the non-null parameter values.
@@ -32,7 +34,7 @@ abstract class $PlayerStateCopyWith<$Res> {
           PlayerState value, $Res Function(PlayerState) then) =
       _$PlayerStateCopyWithImpl<$Res, PlayerState>;
   @useResult
-  $Res call({int life, int lifeChange});
+  $Res call({int life, int lifeChange, int poison, int speed});
 }
 
 /// @nodoc
@@ -52,6 +54,8 @@ class _$PlayerStateCopyWithImpl<$Res, $Val extends PlayerState>
   $Res call({
     Object? life = null,
     Object? lifeChange = null,
+    Object? poison = null,
+    Object? speed = null,
   }) {
     return _then(_value.copyWith(
       life: null == life
@@ -61,6 +65,14 @@ class _$PlayerStateCopyWithImpl<$Res, $Val extends PlayerState>
       lifeChange: null == lifeChange
           ? _value.lifeChange
           : lifeChange // ignore: cast_nullable_to_non_nullable
+              as int,
+      poison: null == poison
+          ? _value.poison
+          : poison // ignore: cast_nullable_to_non_nullable
+              as int,
+      speed: null == speed
+          ? _value.speed
+          : speed // ignore: cast_nullable_to_non_nullable
               as int,
     ) as $Val);
   }
@@ -74,7 +86,7 @@ abstract class _$$PlayerStateImplCopyWith<$Res>
       __$$PlayerStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int life, int lifeChange});
+  $Res call({int life, int lifeChange, int poison, int speed});
 }
 
 /// @nodoc
@@ -92,6 +104,8 @@ class __$$PlayerStateImplCopyWithImpl<$Res>
   $Res call({
     Object? life = null,
     Object? lifeChange = null,
+    Object? poison = null,
+    Object? speed = null,
   }) {
     return _then(_$PlayerStateImpl(
       life: null == life
@@ -102,6 +116,14 @@ class __$$PlayerStateImplCopyWithImpl<$Res>
           ? _value.lifeChange
           : lifeChange // ignore: cast_nullable_to_non_nullable
               as int,
+      poison: null == poison
+          ? _value.poison
+          : poison // ignore: cast_nullable_to_non_nullable
+              as int,
+      speed: null == speed
+          ? _value.speed
+          : speed // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -109,17 +131,27 @@ class __$$PlayerStateImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$PlayerStateImpl implements _PlayerState {
-  const _$PlayerStateImpl({required this.life, this.lifeChange = 0});
+  const _$PlayerStateImpl(
+      {required this.life,
+      this.lifeChange = 0,
+      this.poison = 0,
+      this.speed = 0});
 
   @override
   final int life;
   @override
   @JsonKey()
   final int lifeChange;
+  @override
+  @JsonKey()
+  final int poison;
+  @override
+  @JsonKey()
+  final int speed;
 
   @override
   String toString() {
-    return 'PlayerState(life: $life, lifeChange: $lifeChange)';
+    return 'PlayerState(life: $life, lifeChange: $lifeChange, poison: $poison, speed: $speed)';
   }
 
   @override
@@ -129,11 +161,13 @@ class _$PlayerStateImpl implements _PlayerState {
             other is _$PlayerStateImpl &&
             (identical(other.life, life) || other.life == life) &&
             (identical(other.lifeChange, lifeChange) ||
-                other.lifeChange == lifeChange));
+                other.lifeChange == lifeChange) &&
+            (identical(other.poison, poison) || other.poison == poison) &&
+            (identical(other.speed, speed) || other.speed == speed));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, life, lifeChange);
+  int get hashCode => Object.hash(runtimeType, life, lifeChange, poison, speed);
 
   /// Create a copy of PlayerState
   /// with the given fields replaced by the non-null parameter values.
@@ -145,13 +179,20 @@ class _$PlayerStateImpl implements _PlayerState {
 }
 
 abstract class _PlayerState implements PlayerState {
-  const factory _PlayerState({required final int life, final int lifeChange}) =
-      _$PlayerStateImpl;
+  const factory _PlayerState(
+      {required final int life,
+      final int lifeChange,
+      final int poison,
+      final int speed}) = _$PlayerStateImpl;
 
   @override
   int get life;
   @override
   int get lifeChange;
+  @override
+  int get poison;
+  @override
+  int get speed;
 
   /// Create a copy of PlayerState
   /// with the given fields replaced by the non-null parameter values.
