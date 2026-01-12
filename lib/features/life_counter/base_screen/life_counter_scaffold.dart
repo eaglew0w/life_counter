@@ -5,16 +5,15 @@ import 'package:life_counter/shared/widgets/button/theme_mode_change_button/them
 import 'package:life_counter/shared/notifiers/resettable_notifier.dart';
 import 'package:life_counter/shared/notifiers/theme_mode_state_notifier.dart';
 import 'package:life_counter/shared/models/theme_mode_state.dart';
+import 'package:life_counter/shared/providers/providers.dart';
 
 class LifeCounterScaffold extends ConsumerWidget {
-  final String title;
   final List<ResettableNotifier> resettableNotifiers;
   final NotifierProvider<ThemeModeStateNotifier, ThemeModeState>
       themeModeProvider;
   final Widget body;
 
   const LifeCounterScaffold({
-    required this.title,
     required this.resettableNotifiers,
     required this.themeModeProvider,
     required this.body,
@@ -27,15 +26,80 @@ class LifeCounterScaffold extends ConsumerWidget {
       canPop: false,
       child: Scaffold(
         appBar: AppBar(
-          title: Text(title),
-          leading: ResetButton(
-            notifiers: resettableNotifiers,
+          centerTitle: true,
+          title: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              _buildToggleButton(
+                context: context,
+                ref: ref,
+                icon: const Text('Φ',
+                    style: TextStyle(fontWeight: FontWeight.bold)),
+                isVisible:
+                    ref.watch(counterVisibilityStateProvider).isPoisonVisible,
+                onPressed: () => ref
+                    .read(counterVisibilityStateProvider.notifier)
+                    .togglePoison(),
+                activeColor: Colors.green,
+              ),
+              const SizedBox(width: 8),
+              ResetButton(
+                notifiers: resettableNotifiers,
+              ),
+              const SizedBox(width: 8),
+              _buildToggleButton(
+                context: context,
+                ref: ref,
+                icon: const Icon(Icons.speed, size: 20),
+                isVisible:
+                    ref.watch(counterVisibilityStateProvider).isSpeedVisible,
+                onPressed: () => ref
+                    .read(counterVisibilityStateProvider.notifier)
+                    .toggleSpeed(),
+                activeColor: Colors
+                    .red, // Or orange as per original icon color, let's stick to theme or contrast. Red is fine for "active" indicator or stick to Icon color.
+                // Re-reading user request: "Speed maximum becomes red".
+                // Icon color here: standard is fine. Let's use generic active color.
+              ),
+            ],
           ),
-          actions: [
-            ThemeModeChangeButton(themeModeStateProvider: themeModeProvider),
-          ],
+          leading:
+              ThemeModeChangeButton(themeModeStateProvider: themeModeProvider),
         ),
         body: body,
+      ),
+    );
+  }
+
+  Widget _buildToggleButton({
+    required BuildContext context,
+    required WidgetRef ref,
+    required Widget icon,
+    required bool isVisible,
+    required VoidCallback onPressed,
+    Color? activeColor,
+  }) {
+    final theme = Theme.of(context);
+    final color = isVisible
+        ? (activeColor ?? theme.colorScheme.primary)
+        : theme.disabledColor;
+
+    return ElevatedButton(
+      onPressed: onPressed,
+      style: ElevatedButton.styleFrom(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(0)),
+        backgroundColor: Colors.transparent,
+        shadowColor: Colors.transparent,
+        foregroundColor: color,
+        padding: EdgeInsets
+            .zero, // Minimal padding to allow centering if needed, or stick to default relative sizing
+      ),
+      child: IconTheme(
+        data: IconThemeData(color: color),
+        child: DefaultTextStyle.merge(
+          style: TextStyle(color: color),
+          child: icon,
+        ),
       ),
     );
   }

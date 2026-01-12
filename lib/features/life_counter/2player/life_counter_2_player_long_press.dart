@@ -7,13 +7,11 @@ import 'package:life_counter/shared/widgets/button/life_change_button/life_chang
 import 'package:life_counter/shared/widgets/player/player.dart';
 
 class LifeCounter2PlayerLongPress extends ConsumerWidget {
-  final String title;
-  const LifeCounter2PlayerLongPress({super.key, required this.title});
+  const LifeCounter2PlayerLongPress({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return LifeCounterScaffold(
-      title: title,
       resettableNotifiers: [
         ref.read(playerProviderList[Players.player1.index].notifier),
         ref.read(playerProviderList[Players.player2.index].notifier),

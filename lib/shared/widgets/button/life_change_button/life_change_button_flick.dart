@@ -22,24 +22,48 @@ class LifeChangeButtonFlick extends LifeChangeButton {
     // startPositionがbuild()再描画された際に破棄されるのでフリック判定ができない
     // 今までは再描画されなかったから耐えてた
     // 直前のライフ変更タイマーとフリックのタイミングが被るとアウト
-    Offset? startPosition;
+    Offset? startLocalPosition;
+    Offset? startGlobalPosition;
+    Offset? lastLocalPosition;
+    Offset? lastGlobalPosition;
+
     return GestureDetector(
       onPanStart: (details) {
-        startPosition = details.localPosition;
+        startLocalPosition = details.localPosition;
+        startGlobalPosition = details.globalPosition;
+        lastLocalPosition = details.localPosition;
+        lastGlobalPosition = details.globalPosition;
+      },
+      onPanUpdate: (details) {
+        lastLocalPosition = details.localPosition;
+        lastGlobalPosition = details.globalPosition;
       },
       onPanEnd: (details) {
-        if (startPosition != null) {
-          double distance = (details.localPosition - startPosition!).distance;
+        if (startLocalPosition != null && lastLocalPosition != null) {
+          double distance = (lastLocalPosition! - startLocalPosition!).distance;
           if (distance > flickThreshold) {
             onFlickFunc();
             Feedback.forTap(context);
-            showFlashEffect(context);
+            // フリック成功時：スタート地点とゴール地点の両方でリップルを出す
+            if (startGlobalPosition != null) {
+              showRippleEffect(context, startGlobalPosition!);
+            }
+            if (lastGlobalPosition != null) {
+              showRippleEffect(context, lastGlobalPosition!);
+            }
           } else {
             onPressed();
             Feedback.forTap(context);
+            // フリック失敗（タップ扱い）：スタート地点（＝タップ位置）のみ
+            if (startGlobalPosition != null) {
+              showRippleEffect(context, startGlobalPosition!);
+            }
           }
         }
-        startPosition = null;
+        startLocalPosition = null;
+        startGlobalPosition = null;
+        lastLocalPosition = null;
+        lastGlobalPosition = null;
       },
       child: ElevatedButton(
         onPressed: () => {onPressed()},

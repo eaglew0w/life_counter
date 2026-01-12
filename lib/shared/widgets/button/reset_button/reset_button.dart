@@ -9,7 +9,9 @@ class ResetButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-      onPressed: () {
+      onPressed: null, // 通常タップでは何もしない
+      onLongPress: () {
+        // 長押しでリセット（誤操作防止）
         for (var notifier in notifiers) {
           notifier.reset();
         }
@@ -19,7 +21,13 @@ class ResetButton extends StatelessWidget {
         backgroundColor: Colors.transparent,
         shadowColor: Colors.transparent,
       ),
-      child: const Icon(Icons.restart_alt),
+      child: const Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Icon(Icons.restart_alt),
+          Text('Hold', style: TextStyle(fontSize: 10)),
+        ],
+      ),
     );
   }
 }

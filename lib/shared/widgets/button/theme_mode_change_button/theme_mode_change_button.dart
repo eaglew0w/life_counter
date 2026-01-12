@@ -29,6 +29,7 @@ class ThemeModeChangeButton extends ConsumerWidget {
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(0)),
         backgroundColor: Colors.transparent,
         shadowColor: Colors.transparent,
+        padding: EdgeInsets.zero, // Ensure icon is centered
       ),
       child: getThemeModeIcon(themeModeState),
     );
