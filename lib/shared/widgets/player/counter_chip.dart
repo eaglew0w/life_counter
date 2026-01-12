@@ -22,7 +22,7 @@ class CounterChip extends StatelessWidget {
       onTap: onTap,
       onLongPress: onLongPress,
       child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
         decoration: BoxDecoration(
           color: Theme.of(context).colorScheme.surfaceContainerHighest,
           borderRadius: BorderRadius.circular(16),
@@ -30,11 +30,14 @@ class CounterChip extends StatelessWidget {
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
+            // Icon size is controlled by parent widget (Player) or IconTheme.
+            // We'll trust the plan to just increase container size for touch target first.
             icon,
-            const SizedBox(width: 4),
+            const SizedBox(width: 8), // Increased spacing
             Text(
               '$count',
-              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+              style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                    // Increased style from bodyMedium
                     fontWeight: FontWeight.bold,
                     color: countColor,
                   ),
