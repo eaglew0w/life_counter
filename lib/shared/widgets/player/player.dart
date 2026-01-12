@@ -5,6 +5,7 @@ import 'package:life_counter/shared/utils/global_functions.dart';
 import 'package:life_counter/shared/models/player_state.dart';
 import 'package:life_counter/shared/notifiers/player_state_notifier.dart';
 import 'package:life_counter/shared/widgets/player/counter_chip.dart';
+import 'package:life_counter/shared/providers/providers.dart';
 
 class Player extends ConsumerWidget {
   final NotifierProvider<PlayerStateNotifier, PlayerState> playerProvider;
@@ -75,6 +76,7 @@ class Player extends ConsumerWidget {
 
     final playerState = ref.watch(playerProvider);
     final notifier = ref.read(playerProvider.notifier);
+    final visibilityState = ref.watch(counterVisibilityStateProvider);
 
     // Determines alignment based on player position
     // P1 (Left): Poison: TopLeft, Speed: BottomLeft
@@ -89,32 +91,34 @@ class Player extends ConsumerWidget {
       padding: const EdgeInsets.all(16.0),
       child: Stack(
         children: [
-          Align(
-            alignment: poisonAlign,
-            child: CounterChip(
-              icon: Text(
-                'Φ',
-                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                      color: Colors.green,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16,
-                    ),
-              ), // Poison icon
-              count: playerState.poison,
-              onTap: () => notifier.changePoison(1),
-              onLongPress: notifier.resetPoison,
+          if (visibilityState.isPoisonVisible)
+            Align(
+              alignment: poisonAlign,
+              child: CounterChip(
+                icon: Text(
+                  'Φ',
+                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                        color: Colors.green,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16,
+                      ),
+                ), // Poison icon
+                count: playerState.poison,
+                onTap: () => notifier.changePoison(1),
+                onLongPress: notifier.resetPoison,
+              ),
             ),
-          ),
-          Align(
-            alignment: speedAlign,
-            child: CounterChip(
-              icon: const Icon(Icons.speed, size: 16, color: Colors.orange),
-              count: playerState.speed,
-              countColor: playerState.speed == 4 ? Colors.red : null,
-              onTap: () => notifier.changeSpeed(1),
-              onLongPress: notifier.resetSpeed,
+          if (visibilityState.isSpeedVisible)
+            Align(
+              alignment: speedAlign,
+              child: CounterChip(
+                icon: const Icon(Icons.speed, size: 16, color: Colors.orange),
+                count: playerState.speed,
+                countColor: playerState.speed == 4 ? Colors.red : null,
+                onTap: () => notifier.changeSpeed(1),
+                onLongPress: notifier.resetSpeed,
+              ),
             ),
-          ),
         ],
       ),
     );
