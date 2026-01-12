@@ -12,6 +12,7 @@ trigger: always_on
 2.  **概要の記載**: Issueには作業内容の要約を記載すること。
 3.  **ブランチ作成**: 最新の `origin/develop` からブランチを切り出すこと。
     - ブランチ名形式: `feature/issue-[Issue番号]`
+    - **Exception (Hotfix)**: 緊急修正の場合は `origin/main` から `hotfix/issue-[Issue番号]` を作成する。
 
 ## 2. 開発とコーディング規約
 1.  **コメント**: コード内のコメントは日本語で記述すること。
@@ -46,7 +47,8 @@ trigger: always_on
 
 ## 6. 同期
 1.  マージ後は最新の `origin/develop` を `fetch` し、ローカルブランチに `pull` して最新状態を保つこと。
-2.  **mainとの同期**: `main` ブランチが更新（リリース）された後は、必ず `main` を `develop` にマージして、開発ブランチを最新の状態に保つこと。
+2.  **mainとの同期 (Backport)**: `main` ブランチが更新（リリース/Hotfix）された後は、`origin/main` を fetch し、ローカルの `develop` へマージして `origin/develop` へプッシュすること（PR不要）。
+    - Note: コンフリクトが発生した場合は、ローカルで解消してからプッシュすること。
 
 ## 7. リリース
 1.  `main` ブランチへのリリースを行う際は、[リリース手順](file:///c:/Workspace/life_counter/.agent/rules/release.md) に記載された手順に従うこと。
