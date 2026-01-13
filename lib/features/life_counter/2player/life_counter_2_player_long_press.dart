@@ -13,10 +13,10 @@ class LifeCounter2PlayerLongPress extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return LifeCounterScaffold(
       resettableNotifiers: [
-        ref.read(playerProviderList[Players.player1.index].notifier),
-        ref.read(playerProviderList[Players.player2.index].notifier),
-        ref.read(playerProviderList[Players.player3.index].notifier),
-        ref.read(playerProviderList[Players.player4.index].notifier),
+        ...List.generate(
+          2,
+          (index) => ref.read(playerProviderList[index].notifier),
+        ),
         ref.read(themeModeStateProvider.notifier),
       ],
       themeModeProvider: themeModeStateProvider,
