@@ -96,9 +96,9 @@ class Player extends ConsumerWidget {
               alignment: poisonAlign,
               child: CounterChip(
                 icon: Text(
-                  'Φ',
+                  poisonCounterSymbol,
                   style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                        color: Colors.green,
+                        color: poisonColor,
                         fontWeight: FontWeight.bold,
                         fontSize: 16,
                       ),
@@ -112,9 +112,9 @@ class Player extends ConsumerWidget {
             Align(
               alignment: speedAlign,
               child: CounterChip(
-                icon: const Icon(Icons.speed, size: 16, color: Colors.orange),
+                icon: const Icon(Icons.speed, size: 16, color: speedColor),
                 count: playerState.speed,
-                countColor: playerState.speed == 4 ? Colors.red : null,
+                countColor: playerState.speed == 4 ? speedActiveColor : null,
                 onTap: () => notifier.changeSpeed(1),
                 onLongPress: notifier.resetSpeed,
               ),

@@ -13,10 +13,10 @@ class LifeCounter2Player extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return LifeCounterScaffold(
       resettableNotifiers: [
-        ref.read(playerProviderList[Players.player1.index].notifier),
-        ref.read(playerProviderList[Players.player2.index].notifier),
-        ref.read(playerProviderList[Players.player3.index].notifier),
-        ref.read(playerProviderList[Players.player4.index].notifier),
+        ...List.generate(
+          2, // Only 2 players in this widget
+          (index) => ref.read(playerProviderList[index].notifier),
+        ),
         ref.read(themeModeStateProvider.notifier),
       ],
       themeModeProvider: themeModeStateProvider,
@@ -39,15 +39,13 @@ class LifeCounter2Player extends ConsumerWidget {
       playerProvider: provider,
       playerPosition: position,
       loseButton: LifeChangeButton(
-        text: ChangeLifeInfo.loseText,
-        onPressed: () =>
-            ref.read(provider.notifier).changeLife(ChangeLifeInfo.loseOnTap),
+        text: lifeLoseText,
+        onPressed: () => ref.read(provider.notifier).changeLife(lifeLoseOnTap),
         textColor: lifeLoseButtonTextColor,
       ),
       gainButton: LifeChangeButton(
-        text: ChangeLifeInfo.gainText,
-        onPressed: () =>
-            ref.read(provider.notifier).changeLife(ChangeLifeInfo.gainOnTap),
+        text: lifeGainText,
+        onPressed: () => ref.read(provider.notifier).changeLife(lifeGainOnTap),
         textColor: lifeGainButtonTextColor,
       ),
     );
