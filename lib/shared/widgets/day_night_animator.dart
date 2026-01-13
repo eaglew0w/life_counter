@@ -72,13 +72,13 @@ class _DayNightAnimatorState extends ConsumerState<DayNightAnimator>
           final opacityVal = _opacity.value;
           // Calculate dimmer opacity: stronger for Day to show the sun glow
           final dimmerOpacity = isLight ? 0.3 * opacityVal : 0.5 * opacityVal;
-          
+
           return Stack(
             fit: StackFit.expand,
             children: [
               // 1. Dimmer Overlay (Makes lights pop on any background)
               Container(color: Colors.black.withValues(alpha: dimmerOpacity)),
-              
+
               // 2. The Icon/Orb
               Opacity(
                 opacity: opacityVal,
