@@ -39,3 +39,12 @@ const Color lifeLoseButtonTextColor = Colors.red;
 
 // フリック判定の為の値
 const int flickThresholdForLifeChange = 75;
+
+// Counter Symbols & Colors
+const String poisonCounterSymbol = 'Φ';
+const Color poisonColor = Colors.green;
+const Color speedColor = Colors.orange;
+const Color speedActiveColor = Colors.red;
+
+// Animation Durations
+const Duration dayNightAnimationDuration = Duration(milliseconds: 1500);
