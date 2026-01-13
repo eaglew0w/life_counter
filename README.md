@@ -82,10 +82,9 @@ UIやレイアウトの調整には Web 版の実行が高速で便利です。
 2. **developへの統合**: リリースブランチから `develop` へPRを作成・マージします。
 3. **メインリリース**: `develop` から `main` へのPRを作成・マージします。
 4. **同期**: `main` マージ後は、`main` の最新状態を `develop` にマージし、開発環境を最新に保ちます。
-5. **タグ付けとビルド**:
+5. **タグ付け**:
    - `main` の最新コミットにバージョンタグ（例: `v1.1.0`）を付与します。
-   - `flutter build apk --release --split-per-abi` でAPKを生成します。
-6. **GitHub Release作成**: `gh release create` コマンドを使用して、作成したAPKファイルを添付して公開します。
+6. **GitHub Release作成**: `gh release create` コマンドを使用してリリースを作成します（PWAのためAPK添付は不要）。
 
 詳細な手順は [.agent/rules/release.md](.agent/rules/release.md) を参照してください。
 
