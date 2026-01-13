@@ -56,3 +56,7 @@ trigger: always_on
 
 ## 7. リリース
 1.  `main` ブランチへのリリースを行う際は、[リリース手順](file:///c:/Workspace/life_counter/.agent/rules/release.md) に記載された手順に従うこと。
+
+## 8. 安全管理
+1.  **ブランチ確認**: コマンド実行前（特に `git push`, `gh pr create`）には必ず `git branch` 等で現在作業中のブランチを確認すること。
+2.  **main保護**: `main` ブランチへの直接コミットおよびマージは原則禁止とする（Release/Hotfixフローを除く）。
