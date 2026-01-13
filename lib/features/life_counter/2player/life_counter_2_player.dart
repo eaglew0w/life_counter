@@ -39,15 +39,13 @@ class LifeCounter2Player extends ConsumerWidget {
       playerProvider: provider,
       playerPosition: position,
       loseButton: LifeChangeButton(
-        text: ChangeLifeInfo.loseText,
-        onPressed: () =>
-            ref.read(provider.notifier).changeLife(ChangeLifeInfo.loseOnTap),
+        text: lifeLoseText,
+        onPressed: () => ref.read(provider.notifier).changeLife(lifeLoseOnTap),
         textColor: lifeLoseButtonTextColor,
       ),
       gainButton: LifeChangeButton(
-        text: ChangeLifeInfo.gainText,
-        onPressed: () =>
-            ref.read(provider.notifier).changeLife(ChangeLifeInfo.gainOnTap),
+        text: lifeGainText,
+        onPressed: () => ref.read(provider.notifier).changeLife(lifeGainOnTap),
         textColor: lifeGainButtonTextColor,
       ),
     );

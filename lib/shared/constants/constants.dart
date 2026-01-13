@@ -22,17 +22,15 @@ enum Players { player1, player2, player3, player4 }
 
 enum PlayerPosition { none, left, right }
 
-class ChangeLifeInfo {
-  // もうちょっといい感じに管理したい
-  static String gainText = '+';
-  static String loseText = '-';
-  static int gainOnTap = 1;
-  static int loseOnTap = -1;
-  static int gainOnFlick = 5;
-  static int loseOnFlick = -5;
-  static int gainOnLongPress = 5;
-  static int loseOnLongPress = -5;
-}
+// Life Change Settings
+const String lifeGainText = '+';
+const String lifeLoseText = '-';
+const int lifeGainOnTap = 1;
+const int lifeLoseOnTap = -1;
+const int lifeGainOnFlick = 5;
+const int lifeLoseOnFlick = -5;
+const int lifeGainOnLongPress = 5;
+const int lifeLoseOnLongPress = -5;
 
 const Color lifeGainButtonTextColor = Colors.green;
 const Color lifeLoseButtonTextColor = Colors.red;

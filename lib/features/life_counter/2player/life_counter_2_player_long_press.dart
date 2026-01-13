@@ -39,21 +39,17 @@ class LifeCounter2PlayerLongPress extends ConsumerWidget {
       playerProvider: provider,
       playerPosition: position,
       loseButton: LifeChangeButtonLongPress(
-        text: ChangeLifeInfo.loseText,
-        onPressed: () =>
-            ref.read(provider.notifier).changeLife(ChangeLifeInfo.loseOnTap),
-        onLongPress: () => ref
-            .read(provider.notifier)
-            .changeLife(ChangeLifeInfo.loseOnLongPress),
+        text: lifeLoseText,
+        onPressed: () => ref.read(provider.notifier).changeLife(lifeLoseOnTap),
+        onLongPress: () =>
+            ref.read(provider.notifier).changeLife(lifeLoseOnLongPress),
         textColor: lifeLoseButtonTextColor,
       ),
       gainButton: LifeChangeButtonLongPress(
-        text: ChangeLifeInfo.gainText,
-        onPressed: () =>
-            ref.read(provider.notifier).changeLife(ChangeLifeInfo.gainOnTap),
-        onLongPress: () => ref
-            .read(provider.notifier)
-            .changeLife(ChangeLifeInfo.gainOnLongPress),
+        text: lifeGainText,
+        onPressed: () => ref.read(provider.notifier).changeLife(lifeGainOnTap),
+        onLongPress: () =>
+            ref.read(provider.notifier).changeLife(lifeGainOnLongPress),
         textColor: lifeGainButtonTextColor,
       ),
     );
