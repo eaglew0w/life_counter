@@ -6,6 +6,7 @@ import 'package:life_counter/shared/notifiers/resettable_notifier.dart';
 import 'package:life_counter/shared/notifiers/theme_mode_state_notifier.dart';
 import 'package:life_counter/shared/models/theme_mode_state.dart';
 import 'package:life_counter/shared/providers/providers.dart';
+import 'package:life_counter/shared/constants/constants.dart';
 import 'package:life_counter/shared/widgets/day_night_animator.dart';
 
 class LifeCounterScaffold extends ConsumerWidget {
@@ -36,7 +37,7 @@ class LifeCounterScaffold extends ConsumerWidget {
                   _buildToggleButton(
                     context: context,
                     ref: ref,
-                    icon: const Text('Φ',
+                    icon: const Text(poisonCounterSymbol,
                         style: TextStyle(fontWeight: FontWeight.bold)),
                     isVisible: ref
                         .watch(counterVisibilityStateProvider)
@@ -44,7 +45,7 @@ class LifeCounterScaffold extends ConsumerWidget {
                     onPressed: () => ref
                         .read(counterVisibilityStateProvider.notifier)
                         .togglePoison(),
-                    activeColor: Colors.green,
+                    activeColor: poisonColor,
                   ),
                   const SizedBox(width: 8),
                   ResetButton(
@@ -61,7 +62,7 @@ class LifeCounterScaffold extends ConsumerWidget {
                     onPressed: () => ref
                         .read(counterVisibilityStateProvider.notifier)
                         .toggleSpeed(),
-                    activeColor: Colors.red,
+                    activeColor: speedActiveColor,
                   ),
                 ],
               ),

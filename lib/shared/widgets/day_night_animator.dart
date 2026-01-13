@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:life_counter/shared/models/theme_mode_state.dart';
+import 'package:life_counter/shared/constants/constants.dart';
 
 class DayNightAnimator extends ConsumerStatefulWidget {
   final NotifierProvider<dynamic, ThemeModeState> themeModeProvider;
@@ -28,7 +29,7 @@ class _DayNightAnimatorState extends ConsumerState<DayNightAnimator>
     super.initState();
     _controller = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 1500),
+      duration: dayNightAnimationDuration,
     );
 
     _opacity = TweenSequence<double>([
