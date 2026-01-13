@@ -6,6 +6,7 @@ import 'package:life_counter/shared/notifiers/resettable_notifier.dart';
 import 'package:life_counter/shared/notifiers/theme_mode_state_notifier.dart';
 import 'package:life_counter/shared/models/theme_mode_state.dart';
 import 'package:life_counter/shared/providers/providers.dart';
+import 'package:life_counter/shared/widgets/day_night_animator.dart';
 
 class LifeCounterScaffold extends ConsumerWidget {
   final List<ResettableNotifier> resettableNotifiers;
@@ -24,49 +25,53 @@ class LifeCounterScaffold extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return PopScope(
       canPop: false,
-      child: Scaffold(
-        appBar: AppBar(
-          centerTitle: true,
-          title: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              _buildToggleButton(
-                context: context,
-                ref: ref,
-                icon: const Text('Φ',
-                    style: TextStyle(fontWeight: FontWeight.bold)),
-                isVisible:
-                    ref.watch(counterVisibilityStateProvider).isPoisonVisible,
-                onPressed: () => ref
-                    .read(counterVisibilityStateProvider.notifier)
-                    .togglePoison(),
-                activeColor: Colors.green,
+      child: Stack(
+        children: [
+          Scaffold(
+            appBar: AppBar(
+              centerTitle: true,
+              title: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  _buildToggleButton(
+                    context: context,
+                    ref: ref,
+                    icon: const Text('Φ',
+                        style: TextStyle(fontWeight: FontWeight.bold)),
+                    isVisible: ref
+                        .watch(counterVisibilityStateProvider)
+                        .isPoisonVisible,
+                    onPressed: () => ref
+                        .read(counterVisibilityStateProvider.notifier)
+                        .togglePoison(),
+                    activeColor: Colors.green,
+                  ),
+                  const SizedBox(width: 8),
+                  ResetButton(
+                    notifiers: resettableNotifiers,
+                  ),
+                  const SizedBox(width: 8),
+                  _buildToggleButton(
+                    context: context,
+                    ref: ref,
+                    icon: const Icon(Icons.speed, size: 20),
+                    isVisible: ref
+                        .watch(counterVisibilityStateProvider)
+                        .isSpeedVisible,
+                    onPressed: () => ref
+                        .read(counterVisibilityStateProvider.notifier)
+                        .toggleSpeed(),
+                    activeColor: Colors.red,
+                  ),
+                ],
               ),
-              const SizedBox(width: 8),
-              ResetButton(
-                notifiers: resettableNotifiers,
-              ),
-              const SizedBox(width: 8),
-              _buildToggleButton(
-                context: context,
-                ref: ref,
-                icon: const Icon(Icons.speed, size: 20),
-                isVisible:
-                    ref.watch(counterVisibilityStateProvider).isSpeedVisible,
-                onPressed: () => ref
-                    .read(counterVisibilityStateProvider.notifier)
-                    .toggleSpeed(),
-                activeColor: Colors
-                    .red, // Or orange as per original icon color, let's stick to theme or contrast. Red is fine for "active" indicator or stick to Icon color.
-                // Re-reading user request: "Speed maximum becomes red".
-                // Icon color here: standard is fine. Let's use generic active color.
-              ),
-            ],
+              leading: ThemeModeChangeButton(
+                  themeModeStateProvider: themeModeProvider),
+            ),
+            body: body,
           ),
-          leading:
-              ThemeModeChangeButton(themeModeStateProvider: themeModeProvider),
-        ),
-        body: body,
+          DayNightAnimator(themeModeProvider: themeModeProvider),
+        ],
       ),
     );
   }
