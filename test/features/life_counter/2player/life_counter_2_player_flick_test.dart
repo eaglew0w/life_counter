@@ -4,7 +4,6 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:life_counter/features/life_counter/2player/life_counter_2_player_flick.dart';
 import 'package:life_counter/shared/constants/constants.dart';
 
-
 void main() {
   group('LifeCounter2PlayerFlick UI Tests', () {
     testWidgets('Initial state is correct (Life 40)',
