@@ -47,10 +47,12 @@ trigger: always_on
 ## 5. 合流 (developへ)
 1.  **PR作成**: 作業完了後、`origin/develop` へプルリクエストを作成すること。
     - **必須**: `gh pr create` 実行時は必ず `--base develop` を指定し、マージ先を明示すること。
+    - **必須**: PRの概要（body）は必ずテキストファイル経由（`--body-file`）で入力すること。
+    - **必須**: PR本文に `Closes #[Issue番号]` を記載し、マージ時にIssueが自動クローズされるように連携すること。
 2.  **マージ (CI待機)**: `gh pr merge --auto --merge` を実行し、CIチェック（GitHub Actions等）がパスした後に自動的にマージされるようにすること。
     - **Note**: `--admin` などによる強制マージは原則禁止とする。
 3.  **ブランチの削除**: マージ後は速やかにブランチを削除すること（`--delete-branch` 推奨）。
-4.  **Issue管理**: `develop` へのマージ完了後、対応するIssueをクローズすること。
+4. **Issue管理**: PRのマージ連携機能によりIssueがクローズされたことを確認すること。
 
 ## 6. 同期
 1.  マージ後は最新の `origin/develop` を `fetch` し、ローカルブランチに `pull` して最新状態を保つこと。
