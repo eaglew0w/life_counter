@@ -9,26 +9,30 @@ import 'package:life_counter/shared/widgets/player/player.dart';
 class LifeCounter2PlayerFlick extends ConsumerWidget {
   const LifeCounter2PlayerFlick({super.key});
 
+  static const int _playerCount = 2;
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return LifeCounterScaffold(
       resettableNotifiers: [
         ...List.generate(
-          2,
+          _playerCount,
           (index) => ref.read(playerProviderList[index].notifier),
         ),
         ref.read(themeModeStateProvider.notifier),
       ],
       themeModeProvider: themeModeStateProvider,
       body: Row(
-        children: [
-          Expanded(
-            child: _buildPlayer(ref, Players.player1, PlayerPosition.left),
+        children: List.generate(
+          _playerCount,
+          (index) => Expanded(
+            child: _buildPlayer(
+              ref,
+              Players.values[index],
+              index == 0 ? PlayerPosition.left : PlayerPosition.right,
+            ),
           ),
-          Expanded(
-            child: _buildPlayer(ref, Players.player2, PlayerPosition.right),
-          ),
-        ],
+        ),
       ),
     );
   }
