@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:life_counter/features/life_counter/2player/life_counter_2_player_flick.dart';
 import 'package:life_counter/shared/constants/constants.dart';
-import 'package:life_counter/shared/widgets/button/reset_button/reset_button.dart';
+
 
 void main() {
   group('LifeCounter2PlayerFlick UI Tests', () {
@@ -25,11 +25,12 @@ void main() {
       // ただし、以前の修正でEDH用に40にしている可能性も？
       // constants.dartを見る限り defaultLife = 20.
       // よって20を確認する。
-      
+
       expect(find.text('20'), findsNWidgets(2));
     });
 
-    testWidgets('Tapping +/- buttons changes life', (WidgetTester tester) async {
+    testWidgets('Tapping +/- buttons changes life',
+        (WidgetTester tester) async {
       await tester.pumpWidget(
         const ProviderScope(
           child: MaterialApp(
