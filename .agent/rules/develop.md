@@ -24,6 +24,8 @@ trigger: always_on
 4.  **フォーマット**: コミット前には必ず `dart format .` を実行し、コードを整形すること。
 5.  **定数の利用 (Magic Number禁止)**: 数値や文字列リテラルを直接コードに記述せず、`constants.dart` 等に定数として定義して利用すること。
 6.  **状態管理の統一**: 原則として `flutter_riverpod` を使用し、UIウィジェット内の `setState` はアニメーション制御など最小限に留めること。
+7. **クロスプラットフォーム対応 (重要)**: Web固有の機能（`package:web`, `dart:js_interop` 等）を使用する場合は、`conditional import` や `if (kIsWeb)` 等を用いて、Android/iOSビルドを破壊しないように注意すること。
+8. **PWA機能の検証**: Service Workerやインストール機能などのPWA固有機能は `flutter run` (デバッグモード) では正しく動作しない場合があるため、必ず `flutter build web` の成果物をローカルサーバー等で配信して検証すること。
 
 ## 3. コミットルール
 1.  **コミット単位 (Atomic)**: 機能の追加、バグ修正、リファクタリング等はそれぞれ別のコミット/PRに分け、意味のある最小単位で行うこと。
