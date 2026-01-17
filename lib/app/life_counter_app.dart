@@ -4,6 +4,7 @@ import 'package:life_counter/features/home/home_screen.dart';
 import 'package:life_counter/shared/constants/constants.dart';
 import 'package:life_counter/shared/models/theme_mode_state.dart';
 import 'package:life_counter/shared/providers/providers.dart';
+import 'package:life_counter/shared/notifiers/pwa_update_state_notifier.dart';
 
 import 'package:wakelock_plus/wakelock_plus.dart';
 
@@ -39,6 +40,27 @@ class _LifeCounterAppState extends ConsumerState<LifeCounterApp>
   @override
   Widget build(BuildContext context) {
     final ThemeModeState themeMode = ref.watch(themeModeStateProvider);
+
+    ref.listen(
+      pwaUpdateStateProvider,
+      (previous, hasUpdate) {
+        if (hasUpdate) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: const Text('新しいバージョンが利用可能です'),
+              duration: const Duration(days: 1), // 永続表示に近い設定
+              action: SnackBarAction(
+                label: '更新',
+                onPressed: () {
+                  ref.read(pwaUpdateStateProvider.notifier).reload();
+                },
+              ),
+            ),
+          );
+        }
+      },
+    );
+
     return MaterialApp(
       title: title,
       theme: ThemeData.light(),
