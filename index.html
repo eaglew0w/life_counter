@@ -46,6 +46,11 @@
             return;
           }
 
+          // 手動更新チェック用の関数
+          window.checkForPwaUpdate = function () {
+            reg.update();
+          };
+
           // 新しいワーカーの発見を監視
           reg.addEventListener('updatefound', function() {
             var newWorker = reg.installing;
