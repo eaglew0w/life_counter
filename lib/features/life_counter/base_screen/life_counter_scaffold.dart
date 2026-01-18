@@ -41,6 +41,8 @@ class LifeCounterScaffold extends ConsumerWidget {
                   onPressed: () {
                     showModalBottomSheet(
                       context: context,
+                      isScrollControlled:
+                          true, // Allow custom height/full screen
                       builder: (context) => MatchControlSheet(
                         resettableNotifiers: resettableNotifiers,
                       ),
