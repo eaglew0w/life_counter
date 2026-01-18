@@ -29,6 +29,10 @@ void main() {
       // 毒カウンターのトグルの確認
       expect(find.text('Poison Counter'), findsOneWidget);
       expect(find.byType(SwitchListTile), findsNWidgets(2)); // 毒 + 速度
+
+      // 更新確認ボタンの確認
+      expect(find.text('Check for Updates'), findsOneWidget);
+      expect(find.byIcon(Icons.refresh), findsOneWidget);
     });
 
     testWidgets('トグル操作でプロバイダーの状態が更新されること', (WidgetTester tester) async {
