@@ -3,8 +3,9 @@ import 'package:life_counter/shared/notifiers/resettable_notifier.dart';
 
 class ResetButton extends StatelessWidget {
   final List<ResettableNotifier> notifiers;
+  final double? size;
 
-  const ResetButton({required this.notifiers, super.key});
+  const ResetButton({required this.notifiers, this.size, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -21,11 +22,11 @@ class ResetButton extends StatelessWidget {
         backgroundColor: Colors.transparent,
         shadowColor: Colors.transparent,
       ),
-      child: const Column(
+      child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Icon(Icons.restart_alt),
-          Text('Hold', style: TextStyle(fontSize: 10)),
+          Icon(Icons.restart_alt, size: size),
+          const Text('Hold', style: TextStyle(fontSize: 10)),
         ],
       ),
     );
