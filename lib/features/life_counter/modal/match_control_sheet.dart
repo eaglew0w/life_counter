@@ -64,7 +64,7 @@ class MatchControlSheet extends ConsumerWidget {
             secondary: const Text(poisonCounterSymbol,
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24)),
             value: visibilityState.isPoisonVisible,
-            activeColor: poisonColor,
+            activeTrackColor: poisonColor,
             onChanged: (value) {
               ref.read(counterVisibilityStateProvider.notifier).togglePoison();
             },
@@ -75,7 +75,7 @@ class MatchControlSheet extends ConsumerWidget {
             title: const Text('Speed / Energy'),
             secondary: const Icon(Icons.speed),
             value: visibilityState.isSpeedVisible,
-            activeColor: speedActiveColor,
+            activeTrackColor: speedActiveColor,
             onChanged: (value) {
               ref.read(counterVisibilityStateProvider.notifier).toggleSpeed();
             },
