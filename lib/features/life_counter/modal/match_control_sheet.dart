@@ -100,7 +100,14 @@ class MatchControlSheet extends ConsumerWidget {
               Center(
                 child: TextButton.icon(
                   onPressed: () {
-                    ref.read(pwaUpdateStateProvider.notifier).reload();
+                    ref.read(pwaUpdateStateProvider.notifier).checkForUpdate();
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text('Checking for updates...'),
+                        duration: Duration(seconds: 2),
+                        behavior: SnackBarBehavior.floating,
+                      ),
+                    );
                   },
                   icon: const Icon(Icons.refresh),
                   label: const Text(updateCheckLabel),
