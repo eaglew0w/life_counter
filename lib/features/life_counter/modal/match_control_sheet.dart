@@ -20,7 +20,8 @@ class MatchControlSheet extends ConsumerWidget {
 
     return SafeArea(
       child: Container(
-        padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 16),
+        padding: const EdgeInsets.symmetric(
+            vertical: sheetVerticalPadding, horizontal: sheetHorizontalPadding),
         width: double.infinity,
         child: SingleChildScrollView(
           child: Column(
@@ -29,18 +30,20 @@ class MatchControlSheet extends ConsumerWidget {
             children: [
               Center(
                 child: Container(
-                  width: 40,
-                  height: 4,
+                  width: sheetHandleWidth,
+                  height: sheetHandleHeight,
                   decoration: BoxDecoration(
                     color: theme.dividerColor,
-                    borderRadius: BorderRadius.circular(2),
+                    borderRadius: BorderRadius.circular(sheetHandleRadius),
                   ),
                 ),
               ),
               const SizedBox(height: 24),
               const Text(
-                'Match Control',
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                matchControlTitle,
+                style: TextStyle(
+                    fontSize: matchControlTitleFontSize,
+                    fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 16),
 
@@ -48,22 +51,23 @@ class MatchControlSheet extends ConsumerWidget {
               Center(
                 child: ResetButton(
                   notifiers: resettableNotifiers,
-                  size: 64, // Larger size for menu
+                  size: menuResetButtonSize, // Larger size for menu
                 ),
               ),
               const SizedBox(height: 8),
               const Center(
-                  child: Text('Life Reset', style: TextStyle(fontSize: 12))),
+                  child: Text(lifeResetLabel,
+                      style: TextStyle(fontSize: lifeResetLabelFontSize))),
 
               const Divider(height: 32),
 
-              const Text('Counters',
+              const Text(countersSectionTitle,
                   style: TextStyle(fontWeight: FontWeight.bold)),
               const SizedBox(height: 8),
 
               // Poison Toggle
               SwitchListTile(
-                title: const Text('Poison Counter'),
+                title: const Text(poisonCounterLabel),
                 secondary: const Text(poisonCounterSymbol,
                     style:
                         TextStyle(fontWeight: FontWeight.bold, fontSize: 24)),
@@ -78,7 +82,7 @@ class MatchControlSheet extends ConsumerWidget {
 
               // Speed Toggle
               SwitchListTile(
-                title: const Text('Speed / Energy'),
+                title: const Text(speedCounterLabel),
                 secondary: const Icon(Icons.speed),
                 value: visibilityState.isSpeedVisible,
                 activeTrackColor: speedActiveColor,

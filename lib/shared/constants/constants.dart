@@ -44,5 +44,24 @@ const Color poisonColor = Colors.green;
 const Color speedColor = Colors.orange;
 const Color speedActiveColor = Colors.red;
 
+// UI Dimensions & Styles
+const double sheetVerticalPadding = 24.0;
+const double sheetHorizontalPadding = 16.0;
+const double sheetHandleWidth = 40.0;
+const double sheetHandleHeight = 4.0;
+const double sheetHandleRadius = 2.0;
+
+const double matchControlTitleFontSize = 20.0;
+const double lifeResetLabelFontSize = 12.0;
+const double counterSymbolFontSize = 24.0;
+const double menuResetButtonSize = 64.0;
+
+// UI Texts
+const String matchControlTitle = 'Match Control';
+const String lifeResetLabel = 'Life Reset';
+const String countersSectionTitle = 'Counters';
+const String poisonCounterLabel = 'Poison Counter';
+const String speedCounterLabel = 'Speed';
+
 // Animation Durations
 const Duration dayNightAnimationDuration = Duration(milliseconds: 1500);
