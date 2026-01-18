@@ -23,4 +23,9 @@ class PwaUpdateStateNotifier extends StateNotifier<bool> {
   void reload() {
     PwaUpdateService.reloadPwa();
   }
+
+  /// 更新チェック
+  void checkForUpdate() {
+    PwaUpdateService.checkForUpdate();
+  }
 }

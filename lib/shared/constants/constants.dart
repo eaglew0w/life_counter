@@ -62,6 +62,7 @@ const String lifeResetLabel = 'Life Reset';
 const String countersSectionTitle = 'Counters';
 const String poisonCounterLabel = 'Poison Counter';
 const String speedCounterLabel = 'Speed';
+const String updateCheckLabel = 'Check for Updates';
 
 // Animation Durations
 const Duration dayNightAnimationDuration = Duration(milliseconds: 1500);
