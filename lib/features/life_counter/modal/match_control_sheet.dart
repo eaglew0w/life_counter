@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:life_counter/shared/constants/constants.dart';
+import 'package:life_counter/shared/notifiers/pwa_update_state_notifier.dart';
 import 'package:life_counter/shared/notifiers/resettable_notifier.dart';
 import 'package:life_counter/shared/providers/providers.dart';
 import 'package:life_counter/shared/widgets/button/reset_button/reset_button.dart';
@@ -91,6 +92,19 @@ class MatchControlSheet extends ConsumerWidget {
                       .read(counterVisibilityStateProvider.notifier)
                       .toggleSpeed();
                 },
+              ),
+
+              const Divider(height: 32),
+
+              // Update Check Button
+              Center(
+                child: TextButton.icon(
+                  onPressed: () {
+                    ref.read(pwaUpdateStateProvider.notifier).reload();
+                  },
+                  icon: const Icon(Icons.refresh),
+                  label: const Text(updateCheckLabel),
+                ),
               ),
 
               const SizedBox(height: 24),
