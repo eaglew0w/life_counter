@@ -46,7 +46,8 @@ void main() {
 
       // 初期状態: 毒は非表示
       // スイッチがオフであることを確認 (value=false)
-      final poisonSwitchFinder = find.widgetWithText(SwitchListTile, 'Poison Counter');
+      final poisonSwitchFinder =
+          find.widgetWithText(SwitchListTile, 'Poison Counter');
       SwitchListTile poisonSwitch = tester.widget(poisonSwitchFinder);
       expect(poisonSwitch.value, isFalse);
 
@@ -57,15 +58,16 @@ void main() {
       // スイッチがオンになったことを確認
       poisonSwitch = tester.widget(poisonSwitchFinder);
       expect(poisonSwitch.value, isTrue);
-      
+
       // 速度カウンターのトグル
-       final speedSwitchFinder = find.widgetWithText(SwitchListTile, 'Speed / Energy');
+      final speedSwitchFinder =
+          find.widgetWithText(SwitchListTile, 'Speed / Energy');
       SwitchListTile speedSwitch = tester.widget(speedSwitchFinder);
       expect(speedSwitch.value, isFalse);
 
-       await tester.tap(speedSwitchFinder);
+      await tester.tap(speedSwitchFinder);
       await tester.pump();
-      
+
       speedSwitch = tester.widget(speedSwitchFinder);
       expect(speedSwitch.value, isTrue);
     });
