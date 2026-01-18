@@ -17,6 +17,9 @@ class LifeCounterApp extends ConsumerStatefulWidget {
 
 class _LifeCounterAppState extends ConsumerState<LifeCounterApp>
     with WidgetsBindingObserver {
+  final GlobalKey<ScaffoldMessengerState> _scaffoldMessengerKey =
+      GlobalKey<ScaffoldMessengerState>();
+
   @override
   void initState() {
     super.initState();
@@ -45,10 +48,11 @@ class _LifeCounterAppState extends ConsumerState<LifeCounterApp>
       pwaUpdateStateProvider,
       (previous, hasUpdate) {
         if (hasUpdate) {
-          ScaffoldMessenger.of(context).showSnackBar(
+          _scaffoldMessengerKey.currentState?.showSnackBar(
             SnackBar(
               content: const Text('新しいバージョンが利用可能です'),
               duration: const Duration(days: 1), // 永続表示に近い設定
+              behavior: SnackBarBehavior.floating,
               action: SnackBarAction(
                 label: '更新',
                 onPressed: () {
@@ -62,6 +66,7 @@ class _LifeCounterAppState extends ConsumerState<LifeCounterApp>
     );
 
     return MaterialApp(
+      scaffoldMessengerKey: _scaffoldMessengerKey,
       title: title,
       theme: ThemeData.light(),
       darkTheme: ThemeData.dark(),
