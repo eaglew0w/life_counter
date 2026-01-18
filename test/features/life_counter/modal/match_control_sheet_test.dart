@@ -60,8 +60,7 @@ void main() {
       expect(poisonSwitch.value, isTrue);
 
       // 速度カウンターのトグル
-      final speedSwitchFinder =
-          find.widgetWithText(SwitchListTile, 'Speed / Energy');
+      final speedSwitchFinder = find.widgetWithText(SwitchListTile, 'Speed');
       SwitchListTile speedSwitch = tester.widget(speedSwitchFinder);
       expect(speedSwitch.value, isFalse);
 
