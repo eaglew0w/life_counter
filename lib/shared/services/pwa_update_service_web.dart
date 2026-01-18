@@ -9,8 +9,13 @@ class PwaUpdateService {
   static void reloadPwa() {
     web.window.location.reload();
   }
+
+  static void checkForUpdate() {
+    (web.window as WindowExtension).checkForPwaUpdate();
+  }
 }
 
 extension type WindowExtension(web.Window window) {
   external set onPwaUpdateAvailable(JSFunction callback);
+  external void checkForPwaUpdate();
 }
