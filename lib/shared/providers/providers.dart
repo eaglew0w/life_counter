@@ -6,6 +6,8 @@ import 'package:life_counter/shared/notifiers/player_state_notifier.dart';
 import 'package:life_counter/shared/notifiers/theme_mode_state_notifier.dart';
 import 'package:life_counter/shared/models/counter_visibility_state.dart';
 import 'package:life_counter/shared/notifiers/counter_visibility_state_notifier.dart';
+import 'package:life_counter/shared/models/timer_state.dart';
+import 'package:life_counter/shared/notifiers/timer_state_notifier.dart';
 
 final playerProviderList = List.generate(
   playerNumber,
@@ -20,3 +22,7 @@ final themeModeStateProvider =
 final counterVisibilityStateProvider =
     NotifierProvider<CounterVisibilityStateNotifier, CounterVisibilityState>(
         CounterVisibilityStateNotifier.new);
+
+final timerStateProvider =
+    StateNotifierProvider<TimerStateNotifier, TimerState>(
+        (ref) => TimerStateNotifier());

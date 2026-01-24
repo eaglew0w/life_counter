@@ -5,6 +5,7 @@ import 'package:life_counter/shared/notifiers/pwa_update_state_notifier.dart';
 import 'package:life_counter/shared/notifiers/resettable_notifier.dart';
 import 'package:life_counter/shared/providers/providers.dart';
 import 'package:life_counter/shared/widgets/button/reset_button/reset_button.dart';
+import 'package:life_counter/shared/models/timer_state.dart';
 
 class MatchControlSheet extends ConsumerWidget {
   final List<ResettableNotifier> resettableNotifiers;
@@ -48,11 +49,12 @@ class MatchControlSheet extends ConsumerWidget {
               ),
               const SizedBox(height: 16),
 
-              // Life Reset Button (Centrally placed in the menu for now)
+              // ライフリセットボタン (メニュー中央に配置)
               Center(
                 child: ResetButton(
                   notifiers: resettableNotifiers,
-                  size: menuResetButtonSize, // Larger size for menu
+                  size: menuResetButtonSize, // メニュー用サイズ
+                  showTimer: false, // メニューでは常にリセットを表示
                 ),
               ),
               const SizedBox(height: 8),
@@ -66,7 +68,7 @@ class MatchControlSheet extends ConsumerWidget {
                   style: TextStyle(fontWeight: FontWeight.bold)),
               const SizedBox(height: 8),
 
-              // Poison Toggle
+              // 毒カウンター切り替え
               SwitchListTile(
                 title: const Text(poisonCounterLabel),
                 secondary: const Text(poisonCounterSymbol,
@@ -81,7 +83,7 @@ class MatchControlSheet extends ConsumerWidget {
                 },
               ),
 
-              // Speed Toggle
+              // 速度カウンター切り替え
               SwitchListTile(
                 title: const Text(speedCounterLabel),
                 secondary: const Icon(Icons.speed),
@@ -96,7 +98,63 @@ class MatchControlSheet extends ConsumerWidget {
 
               const Divider(height: 32),
 
-              // Update Check Button
+              const Text(timerSectionTitle,
+                  style: TextStyle(fontWeight: FontWeight.bold)),
+              const SizedBox(height: 8),
+
+              // タイマー切り替え
+              Consumer(
+                builder: (context, ref, child) {
+                  final timerState = ref.watch(timerStateProvider);
+                  return Column(
+                    children: [
+                      SwitchListTile(
+                        title: const Text(timerToggleLabel),
+                        secondary: const Icon(Icons.timer),
+                        value: timerState.isEnabled,
+                        onChanged: (value) {
+                          ref
+                              .read(timerStateProvider.notifier)
+                              .toggleEnabled(value);
+                        },
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                        child: Row(
+                          children: [
+                            const Text(timerModeLabel),
+                            const SizedBox(width: 8),
+                            DropdownButton<TimerMode>(
+                              value: timerState.mode,
+                              onChanged: (TimerMode? newValue) {
+                                if (newValue != null) {
+                                  ref
+                                      .read(timerStateProvider.notifier)
+                                      .setMode(newValue);
+                                }
+                              },
+                              items: const [
+                                DropdownMenuItem(
+                                  value: TimerMode.countDown50,
+                                  child: Text(timerMode50min),
+                                ),
+                                DropdownMenuItem(
+                                  value: TimerMode.countUp,
+                                  child: Text(timerModeCountUp),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  );
+                },
+              ),
+
+              const Divider(height: 32),
+
+              // 更新確認ボタン
               Center(
                 child: TextButton.icon(
                   onPressed: () {

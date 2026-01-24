@@ -66,3 +66,15 @@ const String updateCheckLabel = 'Check for Updates';
 
 // Animation Durations
 const Duration dayNightAnimationDuration = Duration(milliseconds: 1500);
+
+// Timer Settings
+const String timerSectionTitle = 'Timer';
+const String timerToggleLabel = 'Timer';
+const String timerModeLabel = 'Mode: ';
+const String timerMode50min = '50min';
+const String timerModeCountUp = 'Count Up';
+const String timerResetButtonLabel = 'Hold';
+const int defaultTimerDurationMinutes = 50;
+const double timerDisplayFontSizeRatio = 0.8;
+const double timerDisplayDefaultFontSize = 20.0;
+const double timerHoldLabelFontSize = 10.0;
