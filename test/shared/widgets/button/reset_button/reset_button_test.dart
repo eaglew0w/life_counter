@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:life_counter/shared/widgets/button/reset_button/reset_button.dart';
 import 'package:life_counter/shared/notifiers/resettable_notifier.dart';
 
@@ -19,9 +20,11 @@ void main() {
       final mockNotifier = MockResettableNotifier();
 
       await tester.pumpWidget(
-        MaterialApp(
-          home: Scaffold(
-            body: ResetButton(notifiers: [mockNotifier]),
+        ProviderScope(
+          child: MaterialApp(
+            home: Scaffold(
+              body: ResetButton(notifiers: [mockNotifier]),
+            ),
           ),
         ),
       );
@@ -38,9 +41,11 @@ void main() {
       final mockNotifier = MockResettableNotifier();
 
       await tester.pumpWidget(
-        MaterialApp(
-          home: Scaffold(
-            body: ResetButton(notifiers: [mockNotifier]),
+        ProviderScope(
+          child: MaterialApp(
+            home: Scaffold(
+              body: ResetButton(notifiers: [mockNotifier]),
+            ),
           ),
         ),
       );
