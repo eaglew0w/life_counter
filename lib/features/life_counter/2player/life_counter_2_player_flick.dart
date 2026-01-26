@@ -20,6 +20,10 @@ class LifeCounter2PlayerFlick extends ConsumerWidget {
           (index) => ref.read(playerProviderList[index].notifier),
         ),
         ref.read(themeModeStateProvider.notifier),
+        // TimerStateNotifier is also reset via this list if passed, but ResetButton handles it specifically too.
+        // However, standardizing it here makes it consistent for "Reset" action in MatchControlSheet.
+        // The ResetButton inside MatchControlSheet loops through this list.
+        ref.read(timerStateProvider.notifier),
       ],
       themeModeProvider: themeModeStateProvider,
       body: Row(

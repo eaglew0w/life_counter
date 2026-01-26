@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:life_counter/features/life_counter/modal/match_control_sheet.dart';
+import 'package:life_counter/shared/constants/constants.dart';
 import 'package:life_counter/shared/notifiers/resettable_notifier.dart';
 
 void main() {
@@ -20,18 +21,18 @@ void main() {
       );
 
       // タイトルの確認
-      expect(find.text('Match Control'), findsOneWidget);
+      expect(find.text(matchControlTitle), findsOneWidget);
 
       // リセットボタンの確認 (シート内)
-      expect(find.text('Life Reset'), findsOneWidget);
+      expect(find.text(lifeResetLabel), findsOneWidget);
       expect(find.byIcon(Icons.restart_alt), findsOneWidget);
 
       // 毒カウンターのトグルの確認
-      expect(find.text('Poison Counter'), findsOneWidget);
-      expect(find.byType(SwitchListTile), findsNWidgets(2)); // 毒 + 速度
+      expect(find.text(poisonCounterLabel), findsOneWidget);
+      expect(find.byType(SwitchListTile), findsNWidgets(3)); // 毒 + 速度 + タイマー
 
       // 更新確認ボタンの確認
-      expect(find.text('Check for Updates'), findsOneWidget);
+      expect(find.text(updateCheckLabel), findsOneWidget);
       expect(find.byIcon(Icons.refresh), findsOneWidget);
     });
 
@@ -51,7 +52,7 @@ void main() {
       // 初期状態: 毒は非表示
       // スイッチがオフであることを確認 (value=false)
       final poisonSwitchFinder =
-          find.widgetWithText(SwitchListTile, 'Poison Counter');
+          find.widgetWithText(SwitchListTile, poisonCounterLabel);
       SwitchListTile poisonSwitch = tester.widget(poisonSwitchFinder);
       expect(poisonSwitch.value, isFalse);
 
@@ -64,7 +65,8 @@ void main() {
       expect(poisonSwitch.value, isTrue);
 
       // 速度カウンターのトグル
-      final speedSwitchFinder = find.widgetWithText(SwitchListTile, 'Speed');
+      final speedSwitchFinder =
+          find.widgetWithText(SwitchListTile, speedCounterLabel);
       SwitchListTile speedSwitch = tester.widget(speedSwitchFinder);
       expect(speedSwitch.value, isFalse);
 
